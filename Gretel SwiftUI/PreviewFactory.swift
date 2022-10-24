@@ -12,19 +12,13 @@ import MapKit
 
 public class PreviewFactory {
     
-    public static func ConfiguredRecordingService() -> RecordingService {
-        return RecordingService(trackHelper: TrackHelper(viewContext: PersistenceController.shared.container.viewContext)
-        )
-    }
-    
-    public static func ConfiguredLocationService() -> LocationService {
-        return LocationService(locationManager: CLLocationManager(), settingsService: SettingsService())
+    public static func ConfiguredLocationService() -> LocationRecorderService  {
+        return LocationRecorderService(locationManager: CLLocationManager(), settingsService: SettingsService())
     }
     
     public static func TripDashboardPreview() -> some View {
         return TripDashboardView()
             .environmentObject(ConfiguredLocationService())
-            .environmentObject(ConfiguredRecordingService())
     }
     
     public static func DashboardLabelPreview() -> some View {
@@ -38,7 +32,6 @@ public class PreviewFactory {
     public static func ContentViewPreview() -> some View {
         return ContentView()
             .environmentObject(ConfiguredLocationService())
-            .environmentObject(ConfiguredRecordingService())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

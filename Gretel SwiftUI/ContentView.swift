@@ -13,14 +13,12 @@ import CoreLocation
 struct ContentView: View {
     
     @State var showPermissionsModal = true
-    
-    @EnvironmentObject var recordingService:RecordingService
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     
     var body: some View {
         NavigationView {
             TripDashboardView()
-                .environmentObject(recordingService)
-                .JMAlert(showModal: $showPermissionsModal, for: [.locationAlways], autoCheckAuthorization: true)
+                .environmentObject(locationRecorder)
         }
     }
 

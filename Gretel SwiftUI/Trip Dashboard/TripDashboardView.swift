@@ -10,29 +10,29 @@ import MapKit
 
 struct TripDashboardView: View {
     
-    @EnvironmentObject var recordingService:RecordingService
-    @EnvironmentObject var locationService:LocationService
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     
     var body: some View {
         
         ZStack {
             
             VStack {
-                Map(coordinateRegion: $locationService.mapRegion)
+                Map(coordinateRegion: $locationRecorder.region)
                 Spacer()
                 
                 HStack {
                     VStack {
-                        DashboardLabelView(title: "Altitude", value: locationService.currentAltitudeDisplayValue, alignment: .leading)
-                        DashboardLabelView(title: "Speed", value: locationService.currentSpeedDisplayValue, alignment: .leading)
+                        Text(locationRecorder.currentLocationTrackingState == .tracking ? "Tracking" : "Stopped")
+                        DashboardLabelView(title: "Altitude",
+                                           value: locationRecorder.currentLocation.displayValue(for: .altidude),
+                                           alignment: .leading)
+                        DashboardLabelView(title: "Speed",
+                                           value: locationRecorder.currentLocation.displayValue(for: .speed),
+                                           alignment: .leading)
                     }
                     Spacer()
                     Button {
-                        if recordingService.isUpdatingLocation {
-                            recordingService.stopRecordingLocation()
-                        }else{
-                            recordingService.startRecordingLocation()
-                        }
+                        locationRecorder.updateRecordingState()
                     } label: {
                         RecordButtonView()
                     }

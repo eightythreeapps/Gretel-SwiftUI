@@ -34,6 +34,8 @@
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
 		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
 		B5FF62E42901ABC40005E02E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E32901ABC40005E02E /* Location.swift */; };
+		B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E62907E3630005E02E /* RecordingState.swift */; };
+		B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E82907E3870005E02E /* LocationTrackingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
 		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
 		B5FF62E32901ABC40005E02E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B5FF62E62907E3630005E02E /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
+		B5FF62E82907E3870005E02E /* LocationTrackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,7 @@
 		B5E3B79128D31F7D002176DB /* Gretel SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B5FF62E52907E3500005E02E /* Enums */,
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
 				B5E3B79428D31F7D002176DB /* ContentView.swift */,
 				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
@@ -198,6 +203,15 @@
 				B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		B5FF62E52907E3500005E02E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B5FF62E62907E3630005E02E /* RecordingState.swift */,
+				B5FF62E82907E3870005E02E /* LocationTrackingState.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +370,8 @@
 				B5FF62DC290049850005E02E /* Track.swift in Sources */,
 				B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */,
 				B5FF62D329000AAC0005E02E /* RecordButtonView.swift in Sources */,
+				B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */,
+				B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */,
 				B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */,
 				B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */,
 			);

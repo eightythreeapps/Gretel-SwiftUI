@@ -26,7 +26,7 @@ public class PreviewFactory {
     }
     
     public static func RecordButtonPreview() -> some View {
-        return RecordButtonView()
+        return RecordButtonView(buttonState: .constant(.stopped))
     }
     
     public static func ContentViewPreview() -> some View {

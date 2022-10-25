@@ -12,25 +12,6 @@ import MapKit
 
 public final class LocationRecorderService:NSObject, ObservableObject {
     
-    public enum LocationTrackingState {
-        case tracking
-        case stopped
-        case error
-        
-        public var stringValue: String {
-            switch self {
-                
-            case .tracking:
-                return "Tracking"
-            case .stopped:
-                return "Stopped"
-            case .error:
-                return "Error"
-            }
-        }
-        
-    }
-
     private var locationManager:CLLocationManager
     private var settingsService:SettingsService
     private var cancellables = Set<AnyCancellable>()
@@ -39,7 +20,8 @@ public final class LocationRecorderService:NSObject, ObservableObject {
     private static let DefaultLongitude = 51.5072
     private static let DefaultCoordinateSpanDelta = 0.1
     
-    @Published var currentLocationTrackingState:LocationTrackingState = .stopped
+    @Published var currentLocationTrackingState:LocationTrackingState = .notTracking
+    @Published var currentRecordingState:RecordingState = .stopped
     
     @Published var currentLocation:Location = Location(location: CLLocation(coordinate: CLLocationCoordinate2D(latitude: LocationRecorderService.DefaultLatitude, longitude: LocationRecorderService.DefaultLongitude),
                                                                             altitude: 0,
@@ -57,26 +39,40 @@ public final class LocationRecorderService:NSObject, ObservableObject {
         self.locationManager = locationManager
         self.settingsService = settingsService
         super.init()
+        
+        self.startUpdatingUserLocation()
     }
  
     public func updateRecordingState() {
-        switch self.currentLocationTrackingState {
+        switch self.currentRecordingState {
             
-        case .tracking:
-            self.stopUpdatingUserLocation()
+        case .recording:
+            self.stopRecording()
         case .stopped:
-            self.startUpdatingUserLocation()
-        case .error:
-            print("Error")
+            self.startRecording()
+        case .disabled:
+            print("Recording disabled")
         }
     }
     
+    public func startRecording() {
+        self.currentRecordingState = .recording
+    }
+    
+    public func stopRecording() {
+        self.currentRecordingState = .stopped
+    }
+    
     public func stopUpdatingUserLocation() {
-        self.currentLocationTrackingState = .stopped
+        self.currentLocationTrackingState = .notTracking
         self.cancellables.removeAll()
     }
     
-    public func startUpdatingUserLocation() {
+}
+
+private extension LocationRecorderService {
+    
+    func startUpdatingUserLocation() {
         
         self.currentLocationTrackingState = .tracking
         
@@ -92,10 +88,21 @@ public final class LocationRecorderService:NSObject, ObservableObject {
                 self.currentLocation = Location(location: location)
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
                                                  span: MKCoordinateSpan(latitudeDelta: LocationRecorderService.DefaultCoordinateSpanDelta, longitudeDelta: LocationRecorderService.DefaultCoordinateSpanDelta))
+                
+                print(location)
+                
+                if self.currentRecordingState == .recording {
+                    self.captureLocation(location: location)
+                }
+                
             }
         )
         .store(in: &cancellables)
         
     }
-        
+    
+    func captureLocation(location:CLLocation) {
+        print("Recorded location")
+    }
+    
 }

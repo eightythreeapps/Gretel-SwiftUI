@@ -19,7 +19,6 @@ struct TripDashboardView: View {
             VStack {
                 Map(coordinateRegion: $locationRecorder.region)
                 Spacer()
-                
                 HStack {
                     VStack {
                         Text(locationRecorder.currentLocationTrackingState == .tracking ? "Tracking" : "Stopped")
@@ -34,7 +33,7 @@ struct TripDashboardView: View {
                     Button {
                         locationRecorder.updateRecordingState()
                     } label: {
-                        RecordButtonView()
+                        RecordButtonView(buttonState: $locationRecorder.currentRecordingState)
                     }
                     Spacer()
                     VStack {

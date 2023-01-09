@@ -17,6 +17,7 @@ struct DashboardLabelView: View {
         VStack {
             Text(title)
                 .font(.title3)
+                .fontWeight(.bold)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: alignment)
             Text(value)
                 .font(.body)
@@ -27,6 +28,15 @@ struct DashboardLabelView: View {
 
 struct DashboardLabelView_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewFactory.DashboardLabelPreview()
+        VStack {
+            PreviewFactory.DashboardLabelPreview()
+        }.frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: 160.0,
+            alignment: .center
+      )
+        
     }
 }

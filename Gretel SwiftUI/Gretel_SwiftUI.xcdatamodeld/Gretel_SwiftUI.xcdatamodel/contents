@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CD_Track" representedClassName="CD_Track" syncable="YES" codeGenerationType="class">
+    <entity name="Track" representedClassName="Track" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isRecording" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="trackSegments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CD_TrackSegment" inverseName="track" inverseEntity="CD_TrackSegment"/>
+        <relationship name="trackSegments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackSegment" inverseName="track" inverseEntity="TrackSegment"/>
     </entity>
-    <entity name="CD_TrackPoint" representedClassName="CD_TrackPoint" syncable="YES" codeGenerationType="class">
+    <entity name="TrackPoint" representedClassName="TrackPoint" syncable="YES" codeGenerationType="class">
         <attribute name="elevation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="trackSegment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_TrackSegment" inverseName="trackPoints" inverseEntity="CD_TrackSegment"/>
+        <relationship name="trackSegment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrackSegment" inverseName="trackPoints" inverseEntity="TrackSegment"/>
     </entity>
-    <entity name="CD_TrackSegment" representedClassName="CD_TrackSegment" syncable="YES" codeGenerationType="class">
+    <entity name="TrackSegment" representedClassName="TrackSegment" syncable="YES" codeGenerationType="class">
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Track" inverseName="trackSegments" inverseEntity="CD_Track"/>
-        <relationship name="trackPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CD_TrackPoint" inverseName="trackSegment" inverseEntity="CD_TrackPoint"/>
+        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="trackSegments" inverseEntity="Track"/>
+        <relationship name="trackPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackPoint" inverseName="trackSegment" inverseEntity="TrackPoint"/>
     </entity>
 </model>

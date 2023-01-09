@@ -10,5 +10,6 @@ import Foundation
 public enum RecordingState {
     case recording
     case stopped
+    case paused
     case disabled
 }

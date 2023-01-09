@@ -13,12 +13,18 @@ import MapKit
 public class PreviewFactory {
     
     public static func ConfiguredLocationService() -> LocationRecorderService  {
-        return LocationRecorderService(locationManager: CLLocationManager(), settingsService: SettingsService())
+        return LocationRecorderService(locationManager: CLLocationManager(), settingsService: SettingsService(), trackHelper: TrackHelper.init(viewContext: PersistenceController.preview.container.viewContext))
     }
     
     public static func TripDashboardPreview() -> some View {
         return TripDashboardView()
             .environmentObject(ConfiguredLocationService())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+    
+    public static func TrackListPreview() -> some View {
+        return TrackListView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
     
     public static func DashboardLabelPreview() -> some View {

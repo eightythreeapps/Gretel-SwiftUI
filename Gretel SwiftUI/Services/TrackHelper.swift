@@ -12,7 +12,7 @@ import Combine
 public class TrackHelper {
     
     private var viewContext:NSManagedObjectContext
-
+    
     required init(viewContext:NSManagedObjectContext) {
         self.viewContext = viewContext
     }
@@ -27,14 +27,14 @@ public class TrackHelper {
             
             let trackName = dateFormatter.string(from: now)
             
-            let track = CD_Track.init(context: self.viewContext)
+            let track = Track.init(context: self.viewContext)
             track.name = name != nil ? name : trackName
             track.startDate = now
             track.isRecording = true
             
             do {
                 try self.viewContext.save()
-                promise(.success(Track(track: track)))
+                promise(.success(track))
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
                 promise(.failure(error))
@@ -48,14 +48,14 @@ public class TrackHelper {
         
         return Future { promise in
             
-            let fetchRequest: NSFetchRequest<CD_Track> = CD_Track.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "isRecording == %@", true)
+            let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "isRecording == true")
             
             self.viewContext.perform {
                 do {
                     let result = try fetchRequest.execute()
                     if let track = result.first {
-                        promise(.success(Track(track: track)))
+                        promise(.success(track))
                     }
                 } catch {
                     print("Unable to Execute Fetch Request, \(error)")

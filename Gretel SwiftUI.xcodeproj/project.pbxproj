@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1C291EBE9B00BD836C /* TrackListView.swift */; };
+		B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1E291EC1C700BD836C /* Track+Utils.swift */; };
 		B5345E9428D501D000A567B2 /* CorePermissionsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9328D501D000A567B2 /* CorePermissionsSwiftUI */; };
 		B5345E9628D501D000A567B2 /* PermissionsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9528D501D000A567B2 /* PermissionsSwiftUI */; };
 		B5345E9828D501D000A567B2 /* PermissionsSwiftUICamera in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9728D501D000A567B2 /* PermissionsSwiftUICamera */; };
@@ -29,7 +31,6 @@
 		B5FF62D329000AAC0005E02E /* RecordButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D229000AAC0005E02E /* RecordButtonView.swift */; };
 		B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D529000BAF0005E02E /* PreviewFactory.swift */; };
 		B5FF62DA29003E680005E02E /* TrackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D929003E680005E02E /* TrackHelper.swift */; };
-		B5FF62DC290049850005E02E /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DB290049850005E02E /* Track.swift */; };
 		B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DD290056CA0005E02E /* LocationPublisher.swift */; };
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
 		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
@@ -56,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B50D0E1C291EBE9B00BD836C /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
+		B50D0E1E291EC1C700BD836C /* Track+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+Utils.swift"; sourceTree = "<group>"; };
 		B5345EA128F86A2B00A567B2 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		B54D12B128F86D4200E3A0A1 /* Gretel-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gretel-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gretel SwiftUI.entitlements"; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		B5FF62D229000AAC0005E02E /* RecordButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonView.swift; sourceTree = "<group>"; };
 		B5FF62D529000BAF0005E02E /* PreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactory.swift; sourceTree = "<group>"; };
 		B5FF62D929003E680005E02E /* TrackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHelper.swift; sourceTree = "<group>"; };
-		B5FF62DB290049850005E02E /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		B5FF62DD290056CA0005E02E /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
 		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
 				B5E3B79428D31F7D002176DB /* ContentView.swift */,
 				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
+				B50D0E1C291EBE9B00BD836C /* TrackListView.swift */,
 				B5FF62CD29000A480005E02E /* Trip Dashboard */,
 				B5FF62D429000ACC0005E02E /* Services */,
 				B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */,
@@ -152,8 +155,8 @@
 				B5E3B79D28D31F7E002176DB /* Gretel_SwiftUI.xcdatamodeld */,
 				B5E3B79828D31F7E002176DB /* Preview Content */,
 				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
-				B5FF62DB290049850005E02E /* Track.swift */,
 				B5FF62E32901ABC40005E02E /* Location.swift */,
+				B50D0E1E291EC1C700BD836C /* Track+Utils.swift */,
 			);
 			path = "Gretel SwiftUI";
 			sourceTree = "<group>";
@@ -367,12 +370,13 @@
 				B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */,
 				B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */,
 				B5FF62CF29000A750005E02E /* DashboardLabelView.swift in Sources */,
-				B5FF62DC290049850005E02E /* Track.swift in Sources */,
 				B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */,
 				B5FF62D329000AAC0005E02E /* RecordButtonView.swift in Sources */,
 				B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */,
 				B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */,
 				B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */,
+				B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */,
+				B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */,
 				B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

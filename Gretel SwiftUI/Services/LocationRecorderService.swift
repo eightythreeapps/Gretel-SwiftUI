@@ -13,6 +13,7 @@ import MapKit
 public final class LocationRecorderService:NSObject, ObservableObject {
     
     private var locationManager:CLLocationManager
+    private var trackHelper:TrackHelper
     private var settingsService:SettingsService
     private var cancellables = Set<AnyCancellable>()
     
@@ -22,6 +23,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
     
     @Published var currentLocationTrackingState:LocationTrackingState = .notTracking
     @Published var currentRecordingState:RecordingState = .stopped
+    @Published var currentActiveTrack:Track? = nil
     
     @Published var currentLocation:Location = Location(location: CLLocation(coordinate: CLLocationCoordinate2D(latitude: LocationRecorderService.DefaultLatitude, longitude: LocationRecorderService.DefaultLongitude),
                                                                             altitude: 0,
@@ -32,35 +34,70 @@ public final class LocationRecorderService:NSObject, ObservableObject {
                                                                             speed: 0,
                                                                             speedAccuracy: 0, timestamp: Date()))
     
-    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: LocationRecorderService.DefaultLatitude, longitude: LocationRecorderService.DefaultLongitude),
-                                               span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+    @Published var region = MKCoordinateRegion(center:CLLocationCoordinate2D(latitude: LocationRecorderService.DefaultLatitude, longitude: LocationRecorderService.DefaultLongitude),
+                                               span: MKCoordinateSpan(latitudeDelta: LocationRecorderService.DefaultCoordinateSpanDelta,
+                                                                      longitudeDelta: LocationRecorderService.DefaultCoordinateSpanDelta))
     
-    required public init(locationManager:CLLocationManager, settingsService:SettingsService) {
+    required public init(locationManager:CLLocationManager, settingsService:SettingsService, trackHelper:TrackHelper) {
         self.locationManager = locationManager
         self.settingsService = settingsService
+        self.trackHelper = trackHelper
+        
         super.init()
         
         self.startUpdatingUserLocation()
+        
+        self.trackHelper.getCurrentActiveTrack()
+            .sink { completion in
+                print("Completed")
+            } receiveValue: { track in
+                self.currentActiveTrack = track
+            }
+            .store(in: &cancellables)
+
     }
- 
+     
     public func updateRecordingState() {
         switch self.currentRecordingState {
-            
         case .recording:
-            self.stopRecording()
+            self.pauseRecording()
         case .stopped:
-            self.startRecording()
+            self.startNewTrack()
         case .disabled:
             print("Recording disabled")
+        case .paused:
+            self.resumeRecording()
         }
     }
     
-    public func startRecording() {
-        self.currentRecordingState = .recording
+    public func startNewTrack(name:String? = nil) {
+        trackHelper.createNewTrack(name: name)
+            .sink { completion in
+                self.currentRecordingState = .recording
+            } receiveValue: { track in
+                self.currentActiveTrack = track
+            }
+            .store(in: &cancellables)
     }
     
-    public func stopRecording() {
+    public func resumeRecording() {
+        
+        guard let _ = self.currentActiveTrack else {
+            self.currentRecordingState = .stopped
+            return
+        }
+        
+        self.currentRecordingState = .recording
+        
+    }
+    
+    public func pauseRecording() {
+        self.currentRecordingState = .paused
+    }
+    
+    public func endTrack() {
         self.currentRecordingState = .stopped
+        self.currentActiveTrack = nil
     }
     
     public func stopUpdatingUserLocation() {
@@ -102,7 +139,7 @@ private extension LocationRecorderService {
     }
     
     func captureLocation(location:CLLocation) {
-        print("Recorded location")
+       
     }
     
 }

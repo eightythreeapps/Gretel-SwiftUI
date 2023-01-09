@@ -12,14 +12,24 @@ import CoreLocation
 
 struct ContentView: View {
     
-    @State var showPermissionsModal = true
-    @EnvironmentObject var locationRecorder:LocationRecorderService
-    
+    @EnvironmentObject var locationRecorderService:LocationRecorderService
+        
     var body: some View {
+        
         NavigationView {
-            TripDashboardView()
-                .environmentObject(locationRecorder)
+            
+            VStack {
+                
+                if let activeTrack = locationRecorderService.currentActiveTrack {
+                    TrackHUDView(track: activeTrack,
+                                 recordingState: $locationRecorderService.currentRecordingState)
+                }
+                
+                TrackListView()
+            }
+
         }
+        
     }
 
 }
@@ -27,5 +37,37 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         PreviewFactory.ContentViewPreview()
+    }
+}
+
+struct TrackHUDView: View {
+    
+    var track:Track
+    @Binding var recordingState:RecordingState
+    
+    var body: some View {
+        VStack {
+           
+            HStack {
+                VStack {
+                    DashboardLabelView(title: "Distance", value: track.formattedDistance(), alignment: .leading)
+                    DashboardLabelView(title: "Duration", value: track.formattedDuration(), alignment: .leading)
+                    DashboardLabelView(title: "Altitude", value: "27m", alignment: .leading)
+                }
+                RecordButtonView(buttonState: $recordingState)
+            }
+            
+        }
+        .padding()
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: 160.0,
+            alignment: .center
+        )
+        .background(Color(UIColor.systemFill))
+        .cornerRadius(17.0)
+        .padding()
     }
 }

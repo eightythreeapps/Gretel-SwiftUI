@@ -49,6 +49,15 @@ struct RecordButtonView: View {
                     .frame(width: 45, height: 45)
                     .foregroundColor(.gray)
                 
+            case .paused:
+                Image(systemName: "circle")
+                    .resizable()
+                    .frame(width: 70, height: 70)
+                    .foregroundColor(.red)
+                Image(systemName: "circle.fill")
+                    .resizable()
+                    .frame(width: 45, height: 45)
+                    .foregroundColor(.red)
             }
             
             

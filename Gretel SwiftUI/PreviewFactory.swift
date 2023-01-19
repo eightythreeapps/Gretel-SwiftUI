@@ -34,6 +34,12 @@ public class PreviewFactory {
             .environmentObject(ConfiguredLocationRecorder())
         
     }
+
+    public static func makeTrackRecorderPreview() -> some View {
+        return TrackRecorderView()
+            .environmentObject(ConfiguredLocationRecorder())
+            .environmentObject(ConfiguredLocationService())
+    }
     
     public static func makeContentViewPreview() -> some View {
         return ContentView()

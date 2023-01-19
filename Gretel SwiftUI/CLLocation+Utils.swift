@@ -30,13 +30,13 @@ extension CLLocation {
         switch property {
             
         case .latitude:
-            return "\(self.coordinate.latitude)"
+            return "\(self.coordinate.latitude.rounded(toPlaces: 4))"
         case .longitude:
-            return "\(self.coordinate.longitude)"
+            return "\(self.coordinate.longitude.rounded(toPlaces: 4))"
         case .speed:
-            return "\(self.speed)"
+            return "\(self.speed.rounded(toPlaces: 2))"
         case .altidude:
-            return "\(self.altitude)"
+            return "\(self.altitude.rounded(toPlaces: 2))"
         }
         
     }

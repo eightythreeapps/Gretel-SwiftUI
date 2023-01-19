@@ -30,11 +30,6 @@ struct TrackRecorderHUDView: View {
                 HUDLabelView(title: "Longitude", value: longitude)
                 HUDLabelView(title: "Altitude", value: altitude)
             }
-            .frame(
-                minWidth: 300.0,
-                idealWidth: 300.0
-            )
-            
             
             Button {
                 locationRecorder.updateRecordingState()
@@ -53,9 +48,6 @@ struct TrackRecorderHUDView: View {
             }
             .padding()
         }
-        .background(.gray.opacity(0.6))
-        .cornerRadius(20.0)
-        .padding()
     }
 }
 

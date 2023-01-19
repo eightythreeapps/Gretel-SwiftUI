@@ -33,7 +33,6 @@ struct ContentView: View {
                         .resizable()
                         .frame(width: 45.0, height: 45.0)
                 }
-
                 TrackRecorderHUDView(trackName: locationRecorder.currentActiveTrack?.displayName() ?? "No active track",
                                      latitude: locationService.currentLocation.displayValue(for: .latitude),
                                      longitude: locationService.currentLocation.displayValue(for: .longitude),

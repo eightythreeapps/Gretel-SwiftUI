@@ -10,12 +10,6 @@
 		B506BA2429797B6E008CD951 /* TrackRecorderHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B506BA2329797B6E008CD951 /* TrackRecorderHUDView.swift */; };
 		B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1C291EBE9B00BD836C /* TrackListView.swift */; };
 		B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1E291EC1C700BD836C /* Track+Utils.swift */; };
-		B5345E9428D501D000A567B2 /* CorePermissionsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9328D501D000A567B2 /* CorePermissionsSwiftUI */; };
-		B5345E9628D501D000A567B2 /* PermissionsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9528D501D000A567B2 /* PermissionsSwiftUI */; };
-		B5345E9828D501D000A567B2 /* PermissionsSwiftUICamera in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9728D501D000A567B2 /* PermissionsSwiftUICamera */; };
-		B5345E9A28D501D000A567B2 /* PermissionsSwiftUILocation in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9928D501D000A567B2 /* PermissionsSwiftUILocation */; };
-		B5345E9C28D501D000A567B2 /* PermissionsSwiftUILocationAlways in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9B28D501D000A567B2 /* PermissionsSwiftUILocationAlways */; };
-		B5345E9E28D501D000A567B2 /* PermissionsSwiftUISiri in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9D28D501D000A567B2 /* PermissionsSwiftUISiri */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
 		B5C10210297943ED002956BF /* GretelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1020F297943ED002956BF /* GretelApp.swift */; };
@@ -144,13 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5345E9428D501D000A567B2 /* CorePermissionsSwiftUI in Frameworks */,
-				B5345E9828D501D000A567B2 /* PermissionsSwiftUICamera in Frameworks */,
-				B5345E9C28D501D000A567B2 /* PermissionsSwiftUILocationAlways in Frameworks */,
-				B5345E9A28D501D000A567B2 /* PermissionsSwiftUILocation in Frameworks */,
-				B5345E9E28D501D000A567B2 /* PermissionsSwiftUISiri in Frameworks */,
 				B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */,
-				B5345E9628D501D000A567B2 /* PermissionsSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,12 +376,6 @@
 			);
 			name = "Gretel SwiftUI";
 			packageProductDependencies = (
-				B5345E9328D501D000A567B2 /* CorePermissionsSwiftUI */,
-				B5345E9528D501D000A567B2 /* PermissionsSwiftUI */,
-				B5345E9728D501D000A567B2 /* PermissionsSwiftUICamera */,
-				B5345E9928D501D000A567B2 /* PermissionsSwiftUILocation */,
-				B5345E9B28D501D000A567B2 /* PermissionsSwiftUILocationAlways */,
-				B5345E9D28D501D000A567B2 /* PermissionsSwiftUISiri */,
 				B54D12B428FD6C4300E3A0A1 /* CoreGPX */,
 			);
 			productName = "Gretel SwiftUI";
@@ -480,7 +462,6 @@
 			);
 			mainGroup = B5E3B78628D31F7D002176DB;
 			packageReferences = (
-				B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */,
 				B54D12B328FD6C4300E3A0A1 /* XCRemoteSwiftPackageReference "CoreGPX" */,
 			);
 			productRefGroup = B5E3B79028D31F7D002176DB /* Products */;
@@ -1125,14 +1106,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jevonmao/PermissionsSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		B54D12B328FD6C4300E3A0A1 /* XCRemoteSwiftPackageReference "CoreGPX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vincentneo/CoreGPX";
@@ -1144,36 +1117,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B5345E9328D501D000A567B2 /* CorePermissionsSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = CorePermissionsSwiftUI;
-		};
-		B5345E9528D501D000A567B2 /* PermissionsSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUI;
-		};
-		B5345E9728D501D000A567B2 /* PermissionsSwiftUICamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUICamera;
-		};
-		B5345E9928D501D000A567B2 /* PermissionsSwiftUILocation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUILocation;
-		};
-		B5345E9B28D501D000A567B2 /* PermissionsSwiftUILocationAlways */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUILocationAlways;
-		};
-		B5345E9D28D501D000A567B2 /* PermissionsSwiftUISiri */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B5345E9228D501D000A567B2 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUISiri;
-		};
 		B54D12B428FD6C4300E3A0A1 /* CoreGPX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B54D12B328FD6C4300E3A0A1 /* XCRemoteSwiftPackageReference "CoreGPX" */;

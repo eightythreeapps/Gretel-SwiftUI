@@ -10,16 +10,15 @@ import CoreData
 
 struct TrackListView: View {
     
+    @State var trackName:String = "New track"
     @EnvironmentObject var locationRecorderService:LocationRecorder
     @Environment(\.managedObjectContext) var moc
-    
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.name),
         SortDescriptor(\.startDate, order: .reverse)
     ])
     var tracks: FetchedResults<Track>
     
-    @State var trackName:String = "New track"
     
     var body: some View {
         

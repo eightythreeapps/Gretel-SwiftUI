@@ -12,31 +12,32 @@ import MapKit
 
 public class PreviewFactory {
     
-    public static func ConfiguredLocationService() -> LocationRecorderService  {
-        return LocationRecorderService(locationManager: CLLocationManager(), settingsService: SettingsService(), trackHelper: TrackHelper.init(viewContext: PersistenceController.preview.container.viewContext))
+    public static func ConfiguredLocationRecorder() -> LocationRecorder  {
+        
+        let locationService = LocationService(locationManager: CLLocationManager())
+        
+        return LocationRecorder(locationService:locationService, settingsService: SettingsService(), trackHelper: TrackHelper.init(viewContext: PersistenceController.preview.container.viewContext))
     }
     
-    public static func TripDashboardPreview() -> some View {
-        return TripDashboardView()
-            .environmentObject(ConfiguredLocationService())
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    public static func ConfiguredLocationService() -> LocationService {
+        return LocationService(locationManager: CLLocationManager())
     }
     
-    public static func TrackListPreview() -> some View {
+    public static func makeTrackListPreview() -> some View {
         return TrackListView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
     
-    public static func DashboardLabelPreview() -> some View {
-        return DashboardLabelView(title: "Title", value: "Value", alignment: .leading)
+    public static func makeTrackRecorderHUDPreview() -> some View {
+        
+        return TrackRecorderHUDView()
+            .environmentObject(ConfiguredLocationRecorder())
+        
     }
     
-    public static func RecordButtonPreview() -> some View {
-        return RecordButtonView(buttonState: .constant(.stopped))
-    }
-    
-    public static func ContentViewPreview() -> some View {
+    public static func makeContentViewPreview() -> some View {
         return ContentView()
+            .environmentObject(ConfiguredLocationRecorder())
             .environmentObject(ConfiguredLocationService())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }

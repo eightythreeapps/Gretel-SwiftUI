@@ -12,6 +12,7 @@ import Combine
 public class TrackHelper {
     
     private var viewContext:NSManagedObjectContext
+    private var cancellables = Set<AnyCancellable>()
     
     required init(viewContext:NSManagedObjectContext) {
         self.viewContext = viewContext
@@ -30,7 +31,11 @@ public class TrackHelper {
             let track = Track.init(context: self.viewContext)
             track.name = name != nil ? name : trackName
             track.startDate = now
-            track.isRecording = true
+            
+            let trackSegment = TrackSegment.init(context: self.viewContext)
+            trackSegment.time = now
+            
+            track.addToTrackSegments(trackSegment)
             
             do {
                 try self.viewContext.save()
@@ -42,6 +47,23 @@ public class TrackHelper {
             
         }
             
+    }
+    
+    func endCurrentRecording() -> Future<Bool, Never> {
+        
+        return Future { promise in
+            
+            self.getCurrentActiveTrack().sink { completion in
+                print("Completed")
+            } receiveValue: { track in
+                if let track = track {
+                    track.endDate = Date()
+                    track.isRecording = false
+                }
+            }.store(in: &self.cancellables)
+
+        }
+        
     }
     
     func getCurrentActiveTrack() -> Future<Track?,Error> {
@@ -64,6 +86,35 @@ public class TrackHelper {
             }
             
         }
+        
+    }
+    
+    func addPointToSegment(latitude:Double, longitude:Double) {
+        
+        self.getCurrentActiveTrack().sink { completion in
+            print("Active Track loaded")
+        } receiveValue: { track in
+            
+            if let activeTrack = track, let activeSegment = activeTrack.getActiveSegment() {
+                
+                let trackPoint = TrackPoint(context: self.viewContext)
+                trackPoint.latitude = latitude
+                trackPoint.longitude = longitude
+                trackPoint.time = Date()
+                
+                activeSegment.addToTrackPoints(trackPoint)
+                
+                do {
+                    try self.viewContext.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+                
+            }else{
+                print("Could not get active track segment")
+            }
+            
+        }.store(in: &cancellables)
         
     }
     

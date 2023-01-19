@@ -1,16 +1,15 @@
 //
-//  Location.swift
+//  CLLocation+Utils.swift
 //  Gretel SwiftUI
 //
-//  Created by Ben Reed on 20/10/2022.
+//  Created by Ben Reed on 19/01/2023.
 //
 
 import Foundation
 import CoreLocation
 import MapKit
-import SwiftUI
 
-public class Location {
+extension CLLocation {
     
     public enum LocationProperty {
         case latitude
@@ -19,15 +18,9 @@ public class Location {
         case altidude
     }
     
-    private var location:CLLocation
-    
-    required init(location:CLLocation) {
-        self.location = location
-    }
-    
     public func mapRegion() -> MKCoordinateRegion {
         
-        return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
+        return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude),
                                   span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         
     }
@@ -37,13 +30,13 @@ public class Location {
         switch property {
             
         case .latitude:
-            return "\(location.coordinate.latitude)"
+            return "\(self.coordinate.latitude)"
         case .longitude:
-            return "\(location.coordinate.longitude)"
+            return "\(self.coordinate.longitude)"
         case .speed:
-            return "\(location.speed)"
+            return "\(self.speed)"
         case .altidude:
-            return "\(location.altitude)"
+            return "\(self.altitude)"
         }
         
     }

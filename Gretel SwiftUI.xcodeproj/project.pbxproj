@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B506BA2429797B6E008CD951 /* TrackRecorderHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B506BA2329797B6E008CD951 /* TrackRecorderHUDView.swift */; };
 		B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1C291EBE9B00BD836C /* TrackListView.swift */; };
 		B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1E291EC1C700BD836C /* Track+Utils.swift */; };
 		B5345E9428D501D000A567B2 /* CorePermissionsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9328D501D000A567B2 /* CorePermissionsSwiftUI */; };
@@ -15,9 +16,19 @@
 		B5345E9A28D501D000A567B2 /* PermissionsSwiftUILocation in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9928D501D000A567B2 /* PermissionsSwiftUILocation */; };
 		B5345E9C28D501D000A567B2 /* PermissionsSwiftUILocationAlways in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9B28D501D000A567B2 /* PermissionsSwiftUILocationAlways */; };
 		B5345E9E28D501D000A567B2 /* PermissionsSwiftUISiri in Frameworks */ = {isa = PBXBuildFile; productRef = B5345E9D28D501D000A567B2 /* PermissionsSwiftUISiri */; };
-		B5345EA228F86A2B00A567B2 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5345EA128F86A2B00A567B2 /* TripDashboardView.swift */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
+		B5C10210297943ED002956BF /* GretelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1020F297943ED002956BF /* GretelApp.swift */; };
+		B5C10212297943ED002956BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C10211297943ED002956BF /* ContentView.swift */; };
+		B5C10214297943EF002956BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C10213297943EF002956BF /* Assets.xcassets */; };
+		B5C10217297943EF002956BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C10216297943EF002956BF /* Preview Assets.xcassets */; };
+		B5C10221297943EF002956BF /* Gretel_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C10220297943EF002956BF /* Gretel_Watch_AppTests.swift */; };
+		B5C1022B297943EF002956BF /* Gretel_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1022A297943EF002956BF /* Gretel_Watch_AppUITests.swift */; };
+		B5C1022D297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1022C297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift */; };
+		B5C1023929794C59002956BF /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023829794C59002956BF /* LocationService.swift */; };
+		B5C1023A29794C59002956BF /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023829794C59002956BF /* LocationService.swift */; };
+		B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
+		B5C1023D2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
 		B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79228D31F7D002176DB /* Gretel.swift */; };
 		B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79428D31F7D002176DB /* ContentView.swift */; };
 		B5E3B79728D31F7E002176DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3B79628D31F7E002176DB /* Assets.xcassets */; };
@@ -27,19 +38,30 @@
 		B5E3B7A928D31F7E002176DB /* Gretel_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B7A828D31F7E002176DB /* Gretel_SwiftUITests.swift */; };
 		B5E3B7B328D31F7E002176DB /* Gretel_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B7B228D31F7E002176DB /* Gretel_SwiftUIUITests.swift */; };
 		B5E3B7B528D31F7E002176DB /* Gretel_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B7B428D31F7E002176DB /* Gretel_SwiftUIUITestsLaunchTests.swift */; };
-		B5FF62CF29000A750005E02E /* DashboardLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62CE29000A750005E02E /* DashboardLabelView.swift */; };
-		B5FF62D329000AAC0005E02E /* RecordButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D229000AAC0005E02E /* RecordButtonView.swift */; };
 		B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D529000BAF0005E02E /* PreviewFactory.swift */; };
 		B5FF62DA29003E680005E02E /* TrackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D929003E680005E02E /* TrackHelper.swift */; };
 		B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DD290056CA0005E02E /* LocationPublisher.swift */; };
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
-		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
-		B5FF62E42901ABC40005E02E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E32901ABC40005E02E /* Location.swift */; };
+		B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorder.swift */; };
 		B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E62907E3630005E02E /* RecordingState.swift */; };
 		B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E82907E3870005E02E /* LocationTrackingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B5C1021D297943EF002956BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5E3B78728D31F7D002176DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5C1020C297943ED002956BF;
+			remoteInfo = "Gretel Watch App";
+		};
+		B5C10227297943EF002956BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5E3B78728D31F7D002176DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5C1020C297943ED002956BF;
+			remoteInfo = "Gretel Watch App";
+		};
 		B5E3B7A528D31F7E002176DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5E3B78728D31F7D002176DB /* Project object */;
@@ -57,12 +79,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B506BA2329797B6E008CD951 /* TrackRecorderHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecorderHUDView.swift; sourceTree = "<group>"; };
 		B50D0E1C291EBE9B00BD836C /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
 		B50D0E1E291EC1C700BD836C /* Track+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+Utils.swift"; sourceTree = "<group>"; };
-		B5345EA128F86A2B00A567B2 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		B54D12B128F86D4200E3A0A1 /* Gretel-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gretel-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gretel SwiftUI.entitlements"; sourceTree = "<group>"; };
 		B54D12B82900004600E3A0A1 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		B5C1020D297943ED002956BF /* Gretel Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gretel Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5C1020F297943ED002956BF /* GretelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GretelApp.swift; sourceTree = "<group>"; };
+		B5C10211297943ED002956BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B5C10213297943EF002956BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5C10216297943EF002956BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B5C1021C297943EF002956BF /* Gretel Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gretel Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5C10220297943EF002956BF /* Gretel_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_Watch_AppTests.swift; sourceTree = "<group>"; };
+		B5C10226297943EF002956BF /* Gretel Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gretel Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5C1022A297943EF002956BF /* Gretel_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_Watch_AppUITests.swift; sourceTree = "<group>"; };
+		B5C1022C297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B5C1023829794C59002956BF /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		B5C1023B2979577D002956BF /* CLLocation+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Utils.swift"; sourceTree = "<group>"; };
 		B5E3B78F28D31F7D002176DB /* Gretel SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gretel SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3B79228D31F7D002176DB /* Gretel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel.swift; sourceTree = "<group>"; };
 		B5E3B79428D31F7D002176DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,19 +109,37 @@
 		B5E3B7AE28D31F7E002176DB /* Gretel SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gretel SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3B7B228D31F7E002176DB /* Gretel_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_SwiftUIUITests.swift; sourceTree = "<group>"; };
 		B5E3B7B428D31F7E002176DB /* Gretel_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B5FF62CE29000A750005E02E /* DashboardLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardLabelView.swift; sourceTree = "<group>"; };
-		B5FF62D229000AAC0005E02E /* RecordButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonView.swift; sourceTree = "<group>"; };
 		B5FF62D529000BAF0005E02E /* PreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactory.swift; sourceTree = "<group>"; };
 		B5FF62D929003E680005E02E /* TrackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHelper.swift; sourceTree = "<group>"; };
 		B5FF62DD290056CA0005E02E /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
-		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
-		B5FF62E32901ABC40005E02E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B5FF62E12901AACC0005E02E /* LocationRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorder.swift; sourceTree = "<group>"; };
 		B5FF62E62907E3630005E02E /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
 		B5FF62E82907E3870005E02E /* LocationTrackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B5C1020A297943ED002956BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C10219297943EF002956BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C10223297943EF002956BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5E3B78C28D31F7D002176DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -119,12 +171,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B585ECB9296EC7E200A91964 /* Publishers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FF62DD290056CA0005E02E /* LocationPublisher.swift */,
+				B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */,
+			);
+			path = Publishers;
+			sourceTree = "<group>";
+		};
+		B5C1020E297943ED002956BF /* Gretel Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				B5C1020F297943ED002956BF /* GretelApp.swift */,
+				B5C10211297943ED002956BF /* ContentView.swift */,
+				B5C10213297943EF002956BF /* Assets.xcassets */,
+				B5C10215297943EF002956BF /* Preview Content */,
+			);
+			path = "Gretel Watch App";
+			sourceTree = "<group>";
+		};
+		B5C10215297943EF002956BF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B5C10216297943EF002956BF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B5C1021F297943EF002956BF /* Gretel Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5C10220297943EF002956BF /* Gretel_Watch_AppTests.swift */,
+			);
+			path = "Gretel Watch AppTests";
+			sourceTree = "<group>";
+		};
+		B5C10229297943EF002956BF /* Gretel Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B5C1022A297943EF002956BF /* Gretel_Watch_AppUITests.swift */,
+				B5C1022C297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift */,
+			);
+			path = "Gretel Watch AppUITests";
+			sourceTree = "<group>";
+		};
 		B5E3B78628D31F7D002176DB = {
 			isa = PBXGroup;
 			children = (
 				B5E3B79128D31F7D002176DB /* Gretel SwiftUI */,
 				B5E3B7A728D31F7E002176DB /* Gretel SwiftUITests */,
 				B5E3B7B128D31F7E002176DB /* Gretel SwiftUIUITests */,
+				B5C1020E297943ED002956BF /* Gretel Watch App */,
+				B5C1021F297943EF002956BF /* Gretel Watch AppTests */,
+				B5C10229297943EF002956BF /* Gretel Watch AppUITests */,
 				B5E3B79028D31F7D002176DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -135,6 +235,9 @@
 				B5E3B78F28D31F7D002176DB /* Gretel SwiftUI.app */,
 				B5E3B7A428D31F7E002176DB /* Gretel SwiftUITests.xctest */,
 				B5E3B7AE28D31F7E002176DB /* Gretel SwiftUIUITests.xctest */,
+				B5C1020D297943ED002956BF /* Gretel Watch App.app */,
+				B5C1021C297943EF002956BF /* Gretel Watch AppTests.xctest */,
+				B5C10226297943EF002956BF /* Gretel Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,21 +245,23 @@
 		B5E3B79128D31F7D002176DB /* Gretel SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B585ECB9296EC7E200A91964 /* Publishers */,
 				B5FF62E52907E3500005E02E /* Enums */,
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
 				B5E3B79428D31F7D002176DB /* ContentView.swift */,
 				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
 				B50D0E1C291EBE9B00BD836C /* TrackListView.swift */,
 				B5FF62CD29000A480005E02E /* Trip Dashboard */,
-				B5FF62D429000ACC0005E02E /* Services */,
+				B5FF62D429000ACC0005E02E /* Helpers */,
 				B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */,
 				B54D12B128F86D4200E3A0A1 /* Gretel-SwiftUI-Info.plist */,
 				B5E3B79628D31F7E002176DB /* Assets.xcassets */,
 				B5E3B79D28D31F7E002176DB /* Gretel_SwiftUI.xcdatamodeld */,
 				B5E3B79828D31F7E002176DB /* Preview Content */,
 				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
-				B5FF62E32901ABC40005E02E /* Location.swift */,
 				B50D0E1E291EC1C700BD836C /* Track+Utils.swift */,
+				B5C1023B2979577D002956BF /* CLLocation+Utils.swift */,
+				B506BA2329797B6E008CD951 /* TrackRecorderHUDView.swift */,
 			);
 			path = "Gretel SwiftUI";
 			sourceTree = "<group>";
@@ -189,23 +294,19 @@
 		B5FF62CD29000A480005E02E /* Trip Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				B5345EA128F86A2B00A567B2 /* TripDashboardView.swift */,
-				B5FF62CE29000A750005E02E /* DashboardLabelView.swift */,
-				B5FF62D229000AAC0005E02E /* RecordButtonView.swift */,
 			);
 			path = "Trip Dashboard";
 			sourceTree = "<group>";
 		};
-		B5FF62D429000ACC0005E02E /* Services */ = {
+		B5FF62D429000ACC0005E02E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */,
+				B5FF62E12901AACC0005E02E /* LocationRecorder.swift */,
 				B54D12B82900004600E3A0A1 /* SettingsService.swift */,
 				B5FF62D929003E680005E02E /* TrackHelper.swift */,
-				B5FF62DD290056CA0005E02E /* LocationPublisher.swift */,
-				B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */,
+				B5C1023829794C59002956BF /* LocationService.swift */,
 			);
-			path = Services;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		B5FF62E52907E3500005E02E /* Enums */ = {
@@ -220,6 +321,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B5C1020C297943ED002956BF /* Gretel Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5C10234297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch App" */;
+			buildPhases = (
+				B5C10209297943ED002956BF /* Sources */,
+				B5C1020A297943ED002956BF /* Frameworks */,
+				B5C1020B297943ED002956BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gretel Watch App";
+			productName = "Gretel Watch App";
+			productReference = B5C1020D297943ED002956BF /* Gretel Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5C1021B297943EF002956BF /* Gretel Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5C10235297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch AppTests" */;
+			buildPhases = (
+				B5C10218297943EF002956BF /* Sources */,
+				B5C10219297943EF002956BF /* Frameworks */,
+				B5C1021A297943EF002956BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5C1021E297943EF002956BF /* PBXTargetDependency */,
+			);
+			name = "Gretel Watch AppTests";
+			productName = "Gretel Watch AppTests";
+			productReference = B5C1021C297943EF002956BF /* Gretel Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B5C10225297943EF002956BF /* Gretel Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5C10236297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch AppUITests" */;
+			buildPhases = (
+				B5C10222297943EF002956BF /* Sources */,
+				B5C10223297943EF002956BF /* Frameworks */,
+				B5C10224297943EF002956BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5C10228297943EF002956BF /* PBXTargetDependency */,
+			);
+			name = "Gretel Watch AppUITests";
+			productName = "Gretel Watch AppUITests";
+			productReference = B5C10226297943EF002956BF /* Gretel Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B5E3B78E28D31F7D002176DB /* Gretel SwiftUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5E3B7B828D31F7E002176DB /* Build configuration list for PBXNativeTarget "Gretel SwiftUI" */;
@@ -289,9 +443,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					B5C1020C297943ED002956BF = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					B5C1021B297943EF002956BF = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = B5C1020C297943ED002956BF;
+					};
+					B5C10225297943EF002956BF = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = B5C1020C297943ED002956BF;
+					};
 					B5E3B78E28D31F7D002176DB = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -325,11 +490,37 @@
 				B5E3B78E28D31F7D002176DB /* Gretel SwiftUI */,
 				B5E3B7A328D31F7E002176DB /* Gretel SwiftUITests */,
 				B5E3B7AD28D31F7E002176DB /* Gretel SwiftUIUITests */,
+				B5C1020C297943ED002956BF /* Gretel Watch App */,
+				B5C1021B297943EF002956BF /* Gretel Watch AppTests */,
+				B5C10225297943EF002956BF /* Gretel Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B5C1020B297943ED002956BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C10217297943EF002956BF /* Preview Assets.xcassets in Resources */,
+				B5C10214297943EF002956BF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C1021A297943EF002956BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C10224297943EF002956BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5E3B78D28D31F7D002176DB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -356,23 +547,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B5C10209297943ED002956BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C10212297943ED002956BF /* ContentView.swift in Sources */,
+				B5C1023D2979577D002956BF /* CLLocation+Utils.swift in Sources */,
+				B5C1023A29794C59002956BF /* LocationService.swift in Sources */,
+				B5C10210297943ED002956BF /* GretelApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C10218297943EF002956BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C10221297943EF002956BF /* Gretel_Watch_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5C10222297943EF002956BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C1022B297943EF002956BF /* Gretel_Watch_AppUITests.swift in Sources */,
+				B5C1022D297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5E3B78B28D31F7D002176DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5345EA228F86A2B00A567B2 /* TripDashboardView.swift in Sources */,
 				B5E3B79F28D31F7E002176DB /* Gretel_SwiftUI.xcdatamodeld in Sources */,
-				B5FF62E42901ABC40005E02E /* Location.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
 				B5FF62DA29003E680005E02E /* TrackHelper.swift in Sources */,
 				B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */,
 				B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */,
-				B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */,
+				B506BA2429797B6E008CD951 /* TrackRecorderHUDView.swift in Sources */,
+				B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */,
+				B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */,
 				B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */,
-				B5FF62CF29000A750005E02E /* DashboardLabelView.swift in Sources */,
 				B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */,
-				B5FF62D329000AAC0005E02E /* RecordButtonView.swift in Sources */,
 				B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */,
+				B5C1023929794C59002956BF /* LocationService.swift in Sources */,
 				B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */,
 				B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */,
 				B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */,
@@ -401,6 +619,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B5C1021E297943EF002956BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5C1020C297943ED002956BF /* Gretel Watch App */;
+			targetProxy = B5C1021D297943EF002956BF /* PBXContainerItemProxy */;
+		};
+		B5C10228297943EF002956BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5C1020C297943ED002956BF /* Gretel Watch App */;
+			targetProxy = B5C10227297943EF002956BF /* PBXContainerItemProxy */;
+		};
 		B5E3B7A628D31F7E002176DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B5E3B78E28D31F7D002176DB /* Gretel SwiftUI */;
@@ -414,6 +642,154 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B5C1022E297943EF002956BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gretel Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gretel;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		B5C1022F297943EF002956BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gretel Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gretel;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		B5C10230297943EF002956BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "place.sometinylittle.Gretel-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gretel Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gretel Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		B5C10231297943EF002956BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "place.sometinylittle.Gretel-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gretel Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gretel Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		B5C10232297943EF002956BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "place.sometinylittle.Gretel-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Gretel Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		B5C10233297943EF002956BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ARU7K8KJKJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "place.sometinylittle.Gretel-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Gretel Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
 		B5E3B7B628D31F7E002176DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -552,7 +928,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -590,7 +966,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,7 +989,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "space.sometinylittle.Gretel.Gretel-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -633,7 +1009,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "space.sometinylittle.Gretel.Gretel-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,6 +1059,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B5C10234297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5C1022E297943EF002956BF /* Debug */,
+				B5C1022F297943EF002956BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5C10235297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5C10230297943EF002956BF /* Debug */,
+				B5C10231297943EF002956BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5C10236297943EF002956BF /* Build configuration list for PBXNativeTarget "Gretel Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5C10232297943EF002956BF /* Debug */,
+				B5C10233297943EF002956BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5E3B78A28D31F7D002176DB /* Build configuration list for PBXProject "Gretel SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

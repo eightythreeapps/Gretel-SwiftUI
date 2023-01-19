@@ -12,19 +12,25 @@ import CoreLocation
 struct Gretel: App {
     
     let persistenceController = PersistenceController.shared
-    let locationRecorder:LocationRecorderService
+    
+    var locationRecorder:LocationRecorder
+    var locationService:LocationService
     
     init() {
-        self.locationRecorder = LocationRecorderService(locationManager: CLLocationManager(),
-                                                        settingsService: SettingsService(),
-                                                        trackHelper: TrackHelper(viewContext: persistenceController.container.viewContext))
+        
+        self.locationService = LocationService(locationManager: CLLocationManager())
+        self.locationRecorder = LocationRecorder(locationService: self.locationService,
+                                                 settingsService: SettingsService(),
+                                                 trackHelper: TrackHelper(viewContext: PersistenceController.shared.container.viewContext))
     }
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(locationRecorder)
+                .environmentObject(locationService)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
+    
 }

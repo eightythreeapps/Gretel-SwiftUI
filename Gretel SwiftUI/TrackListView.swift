@@ -10,7 +10,7 @@ import CoreData
 
 struct TrackListView: View {
     
-    @EnvironmentObject var locationRecorderService:LocationRecorderService
+    @EnvironmentObject var locationRecorderService:LocationRecorder
     @Environment(\.managedObjectContext) var moc
     
     @FetchRequest(sortDescriptors: [
@@ -19,7 +19,6 @@ struct TrackListView: View {
     ])
     var tracks: FetchedResults<Track>
     
-    @State var isPresentingNewTrackForm:Bool = false
     @State var trackName:String = "New track"
     
     var body: some View {
@@ -39,33 +38,18 @@ struct TrackListView: View {
         .navigationBarItems(
             trailing:
                 Button(action: {
-                    isPresentingNewTrackForm = true
+
                 }, label: {
                     Image(systemName: "plus")
                 })
         )
-        .alert("Start recording new track?",
-               isPresented: $isPresentingNewTrackForm) {
-            
-            TextField("Username", text: $trackName)
-            
-            Button("Start recording", action: {
-                locationRecorderService.startNewTrack(name: trackName)
-                isPresentingNewTrackForm = false
-            })
-            
-            Button("Cancel", role: .cancel, action: {
-                isPresentingNewTrackForm = false
-            })
-            
-        }
     }
 }
 
 struct TrackListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PreviewFactory.TrackListPreview()
+            PreviewFactory.makeTrackListPreview()
         }
     }
 }

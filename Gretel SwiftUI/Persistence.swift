@@ -17,6 +17,7 @@ struct PersistenceController {
             let newItem = Track(context: viewContext)
             newItem.startDate = Date()
             newItem.name = "Track \(i)"
+            
         }
         do {
             try viewContext.save()

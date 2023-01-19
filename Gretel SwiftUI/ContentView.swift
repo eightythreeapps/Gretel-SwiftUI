@@ -7,27 +7,44 @@
 
 import SwiftUI
 import CoreData
-import PermissionsSwiftUI
 import CoreLocation
+import MapKit
 
 struct ContentView: View {
     
-    @EnvironmentObject var locationRecorderService:LocationRecorderService
-        
+    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationService:LocationService
+    
+    @State var isShowingTrackList = false
+    
     var body: some View {
         
-        NavigationView {
+        ZStack {
             
-            VStack {
-                
-                if let activeTrack = locationRecorderService.currentActiveTrack {
-                    TrackHUDView(track: activeTrack,
-                                 recordingState: $locationRecorderService.currentRecordingState)
+            Map(coordinateRegion: $locationService.region,
+                showsUserLocation: true,
+                userTrackingMode: $locationService.isTrackingUserLocation)
+            
+            VStack(alignment: .leading) {
+                Button {
+                    isShowingTrackList = true
+                } label: {
+                    Image(systemName: "list.bullet.circle.fill")
+                        .resizable()
+                        .frame(width: 45.0, height: 45.0)
                 }
-                
-                TrackListView()
-            }
 
+                TrackRecorderHUDView(trackName: locationRecorder.currentActiveTrack?.displayName() ?? "No active track",
+                                     latitude: locationService.currentLocation.displayValue(for: .latitude),
+                                     longitude: locationService.currentLocation.displayValue(for: .longitude),
+                                     altitude: locationService.currentLocation.displayValue(for: .altidude))
+                
+            }
+        
+        }
+        .edgesIgnoringSafeArea(.all)
+        .sheet(isPresented: $isShowingTrackList) {
+            TrackListView()
         }
         
     }
@@ -36,38 +53,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewFactory.ContentViewPreview()
-    }
-}
-
-struct TrackHUDView: View {
-    
-    var track:Track
-    @Binding var recordingState:RecordingState
-    
-    var body: some View {
-        VStack {
-           
-            HStack {
-                VStack {
-                    DashboardLabelView(title: "Distance", value: track.formattedDistance(), alignment: .leading)
-                    DashboardLabelView(title: "Duration", value: track.formattedDuration(), alignment: .leading)
-                    DashboardLabelView(title: "Altitude", value: "27m", alignment: .leading)
-                }
-                RecordButtonView(buttonState: $recordingState)
-            }
-            
-        }
-        .padding()
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: 160.0,
-            alignment: .center
-        )
-        .background(Color(UIColor.systemFill))
-        .cornerRadius(17.0)
-        .padding()
+        PreviewFactory.makeContentViewPreview()
     }
 }

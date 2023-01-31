@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct RecordedTrackDetailView: View {
+    
+    @Binding var track:Track?
+    
     var body: some View {
-        Text("Track detail view here")
+        
+        if let track = track {
+            Text("Track \(track.displayName())")
+        }else{
+            Text("No data to display")
+        }
+        
+       
     }
 }
 
 struct RecordedTrackDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordedTrackDetailView()
+        PreviewFactory.makeRecordedTrackDetailView()
     }
 }

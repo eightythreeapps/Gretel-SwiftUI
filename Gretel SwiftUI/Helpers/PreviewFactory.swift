@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreLocation
 import MapKit
-
+import CoreData
 
 public class PreviewFactory {
     
@@ -24,7 +24,12 @@ public class PreviewFactory {
     }
     
     public static func makeTrackListPreview() -> some View {
-        return TrackListView()
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        let tracks = try? PersistenceController.preview.container.viewContext.fetch(fetchRequest)
+        let selectedTrack = tracks?.first
+        
+        return TrackListView(tracks: tracks, selectedTrack: .constant(selectedTrack))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
     
@@ -46,7 +51,15 @@ public class PreviewFactory {
             .environmentObject(ConfiguredLocationRecorder())
             .environmentObject(ConfiguredLocationService())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-   
+    }
+    
+    public static func makeRecordedTrackDetailView() -> some View {
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        var tracks = try? PersistenceController.preview.container.viewContext.fetch(fetchRequest)
+        @State var selectedTrack = tracks?.first
+        
+        return RecordedTrackDetailView(track: $selectedTrack)
     }
   
     public static func makeSettingsView() -> some View {

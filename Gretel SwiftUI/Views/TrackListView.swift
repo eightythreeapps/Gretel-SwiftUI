@@ -10,24 +10,24 @@ import CoreData
 
 struct TrackListView: View {
     
+    var tracks:[Track]? = [Track]()
+    @Binding var selectedTrack:Track?
     @State var trackName:String = "New track"
     
-    @EnvironmentObject var locationRecorderService:LocationRecorder
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-        SortDescriptor(\.startDate, order: .reverse)
-    ])
-    var tracks: FetchedResults<Track>
-        
     var body: some View {
         
-        List(tracks) { track in
-            
-            NavigationLink {
-                RecordedTrackDetailView()
-            } label: {
-                Text(track.displayName())
+        VStack {
+            if let tracks = tracks {
+                List(tracks, selection:$selectedTrack) { track in
+                    
+                    NavigationLink {
+                        RecordedTrackDetailView(track: $selectedTrack)
+                    } label: {
+                        Text(track.displayName())
+                    }
+                }
+            }else{
+                Text("No tracks to display")
             }
         }
         .navigationTitle("My tracks")

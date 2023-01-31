@@ -44,6 +44,18 @@ struct ContentView: View {
     
     @State private var selectedMenuItem:MenuItem? = .myTracks
     @State private var columnVisibility:NavigationSplitViewVisibility = .automatic
+    
+    @EnvironmentObject var locationRecorderService:LocationRecorder
+    @Environment(\.managedObjectContext) var moc
+    
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.name),
+        SortDescriptor(\.startDate, order: .reverse)
+    ])
+    
+    var tracks: FetchedResults<Track>
+    
+    @State var selectedTrack:Track?
 
     var body: some View {
 
@@ -57,7 +69,8 @@ struct ContentView: View {
                             
                             switch menuItem {
                             case .myTracks:
-                                TrackListView()
+                                TrackListView(tracks: tracks.map{$0},
+                                              selectedTrack: $selectedTrack)
                                 
                             case .settings:
                                 SettingsView()
@@ -82,7 +95,7 @@ struct ContentView: View {
                     NavigationLink {
                         switch menuItem {
                         case .myTracks:
-                            TrackListView()
+                            TrackListView(tracks: tracks.map{$0}, selectedTrack: $selectedTrack)
                         case .settings:
                             SettingsView()
                         }
@@ -94,7 +107,7 @@ struct ContentView: View {
                 }
                 
             } content: {
-                TrackListView()
+                TrackListView(tracks: tracks.map{$0}, selectedTrack: $selectedTrack)
             } detail: {
                 Text("Detail")
             }

@@ -17,6 +17,7 @@
 		B51104612979ED3500BC3674 /* Double+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51104602979ED3500BC3674 /* Double+Utils.swift */; };
 		B51104622979ED3500BC3674 /* Double+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51104602979ED3500BC3674 /* Double+Utils.swift */; };
 		B522EB22297AA47B0030FE9F /* RecordedTrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */; };
+		B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5446F53298984F500761BF7 /* RecorderMiniView.swift */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
 		B5BDC98E297AF95200FDAD60 /* ColourScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BDC98D297AF95200FDAD60 /* ColourScheme.xcassets */; };
@@ -89,6 +90,7 @@
 		B511045D2979E34800BC3674 /* TrackRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecorderView.swift; sourceTree = "<group>"; };
 		B51104602979ED3500BC3674 /* Double+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Utils.swift"; sourceTree = "<group>"; };
 		B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedTrackDetailView.swift; sourceTree = "<group>"; };
+		B5446F53298984F500761BF7 /* RecorderMiniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderMiniView.swift; sourceTree = "<group>"; };
 		B54D12B128F86D4200E3A0A1 /* Gretel-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gretel-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gretel SwiftUI.entitlements"; sourceTree = "<group>"; };
 		B54D12B82900004600E3A0A1 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				B511045D2979E34800BC3674 /* TrackRecorderView.swift */,
 				B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */,
 				B50FFE022988342A00A9A29C /* SettingsView.swift */,
+				B5446F53298984F500761BF7 /* RecorderMiniView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				B506BA2429797B6E008CD951 /* LocationHUDView.swift in Sources */,
 				B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */,
 				B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */,
+				B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */,
 				B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */,
 				B50FFE0B29891F9A00A9A29C /* Device.swift in Sources */,
 				B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */,

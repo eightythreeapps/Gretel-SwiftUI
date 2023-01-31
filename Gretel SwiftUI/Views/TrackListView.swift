@@ -12,33 +12,18 @@ struct TrackListView: View {
     
     @State var trackName:String = "New track"
     
-    @EnvironmentObject var locationRecorderService:LocationRecorder
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-        SortDescriptor(\.startDate, order: .reverse)
-    ])
-    var tracks: FetchedResults<Track>
-        
+    var tracks = [Track]()
+    @Binding var path: [Track]
+
     var body: some View {
         
         List(tracks) { track in
-            
-            NavigationLink {
-                RecordedTrackDetailView()
-            } label: {
-                Text(track.displayName())
-            }
+            NavigationLink(track.displayName(), value:track)
+        }
+        .navigationDestination(for: Track.self) { track in
+            RecordedTrackDetailView(track: track)
         }
         .navigationTitle("My tracks")
-        .navigationBarItems(
-            trailing:
-                Button(action: {
-
-                }, label: {
-                    Image(systemName: "plus")
-                })
-        )
     }
 }
 

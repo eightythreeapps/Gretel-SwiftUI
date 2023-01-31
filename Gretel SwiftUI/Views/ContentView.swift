@@ -29,9 +29,9 @@ enum MenuItem:CaseIterable, Identifiable {
     var iconName:String {
         switch self {
         case .myTracks:
-            return "gear"
-        case .settings:
             return "point.topleft.down.curvedto.point.bottomright.up"
+        case .settings:
+            return "gear"
         }
     }
         
@@ -42,6 +42,15 @@ struct ContentView: View {
     @State var isShowingTrackList = false
     @EnvironmentObject var locationRecorder:LocationRecorder
     
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.name),
+        SortDescriptor(\.startDate, order: .reverse)
+    ])
+    var tracks: FetchedResults<Track>
+    
+    @State private var path: [Track] = [Track]()
+    
     @State private var selectedMenuItem:MenuItem? = .myTracks
     @State private var columnVisibility:NavigationSplitViewVisibility = .automatic
 
@@ -50,27 +59,26 @@ struct ContentView: View {
         if UIDevice.isPhone {
             
             TabView {
-                
-                ForEach(MenuItem.allCases) { menuItem in
-                    VStack {
-                        NavigationStack {
-                            
-                            switch menuItem {
-                            case .myTracks:
-                                TrackListView()
-                                
-                            case .settings:
-                                SettingsView()
-                            }
-                            
-                        }
-                        RecorderMiniView()
+               
+                VStack {
+                    NavigationStack(path: $path) {
+                        TrackListView(tracks: tracks.map {$0}, path: $path)
                     }
-                    .tabItem {
-                        Image(systemName: menuItem.iconName)
-                        Text(menuItem.name)
-                    }
+                    RecorderMiniView(track: $locationRecorder.currentActiveTrack)
                 }
+                .tabItem {
+                    Image(systemName: MenuItem.myTracks.iconName)
+                    Text(MenuItem.myTracks.name)
+                }
+                
+                NavigationStack {
+                    SettingsView()
+                }
+                .tabItem {
+                    Image(systemName: MenuItem.settings.iconName)
+                    Text(MenuItem.settings.name)
+                }
+                
             }
             
         }else{
@@ -82,7 +90,7 @@ struct ContentView: View {
                     NavigationLink {
                         switch menuItem {
                         case .myTracks:
-                            TrackListView()
+                            TrackListView(tracks: tracks.map {$0}, path: $path)
                         case .settings:
                             SettingsView()
                         }
@@ -94,7 +102,7 @@ struct ContentView: View {
                 }
                 
             } content: {
-                TrackListView()
+                TrackListView(tracks: tracks.map {$0}, path: $path)
             } detail: {
                 Text("Detail")
             }
@@ -109,25 +117,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         PreviewFactory.makeContentViewPreview()
-    }
-}
-
-struct RecorderMiniView: View {
-    
-    @EnvironmentObject var locationRecorder:LocationRecorder
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            Image(systemName: "map")
-            Spacer()
-            VStack(alignment: .leading) {
-                Text("0:33:54")
-                Text("1,221 locaations")
-            }
-            Spacer()
-            RecordButtonView(recordingState: $locationRecorder.currentRecordingState)
-            Spacer()
-        }
     }
 }

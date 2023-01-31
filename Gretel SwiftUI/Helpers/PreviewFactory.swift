@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreLocation
 import MapKit
-
+import CoreData
 
 public class PreviewFactory {
     
@@ -24,8 +24,15 @@ public class PreviewFactory {
     }
     
     public static func makeTrackListPreview() -> some View {
-        return TrackListView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
+        let track = results.first!
+        
+        return NavigationStack {
+            TrackListView(tracks: results.map{$0}, path: .constant([track]))
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
     }
     
     public static func makeTrackRecorderHUDPreview() -> some View {
@@ -51,6 +58,25 @@ public class PreviewFactory {
   
     public static func makeSettingsView() -> some View {
         return SettingsView()
+    }
+    
+    public static func makeRecordedTrackDetailView() -> some View {
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
+        
+        return RecordedTrackDetailView(track: results.first!)
+    }
+    
+    public static func makeRecorderMiniView() -> some View {
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
+        let track = results.first!
+        
+        return RecorderMiniView(track: .constant(track))
+            .environmentObject(ConfiguredLocationRecorder())
+        
     }
     
 }

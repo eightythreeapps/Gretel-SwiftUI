@@ -52,8 +52,15 @@ struct TrackRecorderView_Previews: PreviewProvider {
 
 struct RecordButtonView: View {
     
+    public enum RecordButtonSize:Double {
+        case small = 20.0
+        case medium = 30.0
+        case large = 60.0
+    }
+    
     @EnvironmentObject var locationRecorder:LocationRecorder
     @Binding var recordingState:RecordingState
+    var size:RecordButtonSize = .large
     
     var body: some View {
         Button {
@@ -69,17 +76,17 @@ struct RecordButtonView: View {
         case .recording:
             return Image(systemName: "pause.circle.fill")
                 .resizable()
-                .frame(width: 60.0, height: 60.0)
+                .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.blue)
         case .disabled:
             return Image(systemName: "record.circle")
                 .resizable()
-                .frame(width: 60.0, height: 60.0)
+                .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.gray)
         case .paused, .stopped:
             return Image(systemName: "record.circle")
                 .resizable()
-                .frame(width: 60.0, height: 60.0)
+                .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.red)
         
         }

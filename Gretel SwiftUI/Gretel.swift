@@ -21,7 +21,7 @@ struct Gretel: App {
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locationRecorder = LocationRecorder(locationService: self.locationService,
                                                  settingsService: SettingsService(),
-                                                 trackHelper: TrackHelper(viewContext: PersistenceController.shared.container.viewContext))
+                                                 trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext))
     }
     
     var body: some Scene {

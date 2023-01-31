@@ -9,13 +9,30 @@ import Foundation
 import CoreData
 import Combine
 
-public class TrackHelper {
+public protocol CoreDataTrackService {
+    
+    
+    
+}
+
+public class TrackDataService:CoreDataTrackService {
     
     private var viewContext:NSManagedObjectContext
     private var cancellables = Set<AnyCancellable>()
     
+    @Published var allTracks:[Track] = [Track]()
+    
     required init(viewContext:NSManagedObjectContext) {
         self.viewContext = viewContext
+    }
+    
+    
+    var fetchRequest: NSFetchRequest<Track> {
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        return fetchRequest
     }
     
     func createNewTrack(name:String? = nil) -> Future<Track?,Error> {

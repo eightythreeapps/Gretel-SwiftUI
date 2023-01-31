@@ -24,8 +24,8 @@ public class LocationService:ObservableObject {
                                                          span: MKCoordinateSpan(latitudeDelta: LocationService.DefaultCoordinateSpanDelta,
                                                                                 longitudeDelta: LocationService.DefaultCoordinateSpanDelta))
     
-    private static let DefaultLatitude = 0.1276
-    private static let DefaultLongitude = 51.5072
+    private static let DefaultLatitude = 50.337570
+    private static let DefaultLongitude = -4.793910
     private static let DefaultCoordinateSpanDelta = 0.1
     
     private var locationManager:CLLocationManager

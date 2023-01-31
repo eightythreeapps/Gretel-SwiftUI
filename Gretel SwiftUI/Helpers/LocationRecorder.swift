@@ -13,7 +13,7 @@ import MapKit
 public final class LocationRecorder:NSObject, ObservableObject {
     
     private var locationService:LocationService
-    private var trackHelper:TrackHelper
+    private var trackHelper:TrackDataService
     private var settingsService:SettingsService
     private var cancellables = Set<AnyCancellable>()
     
@@ -24,7 +24,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
     @Published var currentRecordingState:RecordingState = .stopped
     @Published var currentActiveTrack:Track? = nil
     
-    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackHelper) {
+    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataService) {
         
         self.locationService = locationService
         self.settingsService = settingsService

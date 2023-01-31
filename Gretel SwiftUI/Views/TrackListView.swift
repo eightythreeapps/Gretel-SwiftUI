@@ -11,6 +11,7 @@ import CoreData
 struct TrackListView: View {
     
     @State var trackName:String = "New track"
+    
     @EnvironmentObject var locationRecorderService:LocationRecorder
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [
@@ -18,22 +19,18 @@ struct TrackListView: View {
         SortDescriptor(\.startDate, order: .reverse)
     ])
     var tracks: FetchedResults<Track>
-    
-    
+        
     var body: some View {
         
-        VStack {
+        List(tracks) { track in
             
-            List(tracks) { track in
-                NavigationLink {
-                    Text(track.displayName())
-                } label: {
-                    Text(track.displayName())
-                }
+            NavigationLink {
+                RecordedTrackDetailView()
+            } label: {
+                Text(track.displayName())
             }
-            
         }
-        .navigationTitle("Gretel")
+        .navigationTitle("My tracks")
         .navigationBarItems(
             trailing:
                 Button(action: {

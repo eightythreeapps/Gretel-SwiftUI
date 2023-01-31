@@ -14,7 +14,7 @@ class Gretel_SwiftUITests: XCTestCase {
     
     var viewContext:NSManagedObjectContext!
     var cancellables = Set<AnyCancellable>()
-    var trackHelper:TrackHelper!
+    var trackHelper:TrackDataService!
 
     let coreDataTimeout = 3.0
     
@@ -22,7 +22,7 @@ class Gretel_SwiftUITests: XCTestCase {
         
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.viewContext = PersistenceController.init(inMemory: true).container.viewContext
-        self.trackHelper = TrackHelper(viewContext: self.viewContext)
+        self.trackHelper = TrackDataService(viewContext: self.viewContext)
         
         XCTAssertNotNil(self.viewContext, "ViewContext shold not be nil")
         XCTAssertNotNil(self.trackHelper, "Track helper shold not be nil")

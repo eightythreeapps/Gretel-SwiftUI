@@ -16,7 +16,7 @@ public class PreviewFactory {
         
         let locationService = LocationService(locationManager: CLLocationManager())
         
-        return LocationRecorder(locationService:locationService, settingsService: SettingsService(), trackHelper: TrackHelper.init(viewContext: PersistenceController.preview.container.viewContext))
+        return LocationRecorder(locationService:locationService, settingsService: SettingsService(), trackHelper: TrackDataService.init(viewContext: PersistenceController.preview.container.viewContext))
     }
     
     public static func ConfiguredLocationService() -> LocationService {
@@ -30,11 +30,11 @@ public class PreviewFactory {
     
     public static func makeTrackRecorderHUDPreview() -> some View {
         
-        return TrackRecorderHUDView()
+        return LocationHUDView()
             .environmentObject(ConfiguredLocationRecorder())
         
     }
-
+    
     public static func makeTrackRecorderPreview() -> some View {
         return TrackRecorderView()
             .environmentObject(ConfiguredLocationRecorder())
@@ -46,5 +46,11 @@ public class PreviewFactory {
             .environmentObject(ConfiguredLocationRecorder())
             .environmentObject(ConfiguredLocationService())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+   
     }
+  
+    public static func makeSettingsView() -> some View {
+        return SettingsView()
+    }
+    
 }

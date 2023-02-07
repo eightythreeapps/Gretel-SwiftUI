@@ -13,7 +13,7 @@ struct RecordedTrackDetailView: View {
     
     var body: some View {
         
-        Text(track.displayName())
+        Text(track.trackName())
 
     }
 }

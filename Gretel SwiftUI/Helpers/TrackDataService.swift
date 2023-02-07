@@ -9,15 +9,21 @@ import Foundation
 import CoreData
 import Combine
 
+enum TrackDataServiceError:Error {
+    case noContext
+    case noActiveTack
+    case invalidTrackPointDate
+    case rethrow(error:Error)
+    case saveError(error:Error)
+}
+
 public protocol CoreDataTrackService {
-    
-    
     
 }
 
 public class TrackDataService:CoreDataTrackService {
     
-    private var viewContext:NSManagedObjectContext
+    var viewContext:NSManagedObjectContext
     private var cancellables = Set<AnyCancellable>()
     
     @Published var allTracks:[Track] = [Track]()
@@ -26,113 +32,63 @@ public class TrackDataService:CoreDataTrackService {
         self.viewContext = viewContext
     }
     
-    
-    var fetchRequest: NSFetchRequest<Track> {
-        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        fetchRequest.returnsObjectsAsFaults = false
+    func startNewTrack(name:String? = nil) throws -> Track {
         
-        return fetchRequest
-    }
-    
-    func createNewTrack(name:String? = nil) -> Future<Track?,Error> {
+        let now = Date()
+       
+        //TODO: Update these to read from device locale
+        let sectionKey = now.toFormat("EEEE dd MMM yyyy")
+        let trackName = now.toFormat("dd MMM yyyy HH:mm:ss")
         
-        return Future { promise in
-         
-            let now = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
-            let trackName = dateFormatter.string(from: now)
-            
-            let track = Track.init(context: self.viewContext)
-            track.name = name != nil ? name : trackName
-            track.startDate = now
-            
-            let trackSegment = TrackSegment.init(context: self.viewContext)
-            trackSegment.time = now
-            
-            track.addToTrackSegments(trackSegment)
-            
-            do {
-                try self.viewContext.save()
-                promise(.success(track))
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-                promise(.failure(error))
-            }
-            
+        let track = Track.init(context: self.viewContext)
+        track.formattedCreated = sectionKey
+        track.name = name != nil ? name : trackName
+        track.startDate = now
+        
+        do {
+            try track.save()
+            return track
+        } catch {
+            throw error
         }
-            
+        
     }
     
-    func endCurrentRecording() -> Future<Bool, Never> {
+    func endCurrentRecording(track:Track) throws {
         
-        return Future { promise in
-            
-            self.getCurrentActiveTrack().sink { completion in
-                print("Completed")
-            } receiveValue: { track in
-                if let track = track {
-                    track.endDate = Date()
-                    track.isRecording = false
-                }
-            }.store(in: &self.cancellables)
+        track.endDate = Date()
+        track.isRecording = false
+        
+        do {
+            try track.save()
+        } catch {
+            throw error
+        }
+        
+    }
 
+}
+
+private extension TrackDataService {
+    
+    //Update this to thow a custom error
+    func getCurrentActiveTrack() -> Track? {
+        
+        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "isRecording == true")
+        
+        var activeTrack:Track?
+        
+        do {
+            let results = try self.viewContext.fetch(fetchRequest)
+            if let track = results.first {
+                activeTrack = track
+            }
+        } catch {
+            print("Could not fetch active track")
         }
         
-    }
-    
-    func getCurrentActiveTrack() -> Future<Track?,Error> {
-        
-        return Future { promise in
-            
-            let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "isRecording == true")
-            
-            self.viewContext.perform {
-                do {
-                    let result = try fetchRequest.execute()
-                    if let track = result.first {
-                        promise(.success(track))
-                    }
-                } catch {
-                    print("Unable to Execute Fetch Request, \(error)")
-                    promise(.failure(error))
-                }
-            }
-            
-        }
+        return activeTrack
         
     }
-    
-    func addPointToSegment(latitude:Double, longitude:Double) {
-        
-        self.getCurrentActiveTrack().sink { completion in
-            print("Active Track loaded")
-        } receiveValue: { track in
-            
-            if let activeTrack = track, let activeSegment = activeTrack.getActiveSegment() {
-                
-                let trackPoint = TrackPoint(context: self.viewContext)
-                trackPoint.latitude = latitude
-                trackPoint.longitude = longitude
-                trackPoint.time = Date()
-                
-                activeSegment.addToTrackPoints(trackPoint)
-                
-                do {
-                    try self.viewContext.save()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-                
-            }else{
-                print("Could not get active track segment")
-            }
-            
-        }.store(in: &cancellables)
-        
-    }
-    
 }

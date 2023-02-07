@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B506BA2429797B6E008CD951 /* LocationHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B506BA2329797B6E008CD951 /* LocationHUDView.swift */; };
+		B509C7802991504F00F2A8D4 /* DataHandlingErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B509C77F2991504F00F2A8D4 /* DataHandlingErrors.swift */; };
 		B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1C291EBE9B00BD836C /* TrackListView.swift */; };
 		B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50D0E1E291EC1C700BD836C /* Track+Utils.swift */; };
 		B50FFE032988342A00A9A29C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50FFE022988342A00A9A29C /* SettingsView.swift */; };
@@ -20,6 +21,9 @@
 		B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5446F53298984F500761BF7 /* RecorderMiniView.swift */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
+		B55F2C542992AA8E00174A05 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = B55F2C532992AA8E00174A05 /* SwiftDate */; };
+		B56EC604298BD77F005B9A41 /* NSManagedObject+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EC603298BD77F005B9A41 /* NSManagedObject+Utils.swift */; };
+		B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EC605298C271A005B9A41 /* ActiveTrack.swift */; };
 		B5BDC98E297AF95200FDAD60 /* ColourScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BDC98D297AF95200FDAD60 /* ColourScheme.xcassets */; };
 		B5C10210297943ED002956BF /* GretelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1020F297943ED002956BF /* GretelApp.swift */; };
 		B5C10212297943ED002956BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C10211297943ED002956BF /* ContentView.swift */; };
@@ -83,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		B506BA2329797B6E008CD951 /* LocationHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHUDView.swift; sourceTree = "<group>"; };
+		B509C77F2991504F00F2A8D4 /* DataHandlingErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandlingErrors.swift; sourceTree = "<group>"; };
 		B50D0E1C291EBE9B00BD836C /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
 		B50D0E1E291EC1C700BD836C /* Track+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Track+Utils.swift"; sourceTree = "<group>"; };
 		B50FFE022988342A00A9A29C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -94,6 +99,8 @@
 		B54D12B128F86D4200E3A0A1 /* Gretel-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gretel-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B54D12B228F86D4E00E3A0A1 /* Gretel SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gretel SwiftUI.entitlements"; sourceTree = "<group>"; };
 		B54D12B82900004600E3A0A1 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		B56EC603298BD77F005B9A41 /* NSManagedObject+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Utils.swift"; sourceTree = "<group>"; };
+		B56EC605298C271A005B9A41 /* ActiveTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrack.swift; sourceTree = "<group>"; };
 		B5BDC98D297AF95200FDAD60 /* ColourScheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColourScheme.xcassets; sourceTree = "<group>"; };
 		B5C1020D297943ED002956BF /* Gretel Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gretel Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C1020F297943ED002956BF /* GretelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GretelApp.swift; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55F2C542992AA8E00174A05 /* SwiftDate in Frameworks */,
 				B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +190,7 @@
 				B5C1023B2979577D002956BF /* CLLocation+Utils.swift */,
 				B51104602979ED3500BC3674 /* Double+Utils.swift */,
 				B50FFE0A29891F9A00A9A29C /* Device.swift */,
+				B56EC603298BD77F005B9A41 /* NSManagedObject+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,7 +198,6 @@
 		B50FFE0629891E5500A9A29C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B5FF62CD29000A480005E02E /* Trip Dashboard */,
 				B5E3B79428D31F7D002176DB /* ContentView.swift */,
 				B50D0E1C291EBE9B00BD836C /* TrackListView.swift */,
 				B506BA2329797B6E008CD951 /* LocationHUDView.swift */,
@@ -199,6 +207,14 @@
 				B5446F53298984F500761BF7 /* RecorderMiniView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B55F2C512992A67600174A05 /* Application Models */ = {
+			isa = PBXGroup;
+			children = (
+				B56EC605298C271A005B9A41 /* ActiveTrack.swift */,
+			);
+			path = "Application Models";
 			sourceTree = "<group>";
 		};
 		B585ECB9296EC7E200A91964 /* Publishers */ = {
@@ -276,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
+				B55F2C512992A67600174A05 /* Application Models */,
 				B50FFE0629891E5500A9A29C /* Views */,
 				B585ECB9296EC7E200A91964 /* Publishers */,
 				B5FF62E52907E3500005E02E /* Enums */,
@@ -316,13 +333,6 @@
 			path = "Gretel SwiftUIUITests";
 			sourceTree = "<group>";
 		};
-		B5FF62CD29000A480005E02E /* Trip Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Trip Dashboard";
-			sourceTree = "<group>";
-		};
 		B5FF62D429000ACC0005E02E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +351,7 @@
 			children = (
 				B5FF62E62907E3630005E02E /* RecordingState.swift */,
 				B5FF62E82907E3870005E02E /* LocationTrackingState.swift */,
+				B509C77F2991504F00F2A8D4 /* DataHandlingErrors.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -416,6 +427,7 @@
 			name = "Gretel SwiftUI";
 			packageProductDependencies = (
 				B54D12B428FD6C4300E3A0A1 /* CoreGPX */,
+				B55F2C532992AA8E00174A05 /* SwiftDate */,
 			);
 			productName = "Gretel SwiftUI";
 			productReference = B5E3B78F28D31F7D002176DB /* Gretel SwiftUI.app */;
@@ -502,6 +514,7 @@
 			mainGroup = B5E3B78628D31F7D002176DB;
 			packageReferences = (
 				B54D12B328FD6C4300E3A0A1 /* XCRemoteSwiftPackageReference "CoreGPX" */,
+				B55F2C522992AA8E00174A05 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 			);
 			productRefGroup = B5E3B79028D31F7D002176DB /* Products */;
 			projectDirPath = "";
@@ -604,8 +617,10 @@
 			files = (
 				B50FFE032988342A00A9A29C /* SettingsView.swift in Sources */,
 				B5E3B79F28D31F7E002176DB /* Gretel_SwiftUI.xcdatamodeld in Sources */,
+				B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
 				B5FF62DA29003E680005E02E /* TrackDataService.swift in Sources */,
+				B509C7802991504F00F2A8D4 /* DataHandlingErrors.swift in Sources */,
 				B522EB22297AA47B0030FE9F /* RecordedTrackDetailView.swift in Sources */,
 				B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */,
 				B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */,
@@ -625,6 +640,7 @@
 				B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */,
 				B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */,
 				B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */,
+				B56EC604298BD77F005B9A41 /* NSManagedObject+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,6 +1178,14 @@
 				minimumVersion = 0.9.1;
 			};
 		};
+		B55F2C522992AA8E00174A05 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1169,6 +1193,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B54D12B328FD6C4300E3A0A1 /* XCRemoteSwiftPackageReference "CoreGPX" */;
 			productName = CoreGPX;
+		};
+		B55F2C532992AA8E00174A05 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B55F2C522992AA8E00174A05 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
 		};
 /* End XCSwiftPackageProductDependency section */
 

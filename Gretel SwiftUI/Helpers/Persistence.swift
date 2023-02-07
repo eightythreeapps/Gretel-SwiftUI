@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftDate
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -17,7 +18,7 @@ struct PersistenceController {
             let newItem = Track(context: viewContext)
             newItem.startDate = Date()
             newItem.name = "Track \(i)"
-            
+            newItem.formattedCreated = Date().toFormat("EEEE dd MMM yyyy")
         }
         do {
             try viewContext.save()

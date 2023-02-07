@@ -12,4 +12,5 @@ public enum RecordingState {
     case stopped
     case paused
     case disabled
+    case error
 }

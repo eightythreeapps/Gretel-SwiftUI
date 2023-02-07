@@ -30,7 +30,7 @@ public class PreviewFactory {
         let track = results.first!
         
         return NavigationStack {
-            TrackListView(tracks: results.map{$0}, path: .constant([track]))
+            TrackListView(path: .constant([track]))
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
@@ -43,7 +43,7 @@ public class PreviewFactory {
     }
     
     public static func makeTrackRecorderPreview() -> some View {
-        return TrackRecorderView()
+        return TrackRecorderView(isVisible: .constant(false))
             .environmentObject(ConfiguredLocationRecorder())
             .environmentObject(ConfiguredLocationService())
     }
@@ -74,7 +74,7 @@ public class PreviewFactory {
         let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
         let track = results.first!
         
-        return RecorderMiniView(track: .constant(track))
+        return RecorderMiniView(shouldShowFullRecorderView: .constant(false))
             .environmentObject(ConfiguredLocationRecorder())
         
     }

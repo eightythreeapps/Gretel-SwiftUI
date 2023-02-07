@@ -16,6 +16,8 @@ struct TrackRecorderView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
+    @Binding var isVisible:Bool
+    
     var body: some View {
         
         let layout = (horizontalSizeClass == .compact && verticalSizeClass == .regular) ?
@@ -39,6 +41,16 @@ struct TrackRecorderView: View {
                 VStack {
                     RecorderControlsView()
                 }
+                .navigationTitle(locationRecorder.currentActiveTrack.nameDisplay())
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    Button {
+                        self.isVisible = false
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                    }
+
+                }
             }
         
     }
@@ -46,7 +58,9 @@ struct TrackRecorderView: View {
 
 struct TrackRecorderView_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewFactory.makeTrackRecorderPreview()
+        NavigationStack {
+            PreviewFactory.makeTrackRecorderPreview()
+        }
     }
 }
 
@@ -71,6 +85,7 @@ struct RecordButtonView: View {
     }
     
     func iconForState(recordingState:RecordingState) -> some View {
+        
         switch recordingState {
             
         case .recording:
@@ -83,13 +98,14 @@ struct RecordButtonView: View {
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.gray)
-        case .paused, .stopped:
+        case .paused, .stopped, .error:
             return Image(systemName: "record.circle")
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.red)
         
         }
+        
     }
     
 }
@@ -105,7 +121,7 @@ struct RecorderControlsView: View {
                 Text("--:--:--")
             }
             HStack {
-                HUDLabelView(title: "Points", value: "--")
+                HUDLabelView(title: "Points", value: locationRecorder.currentActiveTrack.pointsCountDisplay)
                 RecordButtonView(recordingState: $locationRecorder.currentRecordingState)
                 HUDLabelView(title: "Distance", value: "--")
             }

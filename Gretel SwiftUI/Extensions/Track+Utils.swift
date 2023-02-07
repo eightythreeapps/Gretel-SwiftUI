@@ -7,32 +7,61 @@
 
 import Foundation
 import Combine
+import SwiftDate
 
-enum DataError: Error {
-    case noContextAvailable
+enum SortOrder {
+    case ascending
+    case descending
 }
 
 extension Track {
     
-    func displayName() -> String {
+    func trackName() -> String {
         
         if let name = self.name {
             return name
         }
         
-        return "No name"
+        return "Untitled"
     }
     
-    func totalDistanceDisplay() -> String {
-        return "10.0km"
+    func totalDistanceInMeters() -> Int {
+        return 0
     }
     
-    func durationDisplay() -> String {
-        return "2:04:23"
+    func totalDurationInMillis() -> Double {
+        
+        var interval:Double = 0
+        
+        let points = getAllPoints(orderBy: .descending)
+        
+        let firstPoint = points.first
+        let lastPoint = points.last
+        
+        do {
+            if let firstPoint = points.first, let lastPoint = points.last {
+                interval = try getInterval(from: firstPoint, to: lastPoint)
+            }
+        } catch {
+            print("Error calculating interval")
+        }
+        
+        return interval
     }
     
-    func pointsCountDisplay() -> String {
-        return "1,244"
+    func pointsCount() -> Int {
+        
+        var count = 0
+        
+        if let segments = self.trackSegments?.allObjects as? [TrackSegment] {
+            
+            for segment in segments {
+                count += segment.trackPoints?.count ?? 0
+            }
+        }
+    
+        return count
+        
     }
     
     func startRecording() -> Future<Bool, Error> {
@@ -56,7 +85,7 @@ extension Track {
         }
     }
  
-    func getActiveSegment() -> TrackSegment? {
+    func getActiveSegment() throws -> TrackSegment {
         
         let segments = trackSegments?.allObjects as? [TrackSegment]
         
@@ -73,12 +102,73 @@ extension Track {
                 
                 self.addToTrackSegments(segment)                
                 return segment
+            }else{
+                throw TrackDataServiceError.noContext
             }
-            
-            return nil
             
         }
         
     }
     
+    func addPointToSegment(segment:TrackSegment, latitude:Double, longitude:Double) {
+      
+        if let moc = self.managedObjectContext {
+
+            let trackPoint = TrackPoint(context: moc)
+            trackPoint.latitude = latitude
+            trackPoint.longitude = longitude
+            trackPoint.time = Date()
+
+            segment.addToTrackPoints(trackPoint)
+
+            do {
+                try moc.save()
+                print("Point added to segment")
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+
+        }
+        
+    }
+    
+    private func getInterval(from:TrackPoint, to:TrackPoint) throws -> TimeInterval {
+        
+        guard let firstPointDate = from.time else {
+            throw TrackDataServiceError.invalidTrackPointDate
+        }
+        
+        guard let lastPointDate = to.time else {
+            throw TrackDataServiceError.invalidTrackPointDate
+        }
+        
+        return lastPointDate.timeIntervalSince(firstPointDate)
+    }
+    
+    private func getAllPoints(orderBy:SortOrder) -> [TrackPoint] {
+        
+        var trackPoints = [TrackPoint]()
+        
+        guard let trackSegments = self.trackSegments?.allObjects as? [TrackSegment] else {
+            return trackPoints
+        }
+        
+        for segment in trackSegments {
+            if let points = segment.trackPoints?.allObjects as? [TrackPoint] {
+                trackPoints.append(contentsOf: points)
+            }
+        }
+        
+        trackPoints.sort { a, b in
+            
+            if orderBy == .descending {
+                return a.time!.isBeforeDate(b.time!, granularity: .second)
+            }else{
+                return a.time!.isAfterDate(b.time!, granularity: .second)
+            }
+
+        }
+        
+        return trackPoints
+    }
 }

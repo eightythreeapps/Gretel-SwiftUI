@@ -10,15 +10,28 @@ import CoreData
 
 struct TrackListView: View {
     
-    @State var trackName:String = "New track"
+    @State var trackName:String = "Untitled"
     
-    var tracks = [Track]()
+    @Environment(\.managedObjectContext) var moc
+    @SectionedFetchRequest<String, Track>(
+        sectionIdentifier: \.formattedCreated!,
+        sortDescriptors: [
+            SortDescriptor(\.name),
+            SortDescriptor(\.startDate, order: .reverse)
+        ])
+    
+    var tracks: SectionedFetchResults<String, Track>
+    
     @Binding var path: [Track]
 
     var body: some View {
         
-        List(tracks) { track in
-            NavigationLink(track.displayName(), value:track)
+        ForEach (tracks) { section in
+            Section(header: Text(section.id)) {
+                List(section) { track in
+                    NavigationLink(track.trackName(), value:track)
+                }
+            }
         }
         .navigationDestination(for: Track.self) { track in
             RecordedTrackDetailView(track: track)

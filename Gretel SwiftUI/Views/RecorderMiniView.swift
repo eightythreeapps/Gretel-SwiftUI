@@ -10,21 +10,21 @@ import SwiftUI
 struct RecorderMiniView: View {
     
     @EnvironmentObject var locationRecorder:LocationRecorder
-    @Binding var track:Track?
+    @Binding var shouldShowFullRecorderView:Bool
     
     var body: some View {
         HStack {
             Spacer()
-            if let track = track {
+            if locationRecorder.currentActiveTrack.exists() {
                 Image(systemName: "map")
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("--:--:--")
-                    Text("1,221 locaations")
+                    Text(locationRecorder.currentActiveTrack.durationDisplay)
+                    Text(locationRecorder.currentActiveTrack.pointsCountDisplay)
                 }
             }else{
                 Button {
-                    //Do stuff
+                    shouldShowFullRecorderView = true
                 } label: {
                     Text("Start new recording")
                 }

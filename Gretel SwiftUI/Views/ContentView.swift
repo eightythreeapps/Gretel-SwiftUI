@@ -17,11 +17,12 @@ enum MenuItem:CaseIterable, Identifiable {
     }
     
     var name:String {
+        
         switch self {
         case .myTracks:
-            return "My Tracks"
+            return "Tracks"
         case .settings:
-            return "Settings"
+            return "Planner"
         }
         
     }
@@ -42,14 +43,9 @@ struct ContentView: View {
     @State var isShowingTrackList = false
     @EnvironmentObject var locationRecorder:LocationRecorder
     
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-        SortDescriptor(\.startDate, order: .reverse)
-    ])
-    var tracks: FetchedResults<Track>
     
     @State private var path: [Track] = [Track]()
+    @State private var isShowingTrackRecorder:Bool = false
     
     @State private var selectedMenuItem:MenuItem? = .myTracks
     @State private var columnVisibility:NavigationSplitViewVisibility = .automatic
@@ -62,9 +58,9 @@ struct ContentView: View {
                
                 VStack {
                     NavigationStack(path: $path) {
-                        TrackListView(tracks: tracks.map {$0}, path: $path)
+                        TrackListView(path: $path)
                     }
-                    RecorderMiniView(track: $locationRecorder.currentActiveTrack)
+                    RecorderMiniView(shouldShowFullRecorderView: $isShowingTrackRecorder)
                 }
                 .tabItem {
                     Image(systemName: MenuItem.myTracks.iconName)
@@ -78,7 +74,11 @@ struct ContentView: View {
                     Image(systemName: MenuItem.settings.iconName)
                     Text(MenuItem.settings.name)
                 }
-                
+            }
+            .sheet(isPresented: $isShowingTrackRecorder) {
+                NavigationStack {
+                    TrackRecorderView(isVisible: $isShowingTrackRecorder)
+                }
             }
             
         }else{
@@ -90,7 +90,7 @@ struct ContentView: View {
                     NavigationLink {
                         switch menuItem {
                         case .myTracks:
-                            TrackListView(tracks: tracks.map {$0}, path: $path)
+                            TrackListView(path: $path)
                         case .settings:
                             SettingsView()
                         }
@@ -102,7 +102,7 @@ struct ContentView: View {
                 }
                 
             } content: {
-                TrackListView(tracks: tracks.map {$0}, path: $path)
+                TrackListView(path: $path)
             } detail: {
                 Text("Detail")
             }

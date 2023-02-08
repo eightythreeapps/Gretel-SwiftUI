@@ -16,6 +16,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
     private var locationService:LocationService
     private var trackHelper:TrackDataService
     private var settingsService:SettingsService
+    private var unitFormatter:UnitFormatter
     private var cancellables = Set<AnyCancellable>()
     
     private static let DefaultLatitude = 0.1276
@@ -23,7 +24,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
     private static let DefaultCoordinateSpanDelta = 0.1
     
     @Published var currentRecordingState:RecordingState = .stopped
-    @Published var currentActiveTrack:ActiveTrack = ActiveTrack()
+    @Published var currentActiveTrack:ActiveTrack?
     
     /**
      Initialises a new instance of LocationRecorder service. This is not a singleton, but there should only ever be one instance crearted when the app starts up.
@@ -32,12 +33,14 @@ public final class LocationRecorder:NSObject, ObservableObject {
         - settingsService: An instance of SettingsService
         - trackHelper: An instance with TrackDataService
      */
-    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataService) {
+    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataService, unitFormatter:UnitFormatter) {
         
         //Assign dependencies
         self.locationService = locationService
         self.settingsService = settingsService
         self.trackHelper = trackHelper
+        self.unitFormatter = unitFormatter
+        self.settingsService = settingsService
         
         //Start the location services
         locationService.startUpdatingUserHeading()
@@ -76,7 +79,12 @@ public final class LocationRecorder:NSObject, ObservableObject {
         
         do {
             let track = try trackHelper.startNewTrack(name: name)
-            self.currentActiveTrack = ActiveTrack(track: track, context: trackHelper.viewContext)
+            self.currentActiveTrack = ActiveTrack(track:track,
+                                                  unitFormatter: self.unitFormatter,
+                                                  settingsService: self.settingsService,
+                                                  pointsCountDisplay: "",
+                                                  durationDisplay: "", distanceDisplay: "",
+                                                  totalDuration: 0)
             self.startRecordingTrack()
             self.currentRecordingState = .recording
         } catch {
@@ -89,7 +97,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
      */
     public func resumeRecording() {
         
-        if self.currentActiveTrack.exists() {
+        if self.currentActiveTrack != nil {
             self.currentRecordingState = .recording
             self.startRecordingTrack()
         }else{
@@ -104,9 +112,9 @@ public final class LocationRecorder:NSObject, ObservableObject {
     public func pauseRecording() {
         
         do {
-            if self.currentActiveTrack.exists() {
+            if self.currentActiveTrack != nil {
                 self.currentRecordingState = .paused
-                try self.currentActiveTrack.endTrackSegment()
+                try self.currentActiveTrack!.endTrackSegment()
                 self.emptyCancellables()
             }else{
                 self.currentRecordingState = .error
@@ -122,7 +130,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
      Ends the surrecnt track.
      */
     public func endTrack() {
-        if self.currentActiveTrack.exists() {
+        if self.currentActiveTrack != nil{
             self.resetActiveTrack()
         }
     }
@@ -132,7 +140,9 @@ public final class LocationRecorder:NSObject, ObservableObject {
      */
     func captureLocation(location:CLLocation) {
         do {
-            try self.currentActiveTrack.addLocation(location: location)
+            if self.currentActiveTrack != nil {
+                try self.currentActiveTrack!.addLocation(location: location)
+            }
         } catch {
             self.currentRecordingState = .error
         }
@@ -143,7 +153,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
 private extension LocationRecorder {
     
     func resetActiveTrack() {
-        self.currentActiveTrack = ActiveTrack()
+        self.currentActiveTrack = nil
         self.currentRecordingState = .stopped
     }
     

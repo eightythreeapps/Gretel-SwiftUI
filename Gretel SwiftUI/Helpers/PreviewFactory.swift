@@ -15,10 +15,12 @@ public class PreviewFactory {
     public static func ConfiguredLocationRecorder() -> LocationRecorder  {
         
         let locationService = LocationService(locationManager: CLLocationManager())
+        let settingsService = SettingsService(userDefaults: UserDefaults.standard)
+        let unitFormatter = UnitFormatter(settingsService: settingsService)
         
         return LocationRecorder(locationService:locationService,
                                 settingsService: SettingsService(userDefaults: UserDefaults.standard),
-                                trackHelper: TrackDataService.init(viewContext: PersistenceController.preview.container.viewContext))
+                                trackHelper: TrackDataService.init(viewContext: PersistenceController.preview.container.viewContext), unitFormatter: unitFormatter)
     }
     
     public static func ConfiguredLocationService() -> LocationService {

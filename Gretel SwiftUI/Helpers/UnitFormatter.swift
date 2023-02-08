@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UnitFormatter {
+public class UnitFormatter {
     
     private var settingsService:SettingsService
     
@@ -41,7 +41,7 @@ class UnitFormatter {
             
         }
         
-        return "\(calculatedDistance)\(granularity.suffix(type: self.settingsService.unitType))"
+        return "\(calculatedDistance.rounded(toPlaces: 2))\(granularity.suffix(type: self.settingsService.unitType))"
         
     }
     

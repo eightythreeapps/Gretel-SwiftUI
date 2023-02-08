@@ -16,17 +16,22 @@ struct Gretel: App {
     var locationRecorder:LocationRecorder
     var locationService:LocationService
     var settingsService:SettingsService
+    var unitFormatter:UnitFormatter
     
     init() {
         
         let userDefaults = UserDefaults.standard
+        let settingsService = SettingsService(userDefaults: userDefaults)
+        let unitFormatter = UnitFormatter(settingsService: settingsService)
         
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locationRecorder = LocationRecorder(locationService: self.locationService,
                                                  settingsService: SettingsService(userDefaults: userDefaults),
-                                                 trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext))
+                                                 trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext), unitFormatter: unitFormatter)
+        self.settingsService = settingsService
+        self.unitFormatter = unitFormatter
+        self.settingsService.configureSettings()
         
-        self.settingsService = SettingsService(userDefaults: userDefaults)
     }
     
     var body: some Scene {

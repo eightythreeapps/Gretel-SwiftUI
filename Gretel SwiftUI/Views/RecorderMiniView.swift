@@ -15,12 +15,12 @@ struct RecorderMiniView: View {
     var body: some View {
         HStack {
             Spacer()
-            if locationRecorder.currentActiveTrack.exists() {
+            if locationRecorder.currentActiveTrack != nil {
                 Image(systemName: "map")
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text(locationRecorder.currentActiveTrack.durationDisplay)
-                    Text(locationRecorder.currentActiveTrack.pointsCountDisplay)
+                    Text(locationRecorder.currentActiveTrack?.durationDisplay ?? "")
+                    Text(locationRecorder.currentActiveTrack?.pointsCountDisplay ?? "")
                 }
                 .onTapGesture {
                     shouldShowFullRecorderView = true

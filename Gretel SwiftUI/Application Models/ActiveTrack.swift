@@ -8,15 +8,31 @@
 import Foundation
 import CoreLocation
 import CoreData
+import Combine
 
-struct ActiveTrack {
+class ActiveTrack {
     
     var track:Track?
-    var context:NSManagedObjectContext?
+    var unitFormatter:UnitFormatter
+    var settingsService:SettingsService
     var pointsCountDisplay:String = ""
     var durationDisplay:String = ""
     var distanceDisplay:String = ""
     var totalDuration:TimeInterval = 0
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(track: Track? = nil, unitFormatter: UnitFormatter, settingsService:SettingsService, pointsCountDisplay: String, durationDisplay: String, distanceDisplay: String, totalDuration: TimeInterval) {
+        self.track = track
+        self.unitFormatter = unitFormatter
+        self.pointsCountDisplay = pointsCountDisplay
+        self.durationDisplay = durationDisplay
+        self.distanceDisplay = distanceDisplay
+        self.totalDuration = totalDuration
+        self.settingsService = settingsService
+        
+        self.startMonitoringSettings()
+    }
     
     /**
      Ends a track sgement.
@@ -26,7 +42,7 @@ struct ActiveTrack {
      
      A new track segment should be started if the track is resumed.
      */
-    mutating func endTrackSegment() throws {
+    func endTrackSegment() throws {
      
         guard let track = self.track else {
             throw TrackDataServiceError.noActiveTrack
@@ -49,7 +65,7 @@ struct ActiveTrack {
      - Throws:`TrackDataServiceError.rethrow(error: error)`
                Simply rethrows the existing Core Data error back up the chain.
      */
-    mutating func startTrackSegment() throws {
+    func startTrackSegment() throws {
         
         do {
             let _ = try self.track?.getActiveSegment()
@@ -71,7 +87,7 @@ struct ActiveTrack {
      - Throws:`TrackDataServiceError.rethrow(error: error)`
                Simply rethrows the existing Core Data error back up the chain.
      */
-    mutating func addLocation(location:CLLocation) throws {
+    func addLocation(location:CLLocation) throws {
     
         do {
             
@@ -87,9 +103,7 @@ struct ActiveTrack {
                                           latitude: location.coordinate.latitude,
                                           longitude: location.coordinate.longitude)
             
-            self.pointsCountDisplay = updatePointsDisplayCount(count: self.track?.pointsCount() ?? 0)
-            self.durationDisplay    = updateDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
-            self.distanceDisplay    = updateDistanceDisplay(meters: self.track?.totalDistanceInMeters() ?? 0)
+            self.updateDisplay()
             
         } catch {
             throw TrackDataServiceError.rethrow(error: error)
@@ -121,7 +135,9 @@ struct ActiveTrack {
      - Returns: The duration value as a `String`.
      */
     func updateDistanceDisplay(meters:Double) -> String {
-        return "\(meters)"
+        
+        let formattedDistance = self.unitFormatter.formatDistance(distanceInMetres: meters, granularity: .large)
+        return formattedDistance
     }
     
     /**
@@ -132,19 +148,17 @@ struct ActiveTrack {
         return self.track?.trackName() ?? ""
     }
     
-    /**
-     Helper function to check if there is an active Track object to persist data to.
-     This is here to give a concrete boolean response so we do not have to rely on optionals in the View layer.
-     - Returns: A `bool` value.
-     */
-    func exists() -> Bool {
-        
-        if self.track == nil {
-            return false
-        }else{
-            return true
-        }
-        
+    func startMonitoringSettings() {
+        settingsService.$unitType.sink { unitType in
+            self.updateDisplay()
+        }.store(in: &cancellables)
     }
     
+    func updateDisplay() {
+        
+        self.pointsCountDisplay = updatePointsDisplayCount(count: self.track?.pointsCount() ?? 0)
+        self.durationDisplay    = updateDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
+        self.distanceDisplay    = updateDistanceDisplay(meters: self.track?.totalDistanceInMeters() ?? 0)
+        
+    }
 }

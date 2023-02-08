@@ -78,8 +78,8 @@
             filePath = "Gretel SwiftUI/Helpers/LocationRecorder.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "updateRecordingState()"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "Gretel SwiftUI/Helpers/LocationRecorder.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "pauseRecording()"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,16 +135,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5DD09099-D99C-4218-9A9D-D1733AC342CE"
+            uuid = "C8D294C4-8851-4271-AA5C-21876FF23134"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Gretel SwiftUI/Helpers/SettingsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "updateUnitType(unitType:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "configureSettings()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

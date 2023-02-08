@@ -41,7 +41,7 @@ struct TrackRecorderView: View {
                 VStack {
                     RecorderControlsView()
                 }
-                .navigationTitle(locationRecorder.currentActiveTrack.nameDisplay())
+                .navigationTitle(locationRecorder.currentActiveTrack?.nameDisplay() ?? "")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button {
@@ -118,12 +118,12 @@ struct RecorderControlsView: View {
         VStack {
             HStack {
                 Image(systemName: "clock")
-                Text(locationRecorder.currentActiveTrack.durationDisplay)
+                Text(locationRecorder.currentActiveTrack?.durationDisplay ?? "")
             }
             HStack {
-                HUDLabelView(title: "Points", value: locationRecorder.currentActiveTrack.pointsCountDisplay)
+                HUDLabelView(title: "Points", value: locationRecorder.currentActiveTrack?.pointsCountDisplay ?? "")
                 RecordButtonView(recordingState: $locationRecorder.currentRecordingState)
-                HUDLabelView(title: "Distance", value: locationRecorder.currentActiveTrack.distanceDisplay)
+                HUDLabelView(title: "Distance", value: locationRecorder.currentActiveTrack?.distanceDisplay ?? "")
             }
             .padding()
         }

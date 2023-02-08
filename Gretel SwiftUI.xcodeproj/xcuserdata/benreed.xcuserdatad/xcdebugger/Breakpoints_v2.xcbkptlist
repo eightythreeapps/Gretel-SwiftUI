@@ -46,8 +46,8 @@
             filePath = "Gretel SwiftUI/Extensions/Track+Utils.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "addPointToSegment(segment:latitude:longitude:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "Gretel SwiftUI/Helpers/TrackDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "startNewTrack(name:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -129,6 +129,22 @@
             startingLineNumber = "83"
             endingLineNumber = "83"
             landmarkName = "addLocation(location:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5DD09099-D99C-4218-9A9D-D1733AC342CE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gretel SwiftUI/Helpers/SettingsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "updateUnitType(unitType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

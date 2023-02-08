@@ -11,7 +11,8 @@ import Combine
 
 enum TrackDataServiceError:Error {
     case noContext
-    case noActiveTack
+    case noActiveTrack
+    case noActiveSegment
     case invalidTrackPointDate
     case rethrow(error:Error)
     case saveError(error:Error)

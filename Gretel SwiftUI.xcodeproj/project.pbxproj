@@ -36,6 +36,7 @@
 		B5C1023A29794C59002956BF /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023829794C59002956BF /* LocationService.swift */; };
 		B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
 		B5C1023D2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
+		B5C371BE2993BDB700FB9BF5 /* UnitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C371BD2993BDB700FB9BF5 /* UnitFormatter.swift */; };
 		B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79228D31F7D002176DB /* Gretel.swift */; };
 		B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79428D31F7D002176DB /* ContentView.swift */; };
 		B5E3B79728D31F7E002176DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3B79628D31F7E002176DB /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 		B5C1022C297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B5C1023829794C59002956BF /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B5C1023B2979577D002956BF /* CLLocation+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Utils.swift"; sourceTree = "<group>"; };
+		B5C371BD2993BDB700FB9BF5 /* UnitFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitFormatter.swift; sourceTree = "<group>"; };
 		B5E3B78F28D31F7D002176DB /* Gretel SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gretel SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3B79228D31F7D002176DB /* Gretel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel.swift; sourceTree = "<group>"; };
 		B5E3B79428D31F7D002176DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				B5FF62D929003E680005E02E /* TrackDataService.swift */,
 				B5C1023829794C59002956BF /* LocationService.swift */,
 				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
+				B5C371BD2993BDB700FB9BF5 /* UnitFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */,
 				B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */,
 				B51104612979ED3500BC3674 /* Double+Utils.swift in Sources */,
+				B5C371BE2993BDB700FB9BF5 /* UnitFormatter.swift in Sources */,
 				B50D0E1F291EC1C700BD836C /* Track+Utils.swift in Sources */,
 				B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */,
 				B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */,

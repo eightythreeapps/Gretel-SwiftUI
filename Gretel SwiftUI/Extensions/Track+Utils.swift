@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftDate
+import CoreLocation
 
 enum SortOrder {
     case ascending
@@ -25,8 +26,18 @@ extension Track {
         return "Untitled"
     }
     
-    func totalDistanceInMeters() -> Int {
-        return 0
+    func totalDistanceInMeters() -> Double {
+        
+        var distance:Double = 0
+        
+        let points = getAllPoints(orderBy: .descending)
+        
+        if let firstPoint = points.first, let lastPoint = points.last {
+            distance = getDistanceBetween(pointA: firstPoint, pointB: lastPoint)
+        }
+        
+        return distance
+        
     }
     
     func totalDurationInMillis() -> Double {
@@ -34,9 +45,6 @@ extension Track {
         var interval:Double = 0
         
         let points = getAllPoints(orderBy: .descending)
-        
-        let firstPoint = points.first
-        let lastPoint = points.last
         
         do {
             if let firstPoint = points.first, let lastPoint = points.last {
@@ -129,6 +137,20 @@ extension Track {
             }
 
         }
+        
+    }
+    
+    private func getDistanceBetween(pointA:TrackPoint, pointB:TrackPoint) -> Double {
+        
+        let startLocation = CLLocation(latitude: pointA.latitude,
+                                  longitude: pointA.longitude)
+        
+        let endLocation = CLLocation(latitude: pointB.latitude,
+                                     longitude: pointB.longitude)
+        
+        let distance = endLocation.distance(from: startLocation)
+        
+        return distance
         
     }
     

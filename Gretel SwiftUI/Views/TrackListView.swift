@@ -26,9 +26,9 @@ struct TrackListView: View {
 
     var body: some View {
         
-        ForEach (tracks) { section in
+        List(tracks) { section in
             Section(header: Text(section.id)) {
-                List(section) { track in
+                ForEach (section) { track in
                     NavigationLink(track.trackName(), value:track)
                 }
             }

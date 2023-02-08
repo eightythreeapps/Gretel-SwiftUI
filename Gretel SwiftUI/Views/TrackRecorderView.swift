@@ -118,12 +118,12 @@ struct RecorderControlsView: View {
         VStack {
             HStack {
                 Image(systemName: "clock")
-                Text("--:--:--")
+                Text(locationRecorder.currentActiveTrack.durationDisplay)
             }
             HStack {
                 HUDLabelView(title: "Points", value: locationRecorder.currentActiveTrack.pointsCountDisplay)
                 RecordButtonView(recordingState: $locationRecorder.currentRecordingState)
-                HUDLabelView(title: "Distance", value: "--")
+                HUDLabelView(title: "Distance", value: locationRecorder.currentActiveTrack.distanceDisplay)
             }
             .padding()
         }

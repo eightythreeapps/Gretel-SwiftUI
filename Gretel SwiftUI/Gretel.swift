@@ -15,13 +15,18 @@ struct Gretel: App {
     
     var locationRecorder:LocationRecorder
     var locationService:LocationService
+    var settingsService:SettingsService
     
     init() {
         
+        let userDefaults = UserDefaults.standard
+        
         self.locationService = LocationService(locationManager: CLLocationManager())
         self.locationRecorder = LocationRecorder(locationService: self.locationService,
-                                                 settingsService: SettingsService(),
+                                                 settingsService: SettingsService(userDefaults: userDefaults),
                                                  trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext))
+        
+        self.settingsService = SettingsService(userDefaults: userDefaults)
     }
     
     var body: some Scene {
@@ -29,6 +34,7 @@ struct Gretel: App {
             ContentView()
                 .environmentObject(locationRecorder)
                 .environmentObject(locationService)
+                .environmentObject(settingsService)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

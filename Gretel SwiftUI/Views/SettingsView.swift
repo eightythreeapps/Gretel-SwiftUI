@@ -9,9 +9,32 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @EnvironmentObject var settingsService:SettingsService
+    
     var body: some View {
         List {
-            Text("Settings view")
+            
+            Section {
+                ForEach(UnitType.allCases){ unitType in
+                    HStack {
+                        Text(unitType.displayValue())
+                        Spacer()
+                        if unitType == settingsService.unitType {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                    .onTapGesture {
+                        settingsService.updateUnitType(unitType: unitType)
+                    }
+                }
+            } header: {
+                Text("Units")
+            } footer: {
+                Text(settingsService.unitType.displayMessage())
+            }
+
+            
         }
     }
 

@@ -22,12 +22,15 @@ struct RecorderMiniView: View {
                     Text(locationRecorder.currentActiveTrack.durationDisplay)
                     Text(locationRecorder.currentActiveTrack.pointsCountDisplay)
                 }
-            }else{
-                Button {
+                .onTapGesture {
                     shouldShowFullRecorderView = true
-                } label: {
-                    Text("Start new recording")
                 }
+            }else{
+                
+                Text("Start new recording")
+                    .onTapGesture {
+                        shouldShowFullRecorderView = true
+                    }
             }
             
             Spacer()

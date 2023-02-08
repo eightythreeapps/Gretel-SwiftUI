@@ -15,6 +15,7 @@ struct ActiveTrack {
     var context:NSManagedObjectContext?
     var pointsCountDisplay:String = ""
     var durationDisplay:String = ""
+    var distanceDisplay:String = ""
     var totalDuration:TimeInterval = 0
     
     /**
@@ -28,7 +29,7 @@ struct ActiveTrack {
     mutating func endTrackSegment() throws {
      
         guard let track = self.track else {
-            throw TrackDataServiceError.noActiveTack
+            throw TrackDataServiceError.noActiveTrack
         }
         
         let currentActiveSegment = try track.getActiveSegment()
@@ -74,15 +75,21 @@ struct ActiveTrack {
     
         do {
             
-            let segment = try self.track?.getActiveSegment()
+            guard let segment = try self.track?.getActiveSegment() else {
+                if self.track == nil {
+                    throw TrackDataServiceError.noActiveTrack
+                }else{
+                    throw TrackDataServiceError.noActiveSegment
+                }
+            }
             
-            //TODO: See if this can be refactored to remove the force unwrap
-            self.track?.addPointToSegment(segment: segment!,
+            self.track?.addPointToSegment(segment: segment,
                                           latitude: location.coordinate.latitude,
                                           longitude: location.coordinate.longitude)
             
             self.pointsCountDisplay = updatePointsDisplayCount(count: self.track?.pointsCount() ?? 0)
-            self.durationDisplay = updateDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
+            self.durationDisplay    = updateDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
+            self.distanceDisplay    = updateDistanceDisplay(meters: self.track?.totalDistanceInMeters() ?? 0)
             
         } catch {
             throw TrackDataServiceError.rethrow(error: error)
@@ -105,10 +112,16 @@ struct ActiveTrack {
      - Returns: The duration value as a `String`.
      */
     func updateDurationDisplay(interval:TimeInterval) -> String {
-        
         let displayTime = interval.toClock(zero: [.pad, .dropLeading])
-       
         return displayTime
+    }
+    
+    /**
+     Returns a formatted string representing the total elapsed time the track has been active for.
+     - Returns: The duration value as a `String`.
+     */
+    func updateDistanceDisplay(meters:Double) -> String {
+        return "\(meters)"
     }
     
     /**

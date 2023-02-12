@@ -13,7 +13,7 @@ struct Gretel: App {
     
     let persistenceController = PersistenceController.shared
     
-    var locationRecorder:LocationRecorder
+    var locationRecorder:LocationRecorderService
     var locationService:LocationService
     var settingsService:SettingsService
     var unitFormatter:UnitFormatter
@@ -25,7 +25,7 @@ struct Gretel: App {
         let unitFormatter = UnitFormatter(settingsService: settingsService)
         
         self.locationService = LocationService(locationManager: CLLocationManager())
-        self.locationRecorder = LocationRecorder(locationService: self.locationService,
+        self.locationRecorder = LocationRecorderService(locationService: self.locationService,
                                                  settingsService: SettingsService(userDefaults: userDefaults),
                                                  trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext), unitFormatter: unitFormatter)
         self.settingsService = settingsService

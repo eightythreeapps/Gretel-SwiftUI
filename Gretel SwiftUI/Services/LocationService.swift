@@ -11,14 +11,15 @@ import CoreLocation
 import MapKit
 import _MapKit_SwiftUI
 
+
 public class LocationService:ObservableObject {
     
-    @Published var currentLocationTrackingState:LocationTrackingState = .notTracking
-    @Published var currentRecordingState:RecordingState = .stopped
-    @Published var currentHeading:CLHeading = CLHeading()
-    @Published var currentLocation:CLLocation = CLLocation(latitude: LocationService.DefaultLatitude, longitude: LocationService.DefaultLongitude)
-    @Published var isTrackingUserLocation:MapUserTrackingMode = .follow
-    @Published var region:MKCoordinateRegion
+    @Published public var currentLocationTrackingState:LocationTrackingState = .notTracking
+    @Published public var currentRecordingState:RecordingState = .stopped
+    @Published public var currentHeading:CLHeading = CLHeading()
+    @Published public var currentLocation:CLLocation = CLLocation(latitude: LocationService.DefaultLatitude, longitude: LocationService.DefaultLongitude)
+    @Published public var isTrackingUserLocation:MapUserTrackingMode = .follow
+    @Published public var region:MKCoordinateRegion
     
     public static let defaultRegion = MKCoordinateRegion(center:CLLocationCoordinate2D(latitude: LocationService.DefaultLatitude, longitude: LocationService.DefaultLongitude),
                                                          span: MKCoordinateSpan(latitudeDelta: LocationService.DefaultCoordinateSpanDelta,
@@ -36,7 +37,7 @@ public class LocationService:ObservableObject {
         self.region = LocationService.defaultRegion
     }
     
-    func startUpdatingUserHeading() {
+    public func startUpdatingUserHeading() {
         
         locationManager.publishHeading().sink { completion in
             print(completion)
@@ -46,7 +47,7 @@ public class LocationService:ObservableObject {
 
     }
     
-    func startUpdatingUserLocation() {
+    public func startUpdatingUserLocation() {
         
         self.currentLocationTrackingState = .tracking
         
@@ -69,7 +70,7 @@ public class LocationService:ObservableObject {
         
     }
     
-    func stopUpdatingUserLocation() {
+    public func stopUpdatingUserLocation() {
         self.currentLocationTrackingState = .notTracking
         self.cancellables.removeAll()
     }

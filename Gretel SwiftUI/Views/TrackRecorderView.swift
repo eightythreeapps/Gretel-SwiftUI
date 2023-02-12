@@ -11,7 +11,7 @@ import MapKit
 
 struct TrackRecorderView: View {
     
-    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     @EnvironmentObject var locationService:LocationService
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -72,7 +72,7 @@ struct RecordButtonView: View {
         case large = 60.0
     }
     
-    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     @Binding var recordingState:RecordingState
     var size:RecordButtonSize = .large
     
@@ -112,7 +112,7 @@ struct RecordButtonView: View {
 
 struct RecorderControlsView: View {
     
-    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     
     var body: some View {
         VStack {

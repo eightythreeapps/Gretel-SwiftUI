@@ -11,7 +11,8 @@ import CoreLocation
 import MapKit
 import CoreData
 
-public final class LocationRecorder:NSObject, ObservableObject {
+
+public final class LocationRecorderService:NSObject, ObservableObject {
     
     private var locationService:LocationService
     private var trackHelper:TrackDataService
@@ -23,8 +24,8 @@ public final class LocationRecorder:NSObject, ObservableObject {
     private static let DefaultLongitude = 51.5072
     private static let DefaultCoordinateSpanDelta = 0.1
     
-    @Published var currentRecordingState:RecordingState = .stopped
-    @Published var currentActiveTrack:ActiveTrack?
+    @Published public var currentRecordingState:RecordingState = .stopped
+    @Published public var currentActiveTrack:MonitorableTrack?
     
     /**
      Initialises a new instance of LocationRecorder service. This is not a singleton, but there should only ever be one instance crearted when the app starts up.
@@ -138,7 +139,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
     /**
      If the recorder is active, this captures the location data from the Core Location publisher and adds it to the track.
      */
-    func captureLocation(location:CLLocation) {
+    public func captureLocation(location:CLLocation) {
         do {
             if self.currentActiveTrack != nil {
                 try self.currentActiveTrack!.addLocation(location: location)
@@ -150,7 +151,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
     
 }
 
-private extension LocationRecorder {
+private extension LocationRecorderService {
     
     func resetActiveTrack() {
         self.currentActiveTrack = nil

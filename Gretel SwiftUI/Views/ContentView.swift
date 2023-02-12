@@ -38,11 +38,9 @@ enum MenuItem:CaseIterable, Identifiable {
         
 }
 
-struct ContentView: View {
+struct ContentView:View {
     
     @State var isShowingTrackList = false
-    @EnvironmentObject var locationRecorder:LocationRecorder
-    
     
     @State private var path: [Track] = [Track]()
     @State private var isShowingTrackRecorder:Bool = false

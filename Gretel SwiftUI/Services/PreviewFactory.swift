@@ -12,13 +12,13 @@ import CoreData
 
 public class PreviewFactory {
     
-    public static func ConfiguredLocationRecorder() -> LocationRecorder  {
+    public static func ConfiguredLocationRecorder() -> LocationRecorderService  {
         
         let locationService = LocationService(locationManager: CLLocationManager())
         let settingsService = SettingsService(userDefaults: UserDefaults.standard)
         let unitFormatter = UnitFormatter(settingsService: settingsService)
         
-        return LocationRecorder(locationService:locationService,
+        return LocationRecorderService(locationService:locationService,
                                 settingsService: SettingsService(userDefaults: UserDefaults.standard),
                                 trackHelper: TrackDataService.init(viewContext: PersistenceController.preview.container.viewContext), unitFormatter: unitFormatter)
     }

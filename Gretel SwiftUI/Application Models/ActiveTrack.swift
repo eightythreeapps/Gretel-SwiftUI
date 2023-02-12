@@ -10,7 +10,23 @@ import CoreLocation
 import CoreData
 import Combine
 
-class ActiveTrack {
+public protocol MonitorableTrack {
+    
+    var track:Track? { get set }
+    var unitFormatter:UnitFormatter { get set }
+    var settingsService:SettingsService { get set }
+    var pointsCountDisplay:String { get set }
+    var durationDisplay:String { get set }
+    var distanceDisplay:String { get set }
+    var totalDuration:TimeInterval { get set }
+    
+    func endTrackSegment() throws
+    func addLocation(location:CLLocation) throws
+    func nameDisplay() -> String
+    
+}
+
+class ActiveTrack: MonitorableTrack {
     
     var track:Track?
     var unitFormatter:UnitFormatter
@@ -21,6 +37,7 @@ class ActiveTrack {
     var totalDuration:TimeInterval = 0
     
     private var cancellables = Set<AnyCancellable>()
+    private var displayTimer:Timer?
     
     init(track: Track? = nil, unitFormatter: UnitFormatter, settingsService:SettingsService, pointsCountDisplay: String, durationDisplay: String, distanceDisplay: String, totalDuration: TimeInterval) {
         self.track = track
@@ -53,26 +70,6 @@ class ActiveTrack {
         
         try currentActiveSegment.save()
         
-    }
-    
-    /**
-     Starts a new track segment.
-     
-     This shoudl be callled when:
-        - A new track is started
-        - An existing track is resumed
-     
-     - Throws:`TrackDataServiceError.rethrow(error: error)`
-               Simply rethrows the existing Core Data error back up the chain.
-     */
-    func startTrackSegment() throws {
-        
-        do {
-            let _ = try self.track?.getActiveSegment()
-        } catch {
-            throw TrackDataServiceError.rethrow(error: error)
-        }
-    
     }
     
     /**
@@ -112,40 +109,28 @@ class ActiveTrack {
     }
     
     /**
-     Returns a formatted string representing the current number of recorded points across all track segments
-     - Parameters:
-        - count: `Int` value of the count of points
-     - Returns: The int value as a `String`.
-     */
-    func updatePointsDisplayCount(count:Int) -> String {
-        return "\(count)"
-    }
-    
-    /**
-     Returns a formatted string representing the total elapsed time the track has been active for.
-     - Returns: The duration value as a `String`.
-     */
-    func updateDurationDisplay(interval:TimeInterval) -> String {
-        let displayTime = interval.toClock(zero: [.pad, .dropLeading])
-        return displayTime
-    }
-    
-    /**
-     Returns a formatted string representing the total elapsed time the track has been active for.
-     - Returns: The duration value as a `String`.
-     */
-    func updateDistanceDisplay(meters:Double) -> String {
-        
-        let formattedDistance = self.unitFormatter.formatDistance(distanceInMetres: meters, granularity: .large)
-        return formattedDistance
-    }
-    
-    /**
      Returns a formatted string representing the track title
      - Returns: The track name value as a `String`.
      */
     func nameDisplay() -> String {
         return self.track?.trackName() ?? ""
+    }
+    
+    
+}
+
+private extension ActiveTrack {
+    
+    func startDisplayTimer() {
+        
+    }
+    
+    func pauseDisplayTimer() {
+        
+    }
+    
+    func endDisplayTimer() {
+        
     }
     
     func startMonitoringSettings() {
@@ -156,9 +141,38 @@ class ActiveTrack {
     
     func updateDisplay() {
         
-        self.pointsCountDisplay = updatePointsDisplayCount(count: self.track?.pointsCount() ?? 0)
-        self.durationDisplay    = updateDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
-        self.distanceDisplay    = updateDistanceDisplay(meters: self.track?.totalDistanceInMeters() ?? 0)
+        self.pointsCountDisplay = formattedPointsDisplayCount(count: self.track?.pointsCount() ?? 0)
+        self.durationDisplay    = formatDurationDisplay(interval: self.track?.totalDurationInMillis() ?? 0)
+        self.distanceDisplay    = formatDistanceDisplay(meters: self.track?.totalDistanceInMeters() ?? 0)
         
+    }
+    
+    /**
+     Returns a formatted string representing the current number of recorded points across all track segments
+     - Parameters:
+        - count: `Int` value of the count of points
+     - Returns: The int value as a `String`.
+     */
+    func formattedPointsDisplayCount(count:Int) -> String {
+        return "\(count)"
+    }
+    
+    /**
+     Returns a formatted string representing the total elapsed time the track has been active for.
+     - Returns: The duration value as a `String`.
+     */
+    func formatDurationDisplay(interval:TimeInterval) -> String {
+        let displayTime = interval.toClock(zero: [.pad, .dropLeading])
+        return displayTime
+    }
+    
+    /**
+     Returns a formatted string representing the total elapsed time the track has been active for.
+     - Returns: The duration value as a `String`.
+     */
+    func formatDistanceDisplay(meters:Double) -> String {
+        
+        let formattedDistance = self.unitFormatter.formatDistance(distanceInMetres: meters, granularity: .large)
+        return formattedDistance
     }
 }

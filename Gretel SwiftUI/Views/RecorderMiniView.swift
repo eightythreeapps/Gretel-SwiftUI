@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecorderMiniView: View {
     
-    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     @Binding var shouldShowFullRecorderView:Bool
     
     var body: some View {

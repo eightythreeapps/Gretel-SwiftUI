@@ -14,7 +14,7 @@ struct LocationHUDView: View {
     var altitude:String = "0.0"
     var speed:String = "4mph"
     
-    @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorderService
     
     var body: some View {
         

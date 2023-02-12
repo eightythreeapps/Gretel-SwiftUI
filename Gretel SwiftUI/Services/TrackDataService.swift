@@ -9,31 +9,18 @@ import Foundation
 import CoreData
 import Combine
 
-enum TrackDataServiceError:Error {
-    case noContext
-    case noActiveTrack
-    case noActiveSegment
-    case invalidTrackPointDate
-    case rethrow(error:Error)
-    case saveError(error:Error)
-}
-
-public protocol CoreDataTrackService {
+public class TrackDataService {
     
-}
-
-public class TrackDataService:CoreDataTrackService {
-    
-    var viewContext:NSManagedObjectContext
+    private var viewContext:NSManagedObjectContext
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var allTracks:[Track] = [Track]()
+    @Published public var allTracks:[Track] = [Track]()
     
     required init(viewContext:NSManagedObjectContext) {
         self.viewContext = viewContext
     }
     
-    func startNewTrack(name:String? = nil) throws -> Track {
+    public func startNewTrack(name:String? = nil) throws -> Track {
         
         let now = Date()
        
@@ -55,7 +42,7 @@ public class TrackDataService:CoreDataTrackService {
         
     }
     
-    func endCurrentRecording(track:Track) throws {
+    public func endCurrentRecording(track:Track) throws {
         
         track.endDate = Date()
         track.isRecording = false

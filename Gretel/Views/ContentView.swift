@@ -22,7 +22,7 @@ enum MenuItem:CaseIterable, Identifiable {
         case .myTracks:
             return "Tracks"
         case .settings:
-            return "Planner"
+            return "Settings"
         }
         
     }

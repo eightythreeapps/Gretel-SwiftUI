@@ -32,9 +32,9 @@ public class PreviewFactory {
         let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
         let track = results.first!
         
-        return NavigationStack {
+        return NavigationStack<NavigationPath, TrackListView> {
             TrackListView(path: .constant([track]))
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext) as! TrackListView
         }
     }
     

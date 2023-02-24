@@ -54,6 +54,7 @@ public class PreviewFactory {
                                  showsUserLocation: true,
                                  currentLocation: CLLocation(latitude: 0.0, longitude: 0.0),
                                  isVisible: .constant(true))
+        .environmentObject(ConfiguredLocationRecorder())
             
     }
     

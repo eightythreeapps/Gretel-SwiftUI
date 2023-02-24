@@ -15,6 +15,8 @@ struct RecorderControlsView: View {
     @Binding var totalDistanceInMetres:Double
     @Binding var elapsedTimeDisplay:String
     
+    @State var showMoreDetail = false
+    
     var currentLocation:CLLocation
     
     @Environment(\.activeUnitType) var activeUnitType
@@ -25,20 +27,24 @@ struct RecorderControlsView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "clock")
-                Text(elapsedTimeDisplay)
+                Spacer()
+                HUDLabelView(imageName: "clock", value: elapsedTimeDisplay)
+                Spacer()
+                HUDLabelView(imageName: "signpost.right.and.left", value: totalDistanceInMetres.formatDistance(unitType: activeUnitType, granularity: .large))
+                Spacer()
+                HUDLabelView(imageName: "mappin.and.ellipse", value: totalRecordedPoints.toString())
+                Spacer()
             }
-            LocationHUDView(
-                latitude: currentLocation.displayValue(for: .latitude),
-                longitude: currentLocation.displayValue(for: .longitude),
-                altitude: currentLocation.displayValue(for: .altidude)
-            )
-            .padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
+            if self.showMoreDetail {
+                HStack {
+                    HUDLabelView(imageName: "location", value: currentLocation.displayValue(for: .latitude))
+                    HUDLabelView(imageName: "Lon", value: currentLocation.displayValue(for: .longitude))
+                    HUDLabelView(imageName: "Altitude", value: currentLocation.displayValue(for: .altidude))
+                    HUDLabelView(imageName: "Speed", value: "0.0")
+                }
+            }
             HStack {
-                HUDLabelView(title: "Points", value: totalRecordedPoints.toString())
                 RecordButtonView(recordingState: $recordingState)
-                HUDLabelView(title: "Distance",
-                             value: totalDistanceInMetres.formatDistance(unitType: activeUnitType, granularity: .large))
             }
             .padding()
         }

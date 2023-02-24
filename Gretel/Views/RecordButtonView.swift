@@ -20,22 +20,36 @@ struct RecordButtonView: View {
     var size:RecordButtonSize = .large
     
     var body: some View {
-        Button {
-            
-            switch recordingState {
-            case .recording:
-                recordingState = .paused
-            case .stopped:
-                recordingState = .recording
-            case .disabled, .error:
-                recordingState = .error
-            case .paused:
-                recordingState = .recording
+        HStack {
+            Button {
+                
+                switch recordingState {
+                case .recording:
+                    recordingState = .paused
+                case .stopped:
+                    recordingState = .recording
+                case .disabled, .error:
+                    recordingState = .error
+                case .paused:
+                    recordingState = .recording
+                }
+                
+            } label: {
+                iconForState(recordingState: recordingState)
+            }
+            if recordingState == .paused {
+                Button {
+                    recordingState = .stopped
+                } label: {
+                    Image(systemName: "stop.circle")
+                        .resizable()
+                        .frame(width: 40.0, height: 40.0)
+                        .foregroundColor(.primary)
+                }
             }
             
-        } label: {
-            iconForState(recordingState: recordingState)
         }
+        
     }
     
     func iconForState(recordingState:RecordingState) -> some View {
@@ -66,6 +80,6 @@ struct RecordButtonView: View {
 
 struct RecordButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordButtonView(recordingState: .constant(.recording))
+        RecordButtonView(recordingState: .constant(.paused))
     }
 }

@@ -21,10 +21,10 @@ struct LocationHUDView: View {
         VStack (alignment: .leading) {
             
             HStack {
-                HUDLabelView(title: "Lat", value: latitude)
-                HUDLabelView(title: "Lon", value: longitude)
-                HUDLabelView(title: "Altitude", value: altitude)
-                HUDLabelView(title: "Speed", value: altitude)
+                HUDLabelView(imageName: "location", value: latitude)
+                HUDLabelView(imageName: "Lon", value: longitude)
+                HUDLabelView(imageName: "Altitude", value: altitude)
+                HUDLabelView(imageName: "Speed", value: altitude)
             }
             
         }
@@ -40,15 +40,13 @@ struct TrackRecorderHUDView_Previews: PreviewProvider {
 
 struct HUDLabelView: View {
     
-    var title:String
+    var imageName:String
     var value:String
     var horizontalAlightment:HorizontalAlignment = .center
     
     var body: some View {
-        VStack(alignment: horizontalAlightment) {
-            Text(title)
-                .font(.headline)
-                .foregroundColor(Color(uiColor: .label))
+        HStack {
+            Image(systemName: imageName)
             Text(value)
                 .font(.subheadline)
                 .foregroundColor(Color(uiColor: .secondaryLabel))

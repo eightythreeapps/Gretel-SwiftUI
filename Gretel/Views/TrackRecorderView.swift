@@ -78,7 +78,8 @@ struct TrackRecorderView: View {
                         }
                     }
                     
-                    RecorderControlsView(recordingState: $recordingState, totalRecordedPoints: $track.totalPointsCount,
+                    RecorderControlsView(recordingState: $recordingState,
+                                         totalRecordedPoints: $track.totalPointsCount,
                                          totalDistanceInMetres: $track.totalDistanceMetres,
                                          elapsedTimeDisplay: $locationRecorder.elapsedTimeDisplay,
                                          currentLocation: currentLocation)

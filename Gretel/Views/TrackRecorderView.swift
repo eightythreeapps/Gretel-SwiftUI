@@ -9,26 +9,47 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
+public class TrackRecorderViewModel:ObservableObject {
+    
+    @Published var mapRegion:MKCoordinateRegion = LocationService.defaultRegion
+    @Published var isTrackingUserLocation:MapUserTrackingMode = .none
+    @Published var track:ActiveTrack = ActiveTrack()
+    @Published var recordingState:RecordingState = .stopped
+    
+    @Published var shouldShowError:Bool = false
+    @Published var isVisible:Bool = false
+    
+    var showsUserLocation:Bool
+    var currentLocation:CLLocation
+    
+    private var locationRecorder:LocationRecorderService
+    
+    init(mapRegion: MKCoordinateRegion, isTrackingUserLocation: MapUserTrackingMode, recordingState: RecordingState, shouldShowError: Bool, isVisible: Bool, showsUserLocation: Bool, currentLocation: CLLocation, locationRecorder: LocationRecorderService) {
+        self.mapRegion = mapRegion
+        self.isTrackingUserLocation = isTrackingUserLocation
+        self.recordingState = recordingState
+        self.shouldShowError = shouldShowError
+        self.isVisible = isVisible
+        self.showsUserLocation = showsUserLocation
+        self.currentLocation = currentLocation
+        self.locationRecorder = locationRecorder
+    }
+    
+    public func elapsedTimeDisplay() -> String {
+        return locationRecorder.elapsedTimeDisplay
+    }
+    
+}
+
 struct TrackRecorderView: View {
     
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.activeUnitType) var activeUnitType
     
-    @Binding var mapRegion:MKCoordinateRegion
-    @Binding var isTrackingUserLocation:MapUserTrackingMode
-    @Binding var track:ActiveTrack
-    @Binding var recordingState:RecordingState
+    @StateObject var viewModel = ViewModelFactory.shared.makeTrackRecorderViewModel()
     
-    @EnvironmentObject var locationRecorder:LocationRecorderService
-    
-    var showsUserLocation:Bool
-    var currentLocation:CLLocation
-    var buttonBackground:Color = .gray.opacity(0.4)
-    
-    @State var shouldShowError:Bool = false
-    
-    @Binding var isVisible:Bool
+    private var buttonBackground:Color = .gray.opacity(0.4)
     
     var body: some View {
         
@@ -39,15 +60,15 @@ struct TrackRecorderView: View {
             layout {
                 ZStack {
                     
-                    Map(coordinateRegion: $mapRegion,
-                        showsUserLocation: showsUserLocation,
-                        userTrackingMode: $isTrackingUserLocation)
+                    Map(coordinateRegion: $viewModel.mapRegion,
+                        showsUserLocation: viewModel.showsUserLocation,
+                        userTrackingMode: $viewModel.isTrackingUserLocation)
 
                     VStack {
                         HStack{
                             Spacer()
                             Button {
-                                isVisible = false
+                                viewModel.isVisible = false
                             } label: {
                                 Image(systemName: "xmark")
                             }
@@ -63,7 +84,7 @@ struct TrackRecorderView: View {
                 }
                 VStack {
                     
-                    if self.recordingState == .error {
+                    if viewModel.recordingState == .error {
                         HStack {
                             Text("Error")
                                 .font(.callout)
@@ -78,13 +99,15 @@ struct TrackRecorderView: View {
                         }
                     }
                     
-                    RecorderControlsView(recordingState: $recordingState, totalRecordedPoints: $track.totalPointsCount,
-                                         totalDistanceInMetres: $track.totalDistanceMetres,
-                                         elapsedTimeDisplay: $locationRecorder.elapsedTimeDisplay,
-                                         currentLocation: currentLocation)
+                    RecorderControlsView(recordingState: $viewModel.recordingState,
+                                         totalRecordedPoints: viewModel.track.totalPointsCount,
+                                         totalDistanceInMetres: viewModel.track.totalDistanceMetres,
+                                         elapsedTimeDisplay: viewModel.elapsedTimeDisplay(),
+                                         currentLocation: viewModel.currentLocation)
                 }
 
             }
+        
     }
 }
 

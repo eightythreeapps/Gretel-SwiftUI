@@ -26,6 +26,15 @@ public class PreviewFactory {
         return LocationService(locationManager: CLLocationManager())
     }
     
+    public static func ConfiguredViewModelFactory() -> ViewModelFactory {
+        
+        let config = ViewModelFactoryConfiguration(locationRecorderService: ConfiguredLocationRecorder(),
+                                                   locationService: ConfiguredLocationService())
+        ViewModelFactory.configure(config: config)
+        
+        return ViewModelFactory.shared
+    }
+    
     public static func makeTrackListPreview() -> some View {
         
         let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
@@ -46,20 +55,14 @@ public class PreviewFactory {
     }
     
     public static func makeTrackRecorderPreview() -> some View {
-        return TrackRecorderView(mapRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-                                                                         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))),
-                                 isTrackingUserLocation: .constant(.follow),
-                                 track: .constant(ActiveTrack()),
-                                 recordingState: .constant(.recording),
-                                 showsUserLocation: true,
-                                 currentLocation: CLLocation(latitude: 0.0, longitude: 0.0),
-                                 isVisible: .constant(true))
-        .environmentObject(ConfiguredLocationRecorder())
-            
+        
+        let vm = ConfiguredViewModelFactory().makeTrackRecorderViewModel()
+        return TrackRecorderView()
+                    
     }
     
     public static func makeContentViewPreview() -> some View {
-        return ContentView(locationRecorder: ConfiguredLocationRecorder(), locationService: ConfiguredLocationService())
+        return ContentView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
    
     }
@@ -83,8 +86,7 @@ public class PreviewFactory {
         let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
         let track = results.first!
         
-        return RecorderMiniView(shouldShowFullRecorderView: .constant(false), track: .constant(ActiveTrack()), recordingState: .constant(.recording))
-            .environmentObject(ConfiguredLocationRecorder())
+        return RecorderMiniView()
         
     }
     

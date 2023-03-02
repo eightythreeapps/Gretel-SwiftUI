@@ -84,6 +84,8 @@ public final class LocationRecorderService:NSObject, ObservableObject {
             self.startRecordingTrack()
         case .stopped:
             self.pauseRecording()
+        case .pendingStop:
+            print("Pending pause")
         case .disabled:
             print("Recording disabled")
         case .paused:

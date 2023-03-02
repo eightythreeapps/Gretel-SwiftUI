@@ -11,16 +11,14 @@ import CoreLocation
 struct RecorderControlsView: View {
     
     @Binding var recordingState:RecordingState
-    @Binding var totalRecordedPoints:Int
-    @Binding var totalDistanceInMetres:Double
-    @Binding var elapsedTimeDisplay:String
     
-    @State var showMoreDetail = false
-    
+    var totalRecordedPoints:Int
+    var totalDistanceInMetres:Double
+    var elapsedTimeDisplay:String
     var currentLocation:CLLocation
     
+    @State var showMoreDetail = false
     @Environment(\.activeUnitType) var activeUnitType
-    
     @EnvironmentObject var locationRecorder:LocationRecorderService
     
     
@@ -54,9 +52,9 @@ struct RecorderControlsView: View {
 struct RecorderControlsView_Previews: PreviewProvider {
     static var previews: some View {
         RecorderControlsView(recordingState: .constant(.stopped),
-                             totalRecordedPoints: .constant(100),
-                             totalDistanceInMetres: .constant(123.4),
-                             elapsedTimeDisplay: .constant("00:00:00"),
+                             totalRecordedPoints: 100,
+                             totalDistanceInMetres: 123.4,
+                             elapsedTimeDisplay: "00:00:00",
                              currentLocation: CLLocation(latitude: 0.0, longitude: 0.0))
     }
 }

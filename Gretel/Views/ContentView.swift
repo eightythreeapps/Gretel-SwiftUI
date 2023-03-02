@@ -39,18 +39,13 @@ enum MenuItem:CaseIterable, Identifiable {
 }
 
 struct ContentView:View {
-    
+        
     @State var isShowingTrackList = false
-    
-    @ObservedObject var locationRecorder:LocationRecorderService
-    @ObservedObject var locationService:LocationService
-    
     @State private var path: [Track] = [Track]()
     @State private var isShowingTrackRecorder:Bool = false
-    
     @State private var selectedMenuItem:MenuItem? = .myTracks
     @State private var columnVisibility:NavigationSplitViewVisibility = .automatic
-
+    
     var body: some View {
 
         if UIDevice.isPhone {
@@ -62,10 +57,7 @@ struct ContentView:View {
                         TrackListView(path: $path)
                     }
                     
-                    RecorderMiniView(shouldShowFullRecorderView: $isShowingTrackRecorder,
-                                     track: $locationRecorder.currentActiveTrack,
-                                     recordingState: $locationRecorder.currentRecordingState)
-                    
+                    RecorderMiniView()
                 }
                 .tabItem {
                     Image(systemName: MenuItem.myTracks.iconName)
@@ -82,12 +74,15 @@ struct ContentView:View {
             }
             .sheet(isPresented: $isShowingTrackRecorder) {
                 NavigationStack {
-                    TrackRecorderView(mapRegion: $locationService.region,
-                                      isTrackingUserLocation: $locationService.isTrackingUserLocation,
-                                      track: $locationRecorder.currentActiveTrack, recordingState: $locationRecorder.currentRecordingState,
-                                      showsUserLocation: true,
-                                      currentLocation: locationService.currentLocation,
-                                      isVisible: $isShowingTrackRecorder)
+                    
+                    
+                    
+//                    TrackRecorderView(mapRegion: $locationService.region,
+//                                      isTrackingUserLocation: $locationService.isTrackingUserLocation,
+//                                      track: $locationRecorder.currentActiveTrack, recordingState: $locationRecorder.currentRecordingState,
+//                                      showsUserLocation: true,
+//                                      currentLocation: locationService.currentLocation,
+//                                      isVisible: $isShowingTrackRecorder)
                 }
             }
             

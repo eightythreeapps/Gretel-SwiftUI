@@ -20,6 +20,8 @@
 		B521223D29A6923A007FFE35 /* TrackTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B521223C29A6923A007FFE35 /* TrackTimer.swift */; };
 		B522EB22297AA47B0030FE9F /* RecordedTrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */; };
 		B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5446F53298984F500761BF7 /* RecorderMiniView.swift */; };
+		B547650A29ACF28B00B13B94 /* IOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547650929ACF28B00B13B94 /* IOService.swift */; };
+		B547650D29AF53EA00B13B94 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547650C29AF53EA00B13B94 /* ViewModelFactory.swift */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
 		B55F2C542992AA8E00174A05 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = B55F2C532992AA8E00174A05 /* SwiftDate */; };
@@ -107,6 +109,8 @@
 		B521223C29A6923A007FFE35 /* TrackTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTimer.swift; sourceTree = "<group>"; };
 		B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedTrackDetailView.swift; sourceTree = "<group>"; };
 		B5446F53298984F500761BF7 /* RecorderMiniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderMiniView.swift; sourceTree = "<group>"; };
+		B547650929ACF28B00B13B94 /* IOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOService.swift; sourceTree = "<group>"; };
+		B547650C29AF53EA00B13B94 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
 		B54D12B128F86D4200E3A0A1 /* Gretel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gretel-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B54D12B228F86D4E00E3A0A1 /* Gretel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gretel.entitlements; sourceTree = "<group>"; };
 		B54D12B82900004600E3A0A1 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
@@ -233,6 +237,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B547650B29AF53A100B13B94 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				B547650C29AF53EA00B13B94 /* ViewModelFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		B55F2C512992A67600174A05 /* Application Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +335,7 @@
 		B5E3B79128D31F7D002176DB /* Gretel */ = {
 			isa = PBXGroup;
 			children = (
+				B547650B29AF53A100B13B94 /* Factories */,
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
 				B572BC32299E87BD0067B542 /* Environment */,
 				B5F825BA29956260002B8E3B /* Protocols */,
@@ -385,6 +398,7 @@
 				B5C1023829794C59002956BF /* LocationService.swift */,
 				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
 				B521223C29A6923A007FFE35 /* TrackTimer.swift */,
+				B547650929ACF28B00B13B94 /* IOService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -664,6 +678,7 @@
 				B5F825C029956429002B8E3B /* UnitType.swift in Sources */,
 				B50FFE032988342A00A9A29C /* SettingsView.swift in Sources */,
 				B5E3B79F28D31F7E002176DB /* Gretel.xcdatamodeld in Sources */,
+				B547650A29ACF28B00B13B94 /* IOService.swift in Sources */,
 				B572BC36299E89B70067B542 /* Double+DisplayFormatting.swift in Sources */,
 				B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
@@ -697,6 +712,7 @@
 				B50D0E1D291EBE9B00BD836C /* TrackListView.swift in Sources */,
 				B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */,
 				B56EC604298BD77F005B9A41 /* NSManagedObject+Utils.swift in Sources */,
+				B547650D29AF53EA00B13B94 /* ViewModelFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

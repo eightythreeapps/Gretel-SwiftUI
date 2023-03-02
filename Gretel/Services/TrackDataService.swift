@@ -54,6 +54,12 @@ public class TrackDataService {
         }
         
     }
+    
+    public func exportTrackData(track:Track) {
+        
+        
+        
+    }
 
 }
 

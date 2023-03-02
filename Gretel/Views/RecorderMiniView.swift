@@ -8,35 +8,47 @@
 import SwiftUI
 import SwiftDate
 
-struct RecorderMiniView: View {
-
-    @Binding var shouldShowFullRecorderView:Bool
-    @Binding var track:ActiveTrack
-    @Binding var recordingState:RecordingState
+public class RecorderMiniViewViewModel:ObservableObject {
     
+    @Published var shouldShowFullRecorderView:Bool
+    @Published var track:ActiveTrack
+    @Published var recordingState:RecordingState
+    
+    public init(shouldShowFullRecorderView: Bool, track: ActiveTrack, recordingState: RecordingState) {
+        self.shouldShowFullRecorderView = shouldShowFullRecorderView
+        self.track = track
+        self.recordingState = recordingState
+    }
+    
+}
+
+struct RecorderMiniView: View {
+    
+    @StateObject var viewModel = ViewModelFactory.shared.makeRecorderMiniViewViewModel()
+
     var body: some View {
         HStack {
             Spacer()
-            if track.readyToRecord() {
+            if viewModel.track.readyToRecord() {
                 Image(systemName: "map")
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("\($track.totalDurationSeconds.wrappedValue.toClock(zero: [.pad,.dropMiddle]))")
+                    Text("\($viewModel.track.totalDurationSeconds.wrappedValue.toClock(zero: [.pad,.dropMiddle]))")
                 }
                 .onTapGesture {
-                    shouldShowFullRecorderView = true
+                    viewModel.shouldShowFullRecorderView = true
                 }
             }else{
                 
                 Text("Start new recording")
                     .onTapGesture {
-                        shouldShowFullRecorderView = true
+                        viewModel.shouldShowFullRecorderView = true
                     }
                 
             }
             
             Spacer()
-            RecordButtonView(recordingState: $recordingState, size: .medium)
+            RecordButtonView(recordingState: $viewModel.recordingState, size: .medium)
             Spacer()
         }
     }

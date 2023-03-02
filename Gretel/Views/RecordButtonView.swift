@@ -24,7 +24,7 @@ struct RecordButtonView: View {
             Button {
                 
                 switch recordingState {
-                case .recording:
+                case .recording,.pendingStop:
                     recordingState = .paused
                 case .stopped:
                     recordingState = .recording
@@ -37,7 +37,7 @@ struct RecordButtonView: View {
             } label: {
                 iconForState(recordingState: recordingState)
             }
-            if recordingState == .paused {
+            if recordingState == .recording {
                 Button {
                     recordingState = .stopped
                 } label: {
@@ -56,7 +56,7 @@ struct RecordButtonView: View {
         
         switch recordingState {
             
-        case .recording:
+        case .recording, .pendingStop:
             return Image(systemName: "pause.circle.fill")
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
@@ -71,7 +71,6 @@ struct RecordButtonView: View {
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.red)
-        
         }
         
     }

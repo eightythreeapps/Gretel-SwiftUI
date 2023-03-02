@@ -9,11 +9,15 @@ import SwiftUI
 
 struct RecordedTrackDetailView: View {
     
+    @EnvironmentObject var ioService:IOService
+    
     var track:Track
     
     var body: some View {
         
-        Text(track.displayName())
+        VStack {
+            Text(track.displayName())
+        }
 
     }
 }

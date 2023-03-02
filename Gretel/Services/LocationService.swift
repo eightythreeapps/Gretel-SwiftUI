@@ -11,8 +11,14 @@ import CoreLocation
 import MapKit
 import _MapKit_SwiftUI
 
+public protocol LocationProvider {
+    func startUpdatingUserHeading()
+    func startUpdatingUserLocation()
+    func stopUpdatingUserLocation()
+}
 
-public class LocationService:ObservableObject {
+
+public class LocationService:LocationProvider, ObservableObject {
     
     @Published public var currentLocationTrackingState:LocationTrackingState = .notTracking
     @Published public var currentRecordingState:RecordingState = .stopped

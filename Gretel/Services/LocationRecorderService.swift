@@ -11,15 +11,15 @@ import CoreLocation
 import MapKit
 import CoreData
 
-
 public final class LocationRecorderService:NSObject, ObservableObject {
     
     private var locationService:LocationService
-    private var trackHelper:TrackDataService
+    private var trackHelper:TrackDataHelper
     private var settingsService:SettingsService
+    private var elapsedTime:TimeInterval = 0
+    
     private var cancellables = Set<AnyCancellable>()
     private var timerCancellables = Set<AnyCancellable>()
-    private var elapsedTime:TimeInterval = 0
     
     private static let DefaultLatitude = 0.1276
     private static let DefaultLongitude = 51.5072
@@ -56,7 +56,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
         - settingsService: An instance of SettingsService
         - trackHelper: An instance with TrackDataService
      */
-    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataService) {
+    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataHelper) {
         
         //Assign dependencies
         self.locationService = locationService

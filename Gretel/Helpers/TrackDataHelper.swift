@@ -9,12 +9,9 @@ import Foundation
 import CoreData
 import Combine
 
-public class TrackDataService {
+public class TrackDataHelper {
     
     private var viewContext:NSManagedObjectContext
-    private var cancellables = Set<AnyCancellable>()
-    
-    @Published public var allTracks:[Track] = [Track]()
     
     required init(viewContext:NSManagedObjectContext) {
         self.viewContext = viewContext
@@ -55,10 +52,6 @@ public class TrackDataService {
         
     }
 
-}
-
-private extension TrackDataService {
-    
     //Update this to thow a custom error
     func getCurrentActiveTrack() -> Track? {
         
@@ -79,4 +72,6 @@ private extension TrackDataService {
         return activeTrack
         
     }
+    
 }
+

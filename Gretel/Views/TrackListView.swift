@@ -29,7 +29,8 @@ struct TrackListView: View {
         List(tracks) { section in
             Section(header: Text(section.id)) {
                 ForEach (section) { track in
-                    NavigationLink(track.displayName(), value:track)
+                    NavigationLink("\(track.displayName()): Points: \(track.pointsCount())",
+                                   value:track)
                 }
             }
         }

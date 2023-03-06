@@ -11,7 +11,6 @@ import CoreLocation
 import MapKit
 import _MapKit_SwiftUI
 
-
 public class LocationService:ObservableObject {
     
     @Published public var currentLocationTrackingState:LocationTrackingState = .notTracking

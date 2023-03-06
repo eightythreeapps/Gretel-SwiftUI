@@ -58,6 +58,7 @@ struct ContentView:View {
             TabView {
                
                 VStack {
+                    
                     NavigationStack(path: $path) {
                         TrackListView(path: $path)
                     }
@@ -82,12 +83,15 @@ struct ContentView:View {
             }
             .sheet(isPresented: $isShowingTrackRecorder) {
                 NavigationStack {
+                    
                     TrackRecorderView(mapRegion: $locationService.region,
                                       isTrackingUserLocation: $locationService.isTrackingUserLocation,
-                                      track: $locationRecorder.currentActiveTrack, recordingState: $locationRecorder.currentRecordingState,
+                                      track: $locationRecorder.currentActiveTrack,
+                                      recordingState: $locationRecorder.currentRecordingState,
                                       showsUserLocation: true,
                                       currentLocation: locationService.currentLocation,
                                       isVisible: $isShowingTrackRecorder)
+                    
                 }
             }
             

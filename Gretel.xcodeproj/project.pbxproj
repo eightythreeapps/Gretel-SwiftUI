@@ -17,7 +17,6 @@
 		B511045E2979E34800BC3674 /* TrackRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511045D2979E34800BC3674 /* TrackRecorderView.swift */; };
 		B51104612979ED3500BC3674 /* Double+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51104602979ED3500BC3674 /* Double+Utils.swift */; };
 		B51104622979ED3500BC3674 /* Double+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51104602979ED3500BC3674 /* Double+Utils.swift */; };
-		B521223D29A6923A007FFE35 /* TrackTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B521223C29A6923A007FFE35 /* TrackTimer.swift */; };
 		B522EB22297AA47B0030FE9F /* RecordedTrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */; };
 		B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5446F53298984F500761BF7 /* RecorderMiniView.swift */; };
 		B54D12B528FD6C4300E3A0A1 /* CoreGPX in Frameworks */ = {isa = PBXBuildFile; productRef = B54D12B428FD6C4300E3A0A1 /* CoreGPX */; };
@@ -43,6 +42,7 @@
 		B5C1023A29794C59002956BF /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023829794C59002956BF /* LocationService.swift */; };
 		B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
 		B5C1023D2979577D002956BF /* CLLocation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1023B2979577D002956BF /* CLLocation+Utils.swift */; };
+		B5C4513B29B0F8530011B4E1 /* IOHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4513A29B0F8530011B4E1 /* IOHelper.swift */; };
 		B5E3B79328D31F7D002176DB /* Gretel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79228D31F7D002176DB /* Gretel.swift */; };
 		B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3B79428D31F7D002176DB /* ContentView.swift */; };
 		B5E3B79728D31F7E002176DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3B79628D31F7E002176DB /* Assets.xcassets */; };
@@ -56,10 +56,10 @@
 		B5F825C229956445002B8E3B /* UnitGranularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F825C129956445002B8E3B /* UnitGranularity.swift */; };
 		B5F825C829956555002B8E3B /* TrackDataServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F825C729956555002B8E3B /* TrackDataServiceError.swift */; };
 		B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D529000BAF0005E02E /* PreviewFactory.swift */; };
-		B5FF62DA29003E680005E02E /* TrackDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D929003E680005E02E /* TrackDataService.swift */; };
+		B5FF62DA29003E680005E02E /* TrackDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D929003E680005E02E /* TrackDataHelper.swift */; };
 		B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DD290056CA0005E02E /* LocationPublisher.swift */; };
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
-		B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorder.swift */; };
+		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
 		B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E62907E3630005E02E /* RecordingState.swift */; };
 		B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E82907E3870005E02E /* LocationTrackingState.swift */; };
 /* End PBXBuildFile section */
@@ -104,7 +104,6 @@
 		B50FFE0A29891F9A00A9A29C /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		B511045D2979E34800BC3674 /* TrackRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecorderView.swift; sourceTree = "<group>"; };
 		B51104602979ED3500BC3674 /* Double+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Utils.swift"; sourceTree = "<group>"; };
-		B521223C29A6923A007FFE35 /* TrackTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTimer.swift; sourceTree = "<group>"; };
 		B522EB21297AA47B0030FE9F /* RecordedTrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedTrackDetailView.swift; sourceTree = "<group>"; };
 		B5446F53298984F500761BF7 /* RecorderMiniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderMiniView.swift; sourceTree = "<group>"; };
 		B54D12B128F86D4200E3A0A1 /* Gretel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gretel-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -131,6 +130,7 @@
 		B5C1022C297943EF002956BF /* Gretel_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B5C1023829794C59002956BF /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B5C1023B2979577D002956BF /* CLLocation+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Utils.swift"; sourceTree = "<group>"; };
+		B5C4513A29B0F8530011B4E1 /* IOHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOHelper.swift; sourceTree = "<group>"; };
 		B5E3B78F28D31F7D002176DB /* Gretel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gretel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3B79228D31F7D002176DB /* Gretel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gretel.swift; sourceTree = "<group>"; };
 		B5E3B79428D31F7D002176DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -147,10 +147,10 @@
 		B5F825C129956445002B8E3B /* UnitGranularity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGranularity.swift; sourceTree = "<group>"; };
 		B5F825C729956555002B8E3B /* TrackDataServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataServiceError.swift; sourceTree = "<group>"; };
 		B5FF62D529000BAF0005E02E /* PreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactory.swift; sourceTree = "<group>"; };
-		B5FF62D929003E680005E02E /* TrackDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataService.swift; sourceTree = "<group>"; };
+		B5FF62D929003E680005E02E /* TrackDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataHelper.swift; sourceTree = "<group>"; };
 		B5FF62DD290056CA0005E02E /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
-		B5FF62E12901AACC0005E02E /* LocationRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorder.swift; sourceTree = "<group>"; };
+		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
 		B5FF62E62907E3630005E02E /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
 		B5FF62E82907E3870005E02E /* LocationTrackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +294,16 @@
 			path = "Gretel Watch AppUITests";
 			sourceTree = "<group>";
 		};
+		B5C4513C29B0FB6E0011B4E1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
+				B5C4513A29B0F8530011B4E1 /* IOHelper.swift */,
+				B5FF62D929003E680005E02E /* TrackDataHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		B5E3B78628D31F7D002176DB = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +333,8 @@
 		B5E3B79128D31F7D002176DB /* Gretel */ = {
 			isa = PBXGroup;
 			children = (
+				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
+				B5C4513C29B0FB6E0011B4E1 /* Helpers */,
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
 				B572BC32299E87BD0067B542 /* Environment */,
 				B5F825BA29956260002B8E3B /* Protocols */,
@@ -378,13 +390,9 @@
 		B5FF62D429000ACC0005E02E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
-				B5FF62E12901AACC0005E02E /* LocationRecorder.swift */,
+				B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */,
 				B54D12B82900004600E3A0A1 /* SettingsService.swift */,
-				B5FF62D929003E680005E02E /* TrackDataService.swift */,
 				B5C1023829794C59002956BF /* LocationService.swift */,
-				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
-				B521223C29A6923A007FFE35 /* TrackTimer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -664,20 +672,20 @@
 				B5F825C029956429002B8E3B /* UnitType.swift in Sources */,
 				B50FFE032988342A00A9A29C /* SettingsView.swift in Sources */,
 				B5E3B79F28D31F7E002176DB /* Gretel.xcdatamodeld in Sources */,
+				B5C4513B29B0F8530011B4E1 /* IOHelper.swift in Sources */,
 				B572BC36299E89B70067B542 /* Double+DisplayFormatting.swift in Sources */,
 				B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
-				B5FF62DA29003E680005E02E /* TrackDataService.swift in Sources */,
+				B5FF62DA29003E680005E02E /* TrackDataHelper.swift in Sources */,
 				B572BC34299E87DB0067B542 /* ApplicationUnitType.swift in Sources */,
 				B5F825C229956445002B8E3B /* UnitGranularity.swift in Sources */,
 				B509C7802991504F00F2A8D4 /* DataHandlingErrors.swift in Sources */,
 				B522EB22297AA47B0030FE9F /* RecordedTrackDetailView.swift in Sources */,
 				B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */,
 				B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */,
-				B521223D29A6923A007FFE35 /* TrackTimer.swift in Sources */,
 				B506BA2429797B6E008CD951 /* LocationHUDView.swift in Sources */,
 				B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */,
-				B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */,
+				B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */,
 				B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */,
 				B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */,
 				B572BC4029A3DBA20067B542 /* DisplayFormatting.swift in Sources */,

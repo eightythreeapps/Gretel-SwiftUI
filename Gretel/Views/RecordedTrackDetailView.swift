@@ -13,8 +13,14 @@ struct RecordedTrackDetailView: View {
     
     var body: some View {
         
-        Text(track.displayName())
-
+        VStack {
+            Text(track.displayName())
+            
+//            ShareLink(item: try! GPXFile(track: track).fileURL(), preview: SharePreview("Your Trip")) {
+//                Text("Share me")
+//            }
+        }
+        
     }
 }
 

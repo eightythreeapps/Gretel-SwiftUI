@@ -16,7 +16,7 @@ struct Gretel: App {
     
     @StateObject var locationRecorder = LocationRecorderService(locationService: LocationService(locationManager: CLLocationManager()),
                                                                 settingsService: SettingsService(userDefaults: UserDefaults.standard),
-                                                                trackHelper: TrackDataService(viewContext: PersistenceController.shared.container.viewContext))
+                                                                trackHelper: TrackDataHelper(viewContext: PersistenceController.shared.container.viewContext))
     
     @StateObject var locationProvider = LocationService(locationManager: CLLocationManager())
     

@@ -83,7 +83,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
         case .recording:
             self.startRecordingTrack()
         case .stopped:
-            self.pauseRecording()
+            self.stopRecordingTrack()
         case .disabled:
             print("Recording disabled")
         case .paused:
@@ -170,21 +170,21 @@ public final class LocationRecorderService:NSObject, ObservableObject {
 
 private extension LocationRecorderService {
     
-    func resetActiveTrack() {
-        self.currentActiveTrack = ActiveTrack()
-        self.currentRecordingState = .stopped
-    }
-    
     func startTimer() {
+        
         //Start the display timer going
         Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
             .receive(on: DispatchQueue.main)
             .sink { timer in
                 self.elapsedTime += 1
-                self.elapsedTimeDisplay = self.timerFormatter.string(from: self.elapsedTime) ?? "Error"
+                self.updateTimerDisplay(elapsedTime: self.elapsedTime)
             }
-            .store(in: &cancellables)
+            .store(in: &timerCancellables)
+    }
+    
+    func updateTimerDisplay(elapsedTime:TimeInterval) {
+        self.elapsedTimeDisplay = self.timerFormatter.string(from: elapsedTime) ?? "Error"
     }
     
     func pauseTimer() {
@@ -193,6 +193,7 @@ private extension LocationRecorderService {
     
     func resetTimer() {
         self.elapsedTime = 0
+        self.updateTimerDisplay(elapsedTime: self.elapsedTime)
         timerCancellables.removeAll()
     }
     
@@ -223,8 +224,19 @@ private extension LocationRecorderService {
     func stopRecordingTrack() {
         //TODO: Refactor this to the ActiveTrack class
         if let track = self.currentActiveTrack.track {
-            try? self.trackHelper.endCurrentRecording(track: track)
+            resetRecorder(track: track)
         }
+    }
+    
+    func resetRecorder(track:Track) {
+        try? self.trackHelper.endCurrentRecording(track: track)
+        self.resetActiveTrack()
+        self.resetTimer()
+    }
+    
+    func resetActiveTrack() {
+        self.currentActiveTrack = ActiveTrack()
+        self.currentRecordingState = .stopped
     }
     
     /**

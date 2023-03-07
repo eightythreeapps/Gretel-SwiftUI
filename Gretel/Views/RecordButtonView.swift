@@ -37,7 +37,7 @@ struct RecordButtonView: View {
             } label: {
                 iconForState(recordingState: recordingState)
             }
-            if recordingState == .recording {
+            if recordingState == .recording || recordingState == .paused {
                 Button {
                     recordingState = .stopped
                 } label: {

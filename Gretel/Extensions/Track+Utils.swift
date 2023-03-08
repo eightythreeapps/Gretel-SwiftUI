@@ -17,6 +17,18 @@ enum SortOrder {
 
 extension Track {
     
+    static var dateFormatter:DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE dd MMM yyyy"
+        return dateFormatter
+    }
+    
+    @objc
+    var sectionSortKey:String {
+        let dateString = Track.dateFormatter.string(from: self.startDate!)
+        return dateString
+    }
+    
     func displayName() -> String {
         return self.name ?? "No name"
     }

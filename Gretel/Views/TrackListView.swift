@@ -14,9 +14,8 @@ struct TrackListView: View {
     
     @Environment(\.managedObjectContext) var moc
     @SectionedFetchRequest<String, Track>(
-        sectionIdentifier: \.formattedCreated!,
+        sectionIdentifier: \.sectionSortKey,
         sortDescriptors: [
-            SortDescriptor(\.name),
             SortDescriptor(\.startDate, order: .reverse)
         ])
     

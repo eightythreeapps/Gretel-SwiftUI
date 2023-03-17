@@ -50,6 +50,19 @@ extension Track {
         
     }
     
+    static func getInterval(from:TrackPoint, to:TrackPoint) throws -> TimeInterval {
+        
+        guard let firstPointDate = from.time else {
+            throw TrackDataServiceError.invalidTrackPointDate
+        }
+        
+        guard let lastPointDate = to.time else {
+            throw TrackDataServiceError.invalidTrackPointDate
+        }
+        
+        return lastPointDate.timeIntervalSince(firstPointDate).rounded()
+    }
+    
     func displayName() -> String {
         return self.name ?? "No name"
     }
@@ -68,18 +81,7 @@ extension Track {
         
     }
     
-    func getInterval(from:TrackPoint, to:TrackPoint) throws -> TimeInterval {
-        
-        guard let firstPointDate = from.time else {
-            throw TrackDataServiceError.invalidTrackPointDate
-        }
-        
-        guard let lastPointDate = to.time else {
-            throw TrackDataServiceError.invalidTrackPointDate
-        }
-        
-        return lastPointDate.timeIntervalSince(firstPointDate)
-    }
+    
     
     func getAllPoints(orderBy:SortOrder) -> [TrackPoint] {
         
@@ -121,7 +123,7 @@ extension Track {
         
     }
     
-    func totalDurationInMillis() -> Double {
+    func totalDuration() -> Double {
         
         var interval:Double = 0
         
@@ -129,7 +131,7 @@ extension Track {
         
         do {
             if let firstPoint = points.first, let lastPoint = points.last {
-                interval = try getInterval(from: firstPoint, to: lastPoint)
+                interval = try Track.getInterval(from: firstPoint, to: lastPoint)
             }
         } catch {
             print("Error calculating interval")

@@ -8,6 +8,7 @@
 import XCTest
 import CoreData
 import Combine
+import SwiftDate
 @testable import Gretel
 
 class Gretel_SwiftUITests: XCTestCase {
@@ -74,6 +75,48 @@ class Gretel_SwiftUITests: XCTestCase {
             
         } catch {
             XCTFail("Failed to create new track object: \(error.localizedDescription)")
+        }
+        
+    }
+    
+    func testDurationBetweenTrackPoints() {
+        
+        let trackPoint1 = TrackPoint(context: self.viewContext)
+        trackPoint1.time = Date()
+        
+        let trackPoint2 = TrackPoint(context: self.viewContext)
+        trackPoint2.time = Date() + 10.seconds
+        
+        do {
+            let interval = try Track.getInterval(from: trackPoint1, to: trackPoint2)
+            XCTAssertTrue(interval == 10)
+        } catch {
+            XCTFail("Could not calculate interval between points")
+        }
+        
+    }
+    
+    func testDurationForTrack() {
+        
+        
+        do {
+            
+            let track = try Track.newInstance(context: self.viewContext)
+            let segment = TrackSegment(context: self.viewContext)
+            
+            for i in 0...10 {
+                let trackPoint = TrackPoint(context: self.viewContext)
+                trackPoint.time = Date() + i.minutes
+                segment.addToTrackPoints(trackPoint)
+            }
+            
+            track.addToTrackSegments(segment)
+            
+            let duration = track.totalDuration()
+            XCTAssertTrue(duration == 600)
+            
+        } catch {
+            XCTFail("Could not calculate interval between points")
         }
         
     }

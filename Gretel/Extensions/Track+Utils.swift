@@ -35,7 +35,7 @@ extension Track {
         let now = Date()
        
         //TODO: Update these to read from device locale
-        let trackName = now.toFormat("dd MMM yyyy HH:mm:ss")
+        let trackName = now.toFormat("dd MMM yyyy HH:mm")
         
         let track = Track(context: context)
         track.name = name != nil ? name : trackName

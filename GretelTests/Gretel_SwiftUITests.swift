@@ -62,7 +62,7 @@ class Gretel_SwiftUITests: XCTestCase {
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss"
+        dateFormatter.dateFormat = "dd MMM yyyy HH:mm"
         
         let trackName = dateFormatter.string(from: Date())
         

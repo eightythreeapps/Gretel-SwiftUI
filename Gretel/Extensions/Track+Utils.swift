@@ -155,6 +155,111 @@ extension Track {
         
     }
     
+    /**
+     Ends a track sgement.
+     This should be called whenever:
+        - The user pauses a track
+        - The GPS signal is lost and the track stops updating
+     
+     A new track segment should be started if the track is resumed.
+     */
+    func endTrackSegment() throws {
+        
+        do {
+            let currentActiveSegment = try getActiveSegment()
+            currentActiveSegment.isActiveSegment = false
+            
+            try currentActiveSegment.save()
+        } catch {
+            throw TrackDataServiceError.noActiveTrack
+        }
+        
+    }
+    
+    /**
+     Adds a location to the current active segment
+     
+     This is called whenever a location update is ready to store against the track segment. This is coordinated by the Recorder Service, which is kept up to date
+     by the LocationPublisher. If the recording state is set to 'recording' then this will be triggered.
+     
+     - Parameters:
+        - location: A `CLLocation` object
+     
+     - Throws:`TrackDataServiceError.rethrow(error: error)`
+               Simply rethrows the existing Core Data error back up the chain.
+     */
+    func addLocation(location:CLLocation) throws {
+    
+        do {
+        
+            let segment = try self.getActiveSegment()
+            
+            self.addPointToSegment(segment: segment,
+                                          latitude: location.coordinate.latitude,
+                                          longitude: location.coordinate.longitude)
+        } catch {
+            throw TrackDataServiceError.rethrow(error: error)
+        }
+    
+    }
+    
+    func addPointToSegment(segment:TrackSegment, latitude:Double, longitude:Double) {
+      
+        if let moc = self.managedObjectContext {
+
+            let trackPoint = TrackPoint(context: moc)
+            trackPoint.latitude = latitude
+            trackPoint.longitude = longitude
+            trackPoint.time = Date()
+
+            segment.addToTrackPoints(trackPoint)
+
+            do {
+                try self.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+
+        }
+        
+    }
+    
+    func getActiveSegment() throws -> TrackSegment {
+        
+        let segments = self.trackSegments?.allObjects as? [TrackSegment]
+        
+        if let activeSegment = segments?.first(where: {$0.isActiveSegment == true }) {
+            
+            return activeSegment
+            
+        }else{
+            
+            if let context = self.managedObjectContext {
+                let segment = TrackSegment(context: context)
+                segment.time = Date()
+                segment.isActiveSegment = true
+                
+                self.addToTrackSegments(segment)
+                return segment
+            }else{
+                throw TrackDataServiceError.noContext
+            }
+            
+        }
+        
+    }
+    
+    public func start() throws {
+        
+        do {
+            self.isRecording = true
+            try self.save()
+        } catch {
+            throw error
+        }
+        
+    }
+    
     public func end() throws {
         
         self.endDate = Date()

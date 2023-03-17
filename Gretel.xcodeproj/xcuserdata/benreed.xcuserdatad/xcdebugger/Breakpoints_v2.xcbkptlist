@@ -164,5 +164,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDC5EDA7-E2D2-4931-AC6A-CE759F154205"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gretel/Application Models/ActiveTrack.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "addLocation(location:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F26C2CB-07EC-4941-8928-8C2CF025B622"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GretelTests/Gretel_SwiftUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "testDescendingOrderingOfTrackPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF054824-C172-4F25-A3EC-1A4D2FBC504F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GretelTests/Gretel_SwiftUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "testAscendingOrderingOfTrackPoints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99FE2D19-40B6-43B5-9ED7-E8EF46D610E7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GretelTests/Gretel_SwiftUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "createAndPopulateTestTrack(locationCount:addTimeDelayBetweenPoints:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "99FE2D19-40B6-43B5-9ED7-E8EF46D610E7 - 3abf09c522010696"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GretelTests.Gretel_SwiftUITests.createAndPopulateTestTrack(locationCount: Swift.Int, addTimeDelayBetweenPoints: Swift.Bool) throws -&gt; Gretel.Track"
+                  moduleName = "GretelTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/GretelTests/Gretel_SwiftUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "1048">
+               </Location>
+               <Location
+                  uuid = "99FE2D19-40B6-43B5-9ED7-E8EF46D610E7 - 3abf09c522010696"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GretelTests.Gretel_SwiftUITests.createAndPopulateTestTrack(locationCount: Swift.Int, addTimeDelayBetweenPoints: Swift.Bool) throws -&gt; Gretel.Track"
+                  moduleName = "GretelTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/GretelTests/Gretel_SwiftUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "1056">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

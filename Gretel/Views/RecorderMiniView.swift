@@ -17,7 +17,7 @@ struct RecorderMiniView: View {
     var body: some View {
         HStack {
             Spacer()
-            if track.readyToRecord() {
+            if track.state == .recording {
                 Image(systemName: "map")
                 Spacer()
                 VStack(alignment: .leading) {

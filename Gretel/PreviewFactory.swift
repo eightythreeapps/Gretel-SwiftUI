@@ -15,7 +15,7 @@ public class PreviewFactory {
     public static func ConfiguredLocationRecorder() -> LocationRecorderService  {
         
         let locationService = LocationService(locationManager: CLLocationManager())
-        let settingsService = SettingsService(userDefaults: UserDefaults.standard)
+        let _ = SettingsService(userDefaults: UserDefaults.standard)
      
         return LocationRecorderService(locationService:locationService,
                                 settingsService: SettingsService(userDefaults: UserDefaults.standard))
@@ -82,7 +82,7 @@ public class PreviewFactory {
         let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
         let track = results.first!
         
-        return RecorderMiniView(shouldShowFullRecorderView: .constant(false), track: .constant(ActiveTrack()), recordingState: .constant(.recording))
+        return RecorderMiniView(shouldShowFullRecorderView: .constant(false), track: .constant(ActiveTrack(track: track)), recordingState: .constant(.recording))
             .environmentObject(ConfiguredLocationRecorder())
         
     }

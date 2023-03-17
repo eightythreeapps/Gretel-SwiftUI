@@ -112,7 +112,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      */
     public func resumeRecording() {
         
-        if self.currentActiveTrack.readyToRecord() {
+        if self.currentActiveTrack.state == .loaded {
             self.currentRecordingState = .recording
             self.startRecordingTrack()
         }else{
@@ -126,16 +126,11 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      */
     public func pauseRecording() {
         
-        do {
-            if self.currentActiveTrack.readyToRecord() {
-                try self.currentActiveTrack.endTrackSegment()
-                self.emptyCancellables()
-                self.pauseTimer()
-            }else{
-                self.currentRecordingState = .error
-            }
-        } catch {
-            
+        if self.currentActiveTrack.state == .recording {
+            self.currentActiveTrack.pause()
+            self.emptyCancellables()
+            self.pauseTimer()
+        }else{
             self.currentRecordingState = .error
         }
         
@@ -145,7 +140,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      Ends the surrecnt track.
      */
     public func endTrack() {
-        if self.currentActiveTrack.readyToRecord() {
+        if self.currentActiveTrack.state == .recording {
             self.resetActiveTrack()
         }
     }
@@ -154,13 +149,8 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      If the recorder is active, this captures the location data from the Core Location publisher and adds it to the track.
      */
     public func captureLocation(location:CLLocation) {
-        do {
-            if self.currentActiveTrack.readyToRecord() {
-                try self.currentActiveTrack.addLocation(location: location)
-            }
-        } catch {
-            print(error.localizedDescription)
-            self.currentRecordingState = .error
+        if self.currentActiveTrack.state == .recording {
+            self.currentActiveTrack.addLocation(location: location)
         }
     }
     
@@ -200,6 +190,7 @@ private extension LocationRecorderService {
      */
     func startRecordingTrack() {
         
+        //TODO: Bring this in line with the Active Track state enum
         if let track = self.currentActiveTrack.track {
             self.resumeTrack(track: track)
         }else{
@@ -213,6 +204,7 @@ private extension LocationRecorderService {
     }
     
     func startListeningForLocationUpdates() {
+        self.currentActiveTrack.startRecording()
         locationService.$currentLocation.sink { location in
             self.captureLocation(location: location)
         }.store(in: &timerCancellables)
@@ -227,6 +219,7 @@ private extension LocationRecorderService {
             //TODO: Figure out dependency on moc
             let track = try Track.newInstance(context: PersistenceController.shared.container.viewContext)
             self.currentActiveTrack = ActiveTrack(track: track)
+            self.currentActiveTrack.startRecording()
             
             self.startListeningForLocationUpdates()
             

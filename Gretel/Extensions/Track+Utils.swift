@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftDate
 import CoreLocation
+import CoreData
 
 enum SortOrder {
     case ascending
@@ -27,6 +28,26 @@ extension Track {
     var sectionSortKey:String {
         let dateString = Track.dateFormatter.string(from: self.startDate!)
         return dateString
+    }
+    
+    static func newInstance(name:String? = nil, context:NSManagedObjectContext) throws -> Track {
+        
+        let now = Date()
+       
+        //TODO: Update these to read from device locale
+        let trackName = now.toFormat("dd MMM yyyy HH:mm:ss")
+        
+        let track = Track(context: context)
+        track.name = name != nil ? name : trackName
+        track.startDate = now
+        
+        do {
+            try track.save()
+            return track
+        } catch {
+            throw error
+        }
+        
     }
     
     func displayName() -> String {
@@ -129,6 +150,19 @@ extension Track {
         }
     
         return count
+        
+    }
+    
+    public func end() throws {
+        
+        self.endDate = Date()
+        self.isRecording = false
+        
+        do {
+            try self.save()
+        } catch {
+            throw error
+        }
         
     }
     

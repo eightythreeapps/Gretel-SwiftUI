@@ -18,8 +18,7 @@ public class PreviewFactory {
         let settingsService = SettingsService(userDefaults: UserDefaults.standard)
      
         return LocationRecorderService(locationService:locationService,
-                                settingsService: SettingsService(userDefaults: UserDefaults.standard),
-                                trackHelper: TrackDataHelper.init(viewContext: PersistenceController.preview.container.viewContext))
+                                settingsService: SettingsService(userDefaults: UserDefaults.standard))
     }
     
     public static func ConfiguredLocationService() -> LocationService {

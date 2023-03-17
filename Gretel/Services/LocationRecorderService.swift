@@ -14,7 +14,6 @@ import CoreData
 public final class LocationRecorderService:NSObject, ObservableObject {
     
     private var locationService:LocationService
-    private var trackHelper:TrackDataHelper
     private var settingsService:SettingsService
     private var elapsedTime:TimeInterval = 0
     
@@ -56,12 +55,11 @@ public final class LocationRecorderService:NSObject, ObservableObject {
         - settingsService: An instance of SettingsService
         - trackHelper: An instance with TrackDataService
      */
-    required public init(locationService:LocationService, settingsService:SettingsService, trackHelper:TrackDataHelper) {
+    required public init(locationService:LocationService, settingsService:SettingsService) {
         
         //Assign dependencies
         self.locationService = locationService
         self.settingsService = settingsService
-        self.trackHelper = trackHelper
         self.settingsService = settingsService
         
         //Start the location services
@@ -100,7 +98,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
     public func createNewActiveTrack(name:String? = nil) {
         
         do {
-            let track = try trackHelper.startNewTrack(name: name)
+            let track = try Track.newInstance(context: PersistenceController.shared.container.viewContext)
             self.currentActiveTrack = ActiveTrack(track:track)
             self.startRecordingTrack()
             self.currentRecordingState = .recording
@@ -202,23 +200,39 @@ private extension LocationRecorderService {
      */
     func startRecordingTrack() {
         
+        if let track = self.currentActiveTrack.track {
+            self.resumeTrack(track: track)
+        }else{
+            self.startNewTrack()
+        }
+                
+    }
+    
+    func resumeTrack(track:Track) {
+        self.startListeningForLocationUpdates()
+    }
+    
+    func startListeningForLocationUpdates() {
+        locationService.$currentLocation.sink { location in
+            self.captureLocation(location: location)
+        }.store(in: &timerCancellables)
+        
+        startTimer()
+    }
+    
+    func startNewTrack() {
         //Start the track recording
         do {
-        
-            let track = try self.trackHelper.startNewTrack()
+            
+            //TODO: Figure out dependency on moc
+            let track = try Track.newInstance(context: PersistenceController.shared.container.viewContext)
             self.currentActiveTrack = ActiveTrack(track: track)
             
-            locationService.$currentLocation.sink { location in
-                self.captureLocation(location: location)
-            }.store(in: &timerCancellables)
-            
-            startTimer()
+            self.startListeningForLocationUpdates()
             
         } catch {
             self.currentRecordingState = .error
         }
-        
-        
     }
     
     func stopRecordingTrack() {
@@ -229,7 +243,7 @@ private extension LocationRecorderService {
     }
     
     func resetRecorder(track:Track) {
-        try? self.trackHelper.endCurrentRecording(track: track)
+        //TODO: end current track
         self.resetActiveTrack()
         self.resetTimer()
     }

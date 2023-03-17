@@ -56,7 +56,6 @@
 		B5F825C229956445002B8E3B /* UnitGranularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F825C129956445002B8E3B /* UnitGranularity.swift */; };
 		B5F825C829956555002B8E3B /* TrackDataServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F825C729956555002B8E3B /* TrackDataServiceError.swift */; };
 		B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D529000BAF0005E02E /* PreviewFactory.swift */; };
-		B5FF62DA29003E680005E02E /* TrackDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D929003E680005E02E /* TrackDataHelper.swift */; };
 		B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DD290056CA0005E02E /* LocationPublisher.swift */; };
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
 		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
@@ -147,7 +146,6 @@
 		B5F825C129956445002B8E3B /* UnitGranularity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGranularity.swift; sourceTree = "<group>"; };
 		B5F825C729956555002B8E3B /* TrackDataServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataServiceError.swift; sourceTree = "<group>"; };
 		B5FF62D529000BAF0005E02E /* PreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactory.swift; sourceTree = "<group>"; };
-		B5FF62D929003E680005E02E /* TrackDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDataHelper.swift; sourceTree = "<group>"; };
 		B5FF62DD290056CA0005E02E /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
 		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 			children = (
 				B5E3B79B28D31F7E002176DB /* Persistence.swift */,
 				B5C4513A29B0F8530011B4E1 /* IOHelper.swift */,
-				B5FF62D929003E680005E02E /* TrackDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,8 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				B5FF62D529000BAF0005E02E /* PreviewFactory.swift */,
-				B5C4513C29B0FB6E0011B4E1 /* Helpers */,
 				B5E3B79228D31F7D002176DB /* Gretel.swift */,
+				B5C4513C29B0FB6E0011B4E1 /* Helpers */,
 				B572BC32299E87BD0067B542 /* Environment */,
 				B5F825BA29956260002B8E3B /* Protocols */,
 				B55F2C512992A67600174A05 /* Application Models */,
@@ -676,7 +673,6 @@
 				B572BC36299E89B70067B542 /* Double+DisplayFormatting.swift in Sources */,
 				B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
-				B5FF62DA29003E680005E02E /* TrackDataHelper.swift in Sources */,
 				B572BC34299E87DB0067B542 /* ApplicationUnitType.swift in Sources */,
 				B5F825C229956445002B8E3B /* UnitGranularity.swift in Sources */,
 				B509C7802991504F00F2A8D4 /* DataHandlingErrors.swift in Sources */,
@@ -1096,6 +1092,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = Gretel/Gretel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;
@@ -1116,6 +1113,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = Gretel/Gretel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;
@@ -1135,6 +1133,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_ENTITLEMENTS = Gretel/Gretel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;
@@ -1153,6 +1152,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_ENTITLEMENTS = Gretel/Gretel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARU7K8KJKJ;

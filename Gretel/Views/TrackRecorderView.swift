@@ -15,20 +15,18 @@ struct TrackRecorderView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.activeUnitType) var activeUnitType
     
-    @Binding var mapRegion:MKCoordinateRegion
-    @Binding var isTrackingUserLocation:MapUserTrackingMode
-    @Binding var track:ActiveTrack
-    @Binding var recordingState:RecordingState
+    @EnvironmentObject var locationRecorder:LocationRecorder
     
-    @EnvironmentObject var locationRecorder:LocationRecorderService
+    @Binding var recordingState:RecordingState
+    @Binding var isVisible:Bool
+    @Binding var isTrackingUserLocation:MapUserTrackingMode
+    
+    @State var shouldShowError:Bool = false
+    @State var mapRegion:MKCoordinateRegion
     
     var showsUserLocation:Bool
     var currentLocation:CLLocation
     var buttonBackground:Color = .gray.opacity(0.4)
-    
-    @State var shouldShowError:Bool = false
-    
-    @Binding var isVisible:Bool
     
     var body: some View {
         
@@ -79,9 +77,9 @@ struct TrackRecorderView: View {
                     }
                     
                     RecorderControlsView(recordingState: $recordingState,
-                                         totalRecordedPoints: $track.totalPointsCount,
-                                         totalDistanceInMetres: $track.totalDistanceMetres,
-                                         elapsedTimeDisplay: $locationRecorder.elapsedTimeDisplay,
+                                         elapsedTimeDisplay: locationRecorder.elapsedTimeDisplay,
+                                         totalRecordedPoints: 0,
+                                         totalDistanceInMetres: 0,
                                          currentLocation: currentLocation)
                 }
 

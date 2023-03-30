@@ -10,19 +10,15 @@ import CoreLocation
 
 struct RecorderControlsView: View {
     
+    @Environment(\.activeUnitType) var activeUnitType
+    @EnvironmentObject var locationRecorder:LocationRecorder
     @Binding var recordingState:RecordingState
-    @Binding var totalRecordedPoints:Int
-    @Binding var totalDistanceInMetres:Double
-    @Binding var elapsedTimeDisplay:String
-    
     @State var showMoreDetail = false
     
+    var elapsedTimeDisplay:String
+    var totalRecordedPoints:Int
+    var totalDistanceInMetres:Double
     var currentLocation:CLLocation
-    
-    @Environment(\.activeUnitType) var activeUnitType
-    
-    @EnvironmentObject var locationRecorder:LocationRecorderService
-    
     
     var body: some View {
         VStack {
@@ -54,9 +50,8 @@ struct RecorderControlsView: View {
 struct RecorderControlsView_Previews: PreviewProvider {
     static var previews: some View {
         RecorderControlsView(recordingState: .constant(.stopped),
-                             totalRecordedPoints: .constant(100),
-                             totalDistanceInMetres: .constant(123.4),
-                             elapsedTimeDisplay: .constant("00:00:00"),
+                             elapsedTimeDisplay: "00:00:00", totalRecordedPoints: 100,
+                             totalDistanceInMetres: 123.4,
                              currentLocation: CLLocation(latitude: 0.0, longitude: 0.0))
     }
 }

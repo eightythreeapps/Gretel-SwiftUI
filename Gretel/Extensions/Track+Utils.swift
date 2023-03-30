@@ -81,8 +81,6 @@ extension Track {
         
     }
     
-    
-    
     func getAllPoints(orderBy:SortOrder) -> [TrackPoint] {
         
         var trackPoints = [TrackPoint]()

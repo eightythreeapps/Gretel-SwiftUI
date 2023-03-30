@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 import CoreData
 
-public final class LocationRecorderService:NSObject, ObservableObject {
+public final class LocationRecorder:NSObject, ObservableObject {
     
     private var locationService:LocationService
     private var settingsService:SettingsService
@@ -39,14 +39,14 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      Users can interact with the UI to change the recording state and this class will need to act accordingly to process
      those changes, so there is an override of `didSet` that calls the `updateRecordingState()`
      */
-    @Published public var currentRecordingState:RecordingState = .stopped {
+    @Published public var state:RecordingState = .stopped {
         didSet {
             self.updateRecordingState()
         }
     }
     
     @Published public var elapsedTimeDisplay:String = "0h 0m 0s"
-    @Published public var currentActiveTrack:ActiveTrack = ActiveTrack()
+    @Published public var track:Track? = nil
     
     /**
      Initialises a new instance of LocationRecorder service. This is not a singleton, but there should only ever be one instance crearted when the app starts up.
@@ -65,9 +65,7 @@ public final class LocationRecorderService:NSObject, ObservableObject {
         //Start the location services
         locationService.startUpdatingUserHeading()
         locationService.startUpdatingUserLocation()
-        
-        //TODO: Check to see if we have a current active track in CoreData?
-        
+    
         super.init()
         
     }
@@ -77,71 +75,15 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      Calling this updates the currentActiveRecordingState @Published var which the UI can subscribe to to stay in sync.
      */
     public func updateRecordingState() {
-        switch self.currentRecordingState {
+        switch self.state {
         case .recording:
-            self.startRecordingTrack()
+            self.startRecording()
         case .stopped:
-            self.stopRecordingTrack()
-        case .disabled:
-            print("Recording disabled")
+            self.endRecording()
         case .paused:
             self.pauseRecording()
         case .error:
-            print("Error starting new recording")
-        }
-    }
-    
-    /**
-     Creates a new track in the Core Data store. If successfull the track will begin recording. If there is an error, the currentRecordingState is updated so the UI
-     can reflect this change to the user in the UI.
-     */
-    public func createNewActiveTrack(name:String? = nil) {
-        
-        do {
-            let track = try Track.newInstance(context: PersistenceController.shared.container.viewContext)
-            self.currentActiveTrack = ActiveTrack(track:track)
-            self.startRecordingTrack()
-            self.currentRecordingState = .recording
-        } catch {
-            self.currentRecordingState = .error
-        }
-    }
-    
-    /**
-     Resumes recording the surrecnt track.
-     */
-    public func resumeRecording() {
-        
-        if self.currentActiveTrack.state == .loaded {
-            self.currentRecordingState = .recording
-            self.startRecordingTrack()
-        }else{
-            self.currentRecordingState = .error
-        }
-        
-    }
-    
-    /**
-     Pauses the surrecnt track.
-     */
-    public func pauseRecording() {
-        
-        if self.currentActiveTrack.state == .recording {
-            self.currentActiveTrack.pause()
-            self.emptyCancellables()
-            self.pauseTimer()
-        }else{
-            self.currentRecordingState = .error
-        }
-        
-    }
-    
-    /**
-     Ends the surrecnt track.
-     */
-    public func endTrack() {
-        if self.currentActiveTrack.state == .recording {
-            self.resetActiveTrack()
+            self.state = .error
         }
     }
     
@@ -149,14 +91,28 @@ public final class LocationRecorderService:NSObject, ObservableObject {
      If the recorder is active, this captures the location data from the Core Location publisher and adds it to the track.
      */
     public func captureLocation(location:CLLocation) {
-        if self.currentActiveTrack.state == .recording {
-            self.currentActiveTrack.addLocation(location: location)
-        }
+        
     }
     
 }
 
-private extension LocationRecorderService {
+private extension LocationRecorder {
+
+    func startRecording() {
+        //TODO: Start recording track
+        print("Recording started")
+    }
+    
+    func endRecording() {
+        //TODO: Stop recording track
+        print("Stopped recording")
+    }
+    
+    func pauseRecording() {
+        //TODO: Pause recording
+        print("Recording paused")
+    }
+    
     
     func startTimer() {
         
@@ -185,26 +141,8 @@ private extension LocationRecorderService {
         timerCancellables.removeAll()
     }
     
-    /**
-     Starts recording a new track and starts the location publisher
-     */
-    func startRecordingTrack() {
-        
-        //TODO: Bring this in line with the Active Track state enum
-        if let track = self.currentActiveTrack.track {
-            self.resumeTrack(track: track)
-        }else{
-            self.startNewTrack()
-        }
-                
-    }
-    
-    func resumeTrack(track:Track) {
-        self.startListeningForLocationUpdates()
-    }
-    
     func startListeningForLocationUpdates() {
-        self.currentActiveTrack.startRecording()
+        
         locationService.$currentLocation.sink { location in
             self.captureLocation(location: location)
         }.store(in: &timerCancellables)
@@ -212,39 +150,6 @@ private extension LocationRecorderService {
         startTimer()
     }
     
-    func startNewTrack() {
-        //Start the track recording
-        do {
-            
-            //TODO: Figure out dependency on moc
-            let track = try Track.newInstance(context: PersistenceController.shared.container.viewContext)
-            self.currentActiveTrack = ActiveTrack(track: track)
-            self.currentActiveTrack.startRecording()
-            
-            self.startListeningForLocationUpdates()
-            
-        } catch {
-            self.currentRecordingState = .error
-        }
-    }
-    
-    func stopRecordingTrack() {
-        //TODO: Refactor this to the ActiveTrack class
-        if let track = self.currentActiveTrack.track {
-            resetRecorder(track: track)
-        }
-    }
-    
-    func resetRecorder(track:Track) {
-        //TODO: end current track
-        self.resetActiveTrack()
-        self.resetTimer()
-    }
-    
-    func resetActiveTrack() {
-        self.currentActiveTrack = ActiveTrack()
-        self.currentRecordingState = .stopped
-    }
     
     /**
      Clears the cancellables and stops the publisher.

@@ -10,18 +10,18 @@ import SwiftDate
 
 struct RecorderMiniView: View {
 
+    @ObservedObject var locationRecorder:LocationRecorder
     @Binding var shouldShowFullRecorderView:Bool
-    @Binding var track:ActiveTrack
     @Binding var recordingState:RecordingState
     
     var body: some View {
         HStack {
             Spacer()
-            if track.state == .recording {
+            if locationRecorder.state == .recording {
                 Image(systemName: "map")
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("\($track.totalDurationSeconds.wrappedValue.toClock(zero: [.pad,.dropMiddle]))")
+                    //Text("\($locationRecorder.track.totalDurationSeconds.wrappedValue.toClock(zero: [.pad,.dropMiddle]))")
                 }
                 .onTapGesture {
                     shouldShowFullRecorderView = true

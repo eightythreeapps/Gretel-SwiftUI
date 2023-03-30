@@ -12,12 +12,12 @@ import CoreData
 
 public class PreviewFactory {
     
-    public static func ConfiguredLocationRecorder() -> LocationRecorderService  {
+    public static func ConfiguredLocationRecorder() -> LocationRecorder  {
         
         let locationService = LocationService(locationManager: CLLocationManager())
         let _ = SettingsService(userDefaults: UserDefaults.standard)
      
-        return LocationRecorderService(locationService:locationService,
+        return LocationRecorder(locationService:locationService,
                                 settingsService: SettingsService(userDefaults: UserDefaults.standard))
     }
     
@@ -45,14 +45,14 @@ public class PreviewFactory {
     }
     
     public static func makeTrackRecorderPreview() -> some View {
-        return TrackRecorderView(mapRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-                                                                         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))),
+        
+        let location = CLLocation(latitude: 0.0, longitude: 0.0)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+        
+        return TrackRecorderView(recordingState: .constant(.recording),
+                                 isVisible: .constant(true),
                                  isTrackingUserLocation: .constant(.follow),
-                                 track: .constant(ActiveTrack()),
-                                 recordingState: .constant(.recording),
-                                 showsUserLocation: true,
-                                 currentLocation: CLLocation(latitude: 0.0, longitude: 0.0),
-                                 isVisible: .constant(true))
+                                 mapRegion: region, showsUserLocation: true, currentLocation: location)
         .environmentObject(ConfiguredLocationRecorder())
             
     }
@@ -82,8 +82,9 @@ public class PreviewFactory {
         let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
         let track = results.first!
         
-        return RecorderMiniView(shouldShowFullRecorderView: .constant(false), track: .constant(ActiveTrack(track: track)), recordingState: .constant(.recording))
-            .environmentObject(ConfiguredLocationRecorder())
+        return RecorderMiniView(locationRecorder: ConfiguredLocationRecorder(),
+                                shouldShowFullRecorderView: .constant(false),
+                                recordingState: .constant(.recording))
         
     }
     

@@ -33,7 +33,14 @@ class Gretel_SwiftUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         self.viewContext = nil
     }
-
+    
+    func testMenuItem() throws {
+        let result = MenuItem.settings
+        XCTAssertTrue(result.name == "Settings")
+        XCTAssertNotNil(result.id)
+        XCTAssertNotNil(result.iconName)
+    }
+    
     func testCreateNewTrackWithCustomName() throws {
         
         let trackName = "Test Track"

@@ -58,7 +58,7 @@
 		B5FF62D629000BAF0005E02E /* PreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62D529000BAF0005E02E /* PreviewFactory.swift */; };
 		B5FF62DE290056CA0005E02E /* LocationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DD290056CA0005E02E /* LocationPublisher.swift */; };
 		B5FF62E02901A9A10005E02E /* HeadingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */; };
-		B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */; };
+		B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E12901AACC0005E02E /* LocationRecorder.swift */; };
 		B5FF62E72907E3630005E02E /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E62907E3630005E02E /* RecordingState.swift */; };
 		B5FF62E92907E3870005E02E /* LocationTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF62E82907E3870005E02E /* LocationTrackingState.swift */; };
 /* End PBXBuildFile section */
@@ -148,7 +148,7 @@
 		B5FF62D529000BAF0005E02E /* PreviewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFactory.swift; sourceTree = "<group>"; };
 		B5FF62DD290056CA0005E02E /* LocationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPublisher.swift; sourceTree = "<group>"; };
 		B5FF62DF2901A9A10005E02E /* HeadingPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingPublisher.swift; sourceTree = "<group>"; };
-		B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorderService.swift; sourceTree = "<group>"; };
+		B5FF62E12901AACC0005E02E /* LocationRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRecorder.swift; sourceTree = "<group>"; };
 		B5FF62E62907E3630005E02E /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
 		B5FF62E82907E3870005E02E /* LocationTrackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -387,7 +387,7 @@
 		B5FF62D429000ACC0005E02E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B5FF62E12901AACC0005E02E /* LocationRecorderService.swift */,
+				B5FF62E12901AACC0005E02E /* LocationRecorder.swift */,
 				B54D12B82900004600E3A0A1 /* SettingsService.swift */,
 				B5C1023829794C59002956BF /* LocationService.swift */,
 			);
@@ -681,7 +681,7 @@
 				B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */,
 				B506BA2429797B6E008CD951 /* LocationHUDView.swift in Sources */,
 				B5C1023C2979577D002956BF /* CLLocation+Utils.swift in Sources */,
-				B5FF62E22901AACC0005E02E /* LocationRecorderService.swift in Sources */,
+				B5FF62E22901AACC0005E02E /* LocationRecorder.swift in Sources */,
 				B5446F54298984F500761BF7 /* RecorderMiniView.swift in Sources */,
 				B5E3B79528D31F7D002176DB /* ContentView.swift in Sources */,
 				B572BC4029A3DBA20067B542 /* DisplayFormatting.swift in Sources */,

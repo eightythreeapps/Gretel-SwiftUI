@@ -14,7 +14,7 @@ struct Gretel: App {
     let persistenceController = PersistenceController.shared
     var settingsService:SettingsService = SettingsService(userDefaults: UserDefaults.standard)
     
-    @StateObject var locationRecorder = LocationRecorderService(locationService: LocationService(locationManager: CLLocationManager()),
+    @StateObject var locationRecorder = LocationRecorder(locationService: LocationService(locationManager: CLLocationManager()),
                                                                 settingsService: SettingsService(userDefaults: UserDefaults.standard))
     
     @StateObject var locationProvider = LocationService(locationManager: CLLocationManager())

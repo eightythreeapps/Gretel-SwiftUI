@@ -7,10 +7,15 @@
 
 import Foundation
 
-public enum RecordingState {
+public enum RecordingError:Error {
+    case couldNotStartRecording
+    case couldNotEndRecording
+    case unknown
+}
+
+public enum RecordingState:Equatable {
     case recording
     case stopped
     case paused
-    case disabled
     case error
 }

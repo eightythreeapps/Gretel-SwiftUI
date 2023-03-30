@@ -42,7 +42,7 @@ struct ContentView:View {
     
     @State var isShowingTrackList = false
     
-    @ObservedObject var locationRecorder:LocationRecorderService
+    @ObservedObject var locationRecorder:LocationRecorder
     @ObservedObject var locationService:LocationService
     
     @State private var path: [Track] = [Track]()
@@ -63,9 +63,9 @@ struct ContentView:View {
                         TrackListView(path: $path)
                     }
                     
-                    RecorderMiniView(shouldShowFullRecorderView: $isShowingTrackRecorder,
-                                     track: $locationRecorder.currentActiveTrack,
-                                     recordingState: $locationRecorder.currentRecordingState)
+                    RecorderMiniView(locationRecorder: locationRecorder,
+                                     shouldShowFullRecorderView: $isShowingTrackRecorder,
+                                     recordingState: $locationRecorder.state)
                     
                 }
                 .tabItem {
@@ -84,13 +84,12 @@ struct ContentView:View {
             .sheet(isPresented: $isShowingTrackRecorder) {
                 NavigationStack {
                     
-                    TrackRecorderView(mapRegion: $locationService.region,
+                    TrackRecorderView(recordingState: $locationRecorder.state,
+                                      isVisible: $isShowingTrackRecorder,
                                       isTrackingUserLocation: $locationService.isTrackingUserLocation,
-                                      track: $locationRecorder.currentActiveTrack,
-                                      recordingState: $locationRecorder.currentRecordingState,
+                                      mapRegion: locationService.region,
                                       showsUserLocation: true,
-                                      currentLocation: locationService.currentLocation,
-                                      isVisible: $isShowingTrackRecorder)
+                                      currentLocation: locationService.currentLocation)
                     
                 }
             }

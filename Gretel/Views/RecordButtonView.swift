@@ -28,7 +28,7 @@ struct RecordButtonView: View {
                     recordingState = .paused
                 case .stopped:
                     recordingState = .recording
-                case .disabled, .error:
+                case .error:
                     recordingState = .error
                 case .paused:
                     recordingState = .recording
@@ -61,12 +61,12 @@ struct RecordButtonView: View {
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.blue)
-        case .disabled:
+        case .error:
             return Image(systemName: "record.circle")
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.gray)
-        case .paused, .stopped, .error:
+        case .paused, .stopped:
             return Image(systemName: "record.circle")
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)

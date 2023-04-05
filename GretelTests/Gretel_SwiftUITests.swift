@@ -14,6 +14,10 @@ import CoreLocation
 
 class Gretel_SwiftUITests: XCTestCase {
     
+    var locationService:LocationService!
+    var settingsService:SettingsService!
+    var locationRecorder:LocationRecorder!
+    
     var viewContext:NSManagedObjectContext!
     var cancellables = Set<AnyCancellable>()
 
@@ -24,6 +28,9 @@ class Gretel_SwiftUITests: XCTestCase {
         
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.viewContext = PersistenceController.init(inMemory: true).container.viewContext
+        self.locationService = LocationService(locationManager: CLLocationManager())
+        self.settingsService = SettingsService(userDefaults: UserDefaults.standard)
+        self.locationRecorder = LocationRecorder(locationService: locationService, settingsService: settingsService, viewContext: self.viewContext)
    
         XCTAssertNotNil(self.viewContext, "ViewContext shold not be nil")
         
@@ -92,6 +99,92 @@ class Gretel_SwiftUITests: XCTestCase {
         
     }
     
+    func testPrepareNewTrackForRecording() {
+        
+        self.locationRecorder.prepareToRecord()
+        XCTAssertNotNil(self.locationRecorder.track, "Track should not be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        XCTAssertTrue(self.locationRecorder.track?.trackSegments?.count == 0)
+        
+    }
+    
+    func testCleanUpUnusedTrack() {
+        
+        self.locationRecorder.prepareToRecord()
+        XCTAssertNotNil(self.locationRecorder.track, "Track should not be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        XCTAssertNotNil(self.locationRecorder.track?.startDate == nil)
+        XCTAssertFalse(self.locationRecorder.track!.isRecording, "Track should not be recording")
+        XCTAssertTrue(self.locationRecorder.track?.trackSegments?.count == 0)
+        
+        let trackId = self.locationRecorder.track?.id
+        XCTAssertNotNil(self.locationRecorder.track?.id, "TrackId should not be nil")
+        
+        self.locationRecorder.cleanUp()
+        
+        XCTAssertNil(self.locationRecorder.track, "Track should be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        
+        self.locationRecorder.prepareToRecord(trackId: trackId)
+        XCTAssertNil(self.locationRecorder.track, "Track should be nil")
+                
+    }
+    
+    func testStartRecordingNewTrackWithCustomName() {
+        
+        let name = "Test Track Name"
+        
+        self.locationRecorder.prepareToRecord(name:name)
+        XCTAssertNotNil(self.locationRecorder.track, "Track should not be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        XCTAssertTrue(self.locationRecorder.track?.name == name)
+        XCTAssertNotNil(self.locationRecorder.track?.startDate == nil)
+        XCTAssertFalse(self.locationRecorder.track!.isRecording, "Track should not be recording")
+        XCTAssertTrue(self.locationRecorder.track?.trackSegments?.count == 0)
+        
+        self.locationRecorder.startRecording()
+        XCTAssertTrue(self.locationRecorder.track!.isRecording, "Track should be recording")
+        XCTAssertTrue(self.locationRecorder.state == .recording, "Recorder state should be recording")
+    }
+    
+    func testStartRecordingNewTrackWithDefaultName() {
+        
+        let dateFormat = "dd MMM yyyy HH:mm"
+        
+        self.locationRecorder.prepareToRecord()
+        XCTAssertNotNil(self.locationRecorder.track, "Track should not be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        
+        let dateFromName = self.locationRecorder.track?.name?.toDate(dateFormat)
+        XCTAssertNotNil(dateFromName, "Name should be able to be converted into a Date object")
+        
+        XCTAssertNotNil(self.locationRecorder.track?.startDate == nil)
+        XCTAssertFalse(self.locationRecorder.track!.isRecording, "Track should not be recording")
+        XCTAssertTrue(self.locationRecorder.track?.trackSegments?.count == 0)
+        
+        self.locationRecorder.startRecording()
+        XCTAssertTrue(self.locationRecorder.track!.isRecording, "Track should be recording")
+        XCTAssertTrue(self.locationRecorder.state == .recording, "Recorder state should be recording")
+    }
+    
+    func testPauseRecording() {
+        
+        self.locationRecorder.prepareToRecord()
+        XCTAssertNotNil(self.locationRecorder.track, "Track should not be nil")
+        XCTAssertTrue(self.locationRecorder.state == .stopped)
+        XCTAssertNotNil(self.locationRecorder.track?.startDate == nil)
+        XCTAssertFalse(self.locationRecorder.track!.isRecording, "Track should not be recording")
+        XCTAssertTrue(self.locationRecorder.track?.trackSegments?.count == 0)
+        XCTAssertNotNil(self.locationRecorder.track?.id, "TrackId should not be nil")
+        
+        self.locationRecorder.startRecording()
+        XCTAssertTrue(self.locationRecorder.state == .recording)
+        
+        self.locationRecorder.pauseRecording()
+        XCTAssertTrue(self.locationRecorder.state == .paused)
+        
+    }
+        
     func testDurationForTrack() {
         //TODO: Fix test to ensure a measurable amount of time can be tested.
 //        do {
@@ -264,7 +357,7 @@ extension Gretel_SwiftUITests {
         do {
             
             let track = try Track.newInstance(context: self.viewContext)
-            let segment = try track.getActiveSegment()
+            let _ = try track.getActiveSegment()
             
             let locations = self.getMockLocationsFor(location: CLLocation(latitude: 50.336868, longitude: -4.776990), itemCount: locationCount)
             

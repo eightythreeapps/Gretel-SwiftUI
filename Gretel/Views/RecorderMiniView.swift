@@ -10,34 +10,28 @@ import SwiftDate
 
 struct RecorderMiniView: View {
 
-    @ObservedObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationRecorder:LocationRecorder
     @Binding var shouldShowFullRecorderView:Bool
-    @Binding var recordingState:RecordingState
     
     var body: some View {
         HStack {
-            Spacer()
-            if locationRecorder.state == .recording {
-                Image(systemName: "map")
-                Spacer()
+            switch locationRecorder.state {
+            case .stopped:
+                Text("No active track")
+            case .recording, .paused:
                 VStack(alignment: .leading) {
-                    //Text("\($locationRecorder.track.totalDurationSeconds.wrappedValue.toClock(zero: [.pad,.dropMiddle]))")
+                    Text(locationRecorder.elapsedTimeDisplay)
                 }
-                .onTapGesture {
-                    shouldShowFullRecorderView = true
-                }
-            }else{
-                
-                Text("Start new recording")
-                    .onTapGesture {
-                        shouldShowFullRecorderView = true
-                    }
-                
+            case .error:
+                Text("Something went wrong")
             }
             
-            Spacer()
-            RecordButtonView(recordingState: $recordingState, size: .medium)
-            Spacer()
+            RecordButtonView(size: .medium)
+        
+        }
+        .padding()
+        .onTapGesture {
+            shouldShowFullRecorderView = true
         }
     }
 }

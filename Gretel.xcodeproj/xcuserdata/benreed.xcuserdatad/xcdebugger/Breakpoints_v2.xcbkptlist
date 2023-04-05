@@ -151,16 +151,143 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "957C7421-FF5C-41CB-B0DB-DA83D25AB6CD"
+            uuid = "17DEFD89-AFF3-4B35-8E55-B14F652C94AF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Gretel/Services/LocationRecorder.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "startListeningForLocationUpdates()"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "prepareToRecord(trackId:name:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "158DDBF1-B724-496E-899D-14B84042EE6E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gretel/Services/LocationRecorder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "cleanUp()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "158DDBF1-B724-496E-899D-14B84042EE6E - e28492b943fa6172"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gretel.LocationRecorder.cleanUp() -&gt; ()"
+                  moduleName = "Gretel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/Gretel/Services/LocationRecorder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "158DDBF1-B724-496E-899D-14B84042EE6E - e28492b943fa6172"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gretel.LocationRecorder.cleanUp() -&gt; ()"
+                  moduleName = "Gretel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/Gretel/Services/LocationRecorder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "158DDBF1-B724-496E-899D-14B84042EE6E - e28492b943fa6172"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gretel.LocationRecorder.cleanUp() -&gt; ()"
+                  moduleName = "Gretel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/Gretel/Services/LocationRecorder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "256">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E338D44-3F36-4091-AB1E-E8D624A38B13"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GretelTests/Gretel_SwiftUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "testStartRecordingNewTrackWithDefaultName()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6E338D44-3F36-4091-AB1E-E8D624A38B13 - d6d11309babd1cdb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GretelTests.Gretel_SwiftUITests.testStartRecordingNewTrackWithDefaultName() -&gt; ()"
+                  moduleName = "GretelTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/GretelTests/Gretel_SwiftUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "932">
+               </Location>
+               <Location
+                  uuid = "6E338D44-3F36-4091-AB1E-E8D624A38B13 - d6d11309babd1cdb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GretelTests.Gretel_SwiftUITests.testStartRecordingNewTrackWithDefaultName() -&gt; ()"
+                  moduleName = "GretelTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benreed/Apps/Gretel-SwiftUI/GretelTests/Gretel_SwiftUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "836">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9458764C-EC9D-4742-9BD2-C946B2806807"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gretel/Views/RecordButtonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "iconForState(recordingState:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

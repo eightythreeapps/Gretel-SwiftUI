@@ -40,6 +40,7 @@ extension Track {
         let track = Track(context: context)
         track.name = name != nil ? name : trackName
         track.startDate = now
+        track.id = UUID()
         
         do {
             try track.save()

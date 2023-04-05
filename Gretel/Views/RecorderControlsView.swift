@@ -40,7 +40,7 @@ struct RecorderControlsView: View {
                 }
             }
             HStack {
-                RecordButtonView(recordingState: $recordingState)
+                RecordButtonView(size: .medium)
             }
             .padding()
         }

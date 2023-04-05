@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecordButtonView: View {
     
-    @Binding var recordingState:RecordingState
+    @EnvironmentObject var locationRecorder:LocationRecorder
     
     public enum RecordButtonSize:Double {
         case small = 20.0
@@ -23,23 +23,23 @@ struct RecordButtonView: View {
         HStack {
             Button {
                 
-                switch recordingState {
-                case .recording:
-                    recordingState = .paused
+                switch locationRecorder.state {
                 case .stopped:
-                    recordingState = .recording
-                case .error:
-                    recordingState = .error
+                    locationRecorder.startRecording()
+                case .recording:
+                    locationRecorder.pauseRecording()
                 case .paused:
-                    recordingState = .recording
+                    locationRecorder.startRecording()
+                case .error:
+                    print("Erorr state")
                 }
                 
             } label: {
-                iconForState(recordingState: recordingState)
+                iconForState(recordingState: locationRecorder.state)
             }
-            if recordingState == .recording || recordingState == .paused {
+            if locationRecorder.state == .recording || locationRecorder.state == .paused {
                 Button {
-                    recordingState = .stopped
+                    locationRecorder.endRecording()
                 } label: {
                     Image(systemName: "stop.circle")
                         .resizable()
@@ -71,15 +71,13 @@ struct RecordButtonView: View {
                 .resizable()
                 .frame(width: size.rawValue, height: size.rawValue)
                 .foregroundColor(.red)
-        
         }
-        
     }
     
 }
 
 struct RecordButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordButtonView(recordingState: .constant(.paused))
+        PreviewFactory.makeRecordButtonViewPreview()
     }
 }

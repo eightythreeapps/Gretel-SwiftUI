@@ -42,8 +42,8 @@ struct ContentView:View {
     
     @State var isShowingTrackList = false
     
-    @ObservedObject var locationRecorder:LocationRecorder
-    @ObservedObject var locationService:LocationService
+    @StateObject var locationRecorder:LocationRecorder
+    @StateObject var locationService:LocationService
     
     @State private var path: [Track] = [Track]()
     @State private var isShowingTrackRecorder:Bool = false
@@ -63,9 +63,7 @@ struct ContentView:View {
                         TrackListView(path: $path)
                     }
                     
-                    RecorderMiniView(locationRecorder: locationRecorder,
-                                     shouldShowFullRecorderView: $isShowingTrackRecorder,
-                                     recordingState: $locationRecorder.state)
+                    RecorderMiniView(shouldShowFullRecorderView: $isShowingTrackRecorder)
                     
                 }
                 .tabItem {
@@ -84,8 +82,7 @@ struct ContentView:View {
             .sheet(isPresented: $isShowingTrackRecorder) {
                 NavigationStack {
                     
-                    TrackRecorderView(recordingState: $locationRecorder.state,
-                                      isVisible: $isShowingTrackRecorder,
+                    TrackRecorderView(isVisible: $isShowingTrackRecorder,
                                       isTrackingUserLocation: $locationService.isTrackingUserLocation,
                                       mapRegion: locationService.region,
                                       showsUserLocation: true,

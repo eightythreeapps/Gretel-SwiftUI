@@ -24,6 +24,8 @@ public final class LocationRecorder:NSObject, ObservableObject {
     private static let DefaultLongitude = 51.5072
     private static let DefaultCoordinateSpanDelta = 0.1
     
+    private var viewContext:NSManagedObjectContext
+    
     private var timerFormatter:DateComponentsFormatter = {
         
         let formatter = DateComponentsFormatter()
@@ -34,17 +36,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
         return formatter
     }()
     
-    /**
-     Provides subscribeable access to the current recording state of the application.
-     Users can interact with the UI to change the recording state and this class will need to act accordingly to process
-     those changes, so there is an override of `didSet` that calls the `updateRecordingState()`
-     */
-    @Published public var state:RecordingState = .stopped {
-        didSet {
-            self.updateRecordingState()
-        }
-    }
-    
+    @Published public var state:RecordingState = .stopped
     @Published public var elapsedTimeDisplay:String = "0h 0m 0s"
     @Published public var track:Track? = nil
     
@@ -55,12 +47,12 @@ public final class LocationRecorder:NSObject, ObservableObject {
         - settingsService: An instance of SettingsService
         - trackHelper: An instance with TrackDataService
      */
-    required public init(locationService:LocationService, settingsService:SettingsService) {
+    required public init(locationService:LocationService, settingsService:SettingsService, viewContext:NSManagedObjectContext) {
         
         //Assign dependencies
         self.locationService = locationService
         self.settingsService = settingsService
-        self.settingsService = settingsService
+        self.viewContext = viewContext
         
         //Start the location services
         locationService.startUpdatingUserHeading()
@@ -70,49 +62,160 @@ public final class LocationRecorder:NSObject, ObservableObject {
         
     }
     
+    //MARK: Track preparation methods
     /**
-     Called by the UI layer to update the recording state. This abstracts all of the business logic away from the views and keeps the View layer clean by needing fewer if... statements.
-     Calling this updates the currentActiveRecordingState @Published var which the UI can subscribe to to stay in sync.
+     Prepares a `Track` object for recording. If this method is supplied with a trackId from an existing track, the name parameter will be ignored.
+     - parameters:
+        - trackId: The identifier of the track object to be loaded
+        - name: The name of a new track object as set by the user. If this is left as `nil` the track will be named using the current date.
      */
-    public func updateRecordingState() {
-        switch self.state {
-        case .recording:
-            self.startRecording()
-        case .stopped:
-            self.endRecording()
-        case .paused:
-            self.pauseRecording()
-        case .error:
-            self.state = .error
+    func prepareToRecord(trackId:UUID? = nil, name:String? = nil) {
+        
+        if let trackId = trackId {
+            self.track = loadExistingTrack(uuid: trackId)
+        }else {
+            if let track = createNewTrack(name: name) {
+                self.track = track
+            }else{
+                self.state = .error
+            }
         }
+        
     }
     
     /**
-     If the recorder is active, this captures the location data from the Core Location publisher and adds it to the track.
+     Deletes a track from the data store
+     - parameters:
+        - trackId: The identifier of the track object to be deleted
      */
-    public func captureLocation(location:CLLocation) {
+    func deleteTrack(trackId:UUID) {
+        
+        if let track = self.loadExistingTrack(uuid: trackId) {
+            self.viewContext.delete(track)
+            do {
+                try self.viewContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: Recording control methods
+    /**
+     Starts the recording process. This will create a suscriber to listen to the location manager updates and commit them to the track object.
+     */
+    func startRecording() {
+        
+        if self.track != nil {
+            self.track?.isRecording = true
+            do {
+                self.state = .recording
+                self.track?.isRecording = true
+                try self.track?.save()
+                self.startListeningForLocationUpdates()
+            } catch {
+                print(error)
+                self.state = .error 
+            }
+            
+        }
+        
+    }
+    
+    /**
+     Ends the current recording, cleans up the recorder state and resets all timers and subscribers,
+     */
+    func endRecording() {
+        
+        do {
+            try self.track?.end()
+            self.state = .stopped
+            self.resetTimer()
+            self.track = nil
+            
+        } catch {
+            self.state = .error
+        }
+        
+    }
+    
+    /**
+     Stops the recorder from listening to location updates until it is restarted. All timers are paused and the `Track` object is left intact.
+     */
+    func pauseRecording() {
+        self.state = .paused
+        self.pauseTimer()
+    }
+    
+    /**
+     Cleans up a track that has not been started. If a track has been initialised and not started then it is not required so this method
+     can be called to clean up and reset the recorder ready for a new track to begin.
+     */
+    func cleanUp() {
+        
+        if let track = self.track, let trackId = track.id {
+            if !track.isRecording {
+                self.track = nil
+                self.deleteTrack(trackId: trackId)
+                self.state = .stopped
+            }
+        }
         
     }
     
 }
 
 private extension LocationRecorder {
+    
+    /**
+     Helper method to load an existing track object from the data store
+     - parameters:
+        - trackId: The identifier of the track object to be loaded
+     */
+    func loadExistingTrack(uuid:UUID) -> Track? {
+        
+        let request = Track.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", uuid.uuidString)
+        
+        do {
+            
+            let results = try self.viewContext.fetch(request)
+            if let track = results.first {
+                return track
+            }
+            
+        } catch {
+            print(error)
+        }
+        
+        return nil
 
-    func startRecording() {
-        //TODO: Start recording track
-        print("Recording started")
     }
     
-    func endRecording() {
-        //TODO: Stop recording track
-        print("Stopped recording")
+    func createNewTrack(name:String?) -> Track? {
+        do {
+            let track = try Track.newInstance(name: name, context: self.viewContext)
+            return track
+        } catch {
+            print(error)
+            self.state = .error
+            return nil
+        }
     }
     
-    func pauseRecording() {
-        //TODO: Pause recording
-        print("Recording paused")
+    /**
+     If the recorder is active, this captures the location data from the Core Location publisher and adds it to the track.
+     */
+    func captureLocation(location:CLLocation) {
+        if self.track != nil {
+            do {
+                print("Adding location to track segment")
+                try self.track?.addLocation(location: location)
+            } catch {
+                self.state = .error
+            }
+        }
     }
-    
     
     func startTimer() {
         
@@ -150,6 +253,10 @@ private extension LocationRecorder {
         startTimer()
     }
     
+    func stopListeningForLocationUpdates() {
+        self.emptyCancellables()
+        self.pauseTimer()
+    }
     
     /**
      Clears the cancellables and stops the publisher.

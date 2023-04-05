@@ -23,7 +23,6 @@
 		B54D12B92900004600E3A0A1 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D12B82900004600E3A0A1 /* SettingsService.swift */; };
 		B55F2C542992AA8E00174A05 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = B55F2C532992AA8E00174A05 /* SwiftDate */; };
 		B56EC604298BD77F005B9A41 /* NSManagedObject+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EC603298BD77F005B9A41 /* NSManagedObject+Utils.swift */; };
-		B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EC605298C271A005B9A41 /* ActiveTrack.swift */; };
 		B572BC34299E87DB0067B542 /* ApplicationUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572BC33299E87DB0067B542 /* ApplicationUnitType.swift */; };
 		B572BC36299E89B70067B542 /* Double+DisplayFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572BC35299E89B70067B542 /* Double+DisplayFormatting.swift */; };
 		B572BC38299E8B8F0067B542 /* Int+DisplayFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572BC37299E8B8F0067B542 /* Int+DisplayFormatting.swift */; };
@@ -109,7 +108,6 @@
 		B54D12B228F86D4E00E3A0A1 /* Gretel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gretel.entitlements; sourceTree = "<group>"; };
 		B54D12B82900004600E3A0A1 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		B56EC603298BD77F005B9A41 /* NSManagedObject+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Utils.swift"; sourceTree = "<group>"; };
-		B56EC605298C271A005B9A41 /* ActiveTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrack.swift; sourceTree = "<group>"; };
 		B572BC33299E87DB0067B542 /* ApplicationUnitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUnitType.swift; sourceTree = "<group>"; };
 		B572BC35299E89B70067B542 /* Double+DisplayFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+DisplayFormatting.swift"; sourceTree = "<group>"; };
 		B572BC37299E8B8F0067B542 /* Int+DisplayFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+DisplayFormatting.swift"; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 		B55F2C512992A67600174A05 /* Application Models */ = {
 			isa = PBXGroup;
 			children = (
-				B56EC605298C271A005B9A41 /* ActiveTrack.swift */,
 			);
 			path = "Application Models";
 			sourceTree = "<group>";
@@ -671,7 +668,6 @@
 				B5E3B79F28D31F7E002176DB /* Gretel.xcdatamodeld in Sources */,
 				B5C4513B29B0F8530011B4E1 /* IOHelper.swift in Sources */,
 				B572BC36299E89B70067B542 /* Double+DisplayFormatting.swift in Sources */,
-				B56EC606298C271A005B9A41 /* ActiveTrack.swift in Sources */,
 				B5E3B79C28D31F7E002176DB /* Persistence.swift in Sources */,
 				B572BC34299E87DB0067B542 /* ApplicationUnitType.swift in Sources */,
 				B5F825C229956445002B8E3B /* UnitGranularity.swift in Sources */,

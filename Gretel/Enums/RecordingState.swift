@@ -14,8 +14,8 @@ public enum RecordingError:Error {
 }
 
 public enum RecordingState:Equatable {
-    case recording
     case stopped
+    case recording
     case paused
     case error
 }

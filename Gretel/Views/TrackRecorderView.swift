@@ -17,11 +17,9 @@ struct TrackRecorderView: View {
     
     @EnvironmentObject var locationRecorder:LocationRecorder
     
-    @Binding var recordingState:RecordingState
     @Binding var isVisible:Bool
     @Binding var isTrackingUserLocation:MapUserTrackingMode
     
-    @State var shouldShowError:Bool = false
     @State var mapRegion:MKCoordinateRegion
     
     var showsUserLocation:Bool
@@ -61,7 +59,7 @@ struct TrackRecorderView: View {
                 }
                 VStack {
                     
-                    if self.recordingState == .error {
+                    if self.locationRecorder.state == .error {
                         HStack {
                             Text("Error")
                                 .font(.callout)
@@ -76,13 +74,17 @@ struct TrackRecorderView: View {
                         }
                     }
                     
-                    RecorderControlsView(recordingState: $recordingState,
+                    RecorderControlsView(recordingState: $locationRecorder.state,
                                          elapsedTimeDisplay: locationRecorder.elapsedTimeDisplay,
                                          totalRecordedPoints: 0,
                                          totalDistanceInMetres: 0,
                                          currentLocation: currentLocation)
                 }
 
+            }.onAppear {
+                locationRecorder.prepareToRecord()
+            }.onDisappear {
+                locationRecorder.cleanUp()
             }
     }
 }

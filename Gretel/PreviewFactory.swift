@@ -18,7 +18,8 @@ public class PreviewFactory {
         let _ = SettingsService(userDefaults: UserDefaults.standard)
      
         return LocationRecorder(locationService:locationService,
-                                settingsService: SettingsService(userDefaults: UserDefaults.standard))
+                                settingsService: SettingsService(userDefaults: UserDefaults.standard),
+                                viewContext: PersistenceController.preview.container.viewContext)
     }
     
     public static func ConfiguredLocationService() -> LocationService {
@@ -49,10 +50,11 @@ public class PreviewFactory {
         let location = CLLocation(latitude: 0.0, longitude: 0.0)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         
-        return TrackRecorderView(recordingState: .constant(.recording),
-                                 isVisible: .constant(true),
+        return TrackRecorderView(isVisible: .constant(true),
                                  isTrackingUserLocation: .constant(.follow),
-                                 mapRegion: region, showsUserLocation: true, currentLocation: location)
+                                 mapRegion: region,
+                                 showsUserLocation: true,
+                                 currentLocation: location)
         .environmentObject(ConfiguredLocationRecorder())
             
     }
@@ -77,15 +79,13 @@ public class PreviewFactory {
     }
     
     public static func makeRecorderMiniView() -> some View {
-        
-        let fetchRequest: NSFetchRequest<Track> = Track.fetchRequest()
-        let results = try! PersistenceController.preview.container.viewContext.fetch(fetchRequest)
-        let track = results.first!
-        
-        return RecorderMiniView(locationRecorder: ConfiguredLocationRecorder(),
-                                shouldShowFullRecorderView: .constant(false),
-                                recordingState: .constant(.recording))
+        return RecorderMiniView(shouldShowFullRecorderView: .constant(false))
+            .environmentObject(ConfiguredLocationRecorder())
         
     }
     
+    public static func makeRecordButtonViewPreview() -> some View {
+        return RecordButtonView(size: .medium)
+            .environmentObject(ConfiguredLocationRecorder())
+    }
 }

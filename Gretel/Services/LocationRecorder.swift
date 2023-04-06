@@ -61,7 +61,7 @@ public final class LocationRecorder:NSObject, ObservableObject {
         super.init()
         
     }
-    
+        
     //MARK: Track preparation methods
     /**
      Prepares a `Track` object for recording. If this method is supplied with a trackId from an existing track, the name parameter will be ignored.

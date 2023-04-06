@@ -16,6 +16,7 @@ struct TrackRecorderView: View {
     @Environment(\.activeUnitType) var activeUnitType
     
     @EnvironmentObject var locationRecorder:LocationRecorder
+    @EnvironmentObject var locationProvider:LocationService
     
     @Binding var isVisible:Bool
     @Binding var isTrackingUserLocation:MapUserTrackingMode
@@ -35,9 +36,8 @@ struct TrackRecorderView: View {
             layout {
                 ZStack {
                     
-                    Map(coordinateRegion: $mapRegion,
-                        showsUserLocation: showsUserLocation,
-                        userTrackingMode: $isTrackingUserLocation)
+                    MapView(region: $locationProvider.region,
+                            recordingState: $locationRecorder.state)
 
                     VStack {
                         HStack{

@@ -27,6 +27,7 @@ struct Gretel: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environment(\.activeUnitType, .metric)
                 .environmentObject(locationRecorder)
+                .environmentObject(locationProvider)
         }
     }
     

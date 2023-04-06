@@ -205,8 +205,11 @@ extension Track {
     func addPointToSegment(segment:TrackSegment, latitude:Double, longitude:Double) {
       
         if let moc = self.managedObjectContext {
-
-            let trackPoint = TrackPoint(context: moc)
+                 
+            guard let trackPoint = TrackPoint.newInstance(type: TrackPoint.self, moc: moc) else {
+                return
+            }
+            
             trackPoint.latitude = latitude
             trackPoint.longitude = longitude
             trackPoint.time = Date()
@@ -234,7 +237,9 @@ extension Track {
         }else{
             
             if let context = self.managedObjectContext {
-                let segment = TrackSegment(context: context)
+                guard let segment = TrackSegment.newInstance(type: TrackSegment.self, moc: context) else {
+                    throw TrackDataServiceError.noActiveSegment
+                }
                 segment.time = Date()
                 segment.isActiveSegment = true
                 
